@@ -1,0 +1,1515 @@
+---
+title             : "Early language experience in a Papuan village"
+shorttitle        : "Early language experience in a Papuan village"
+
+author: 
+  - name          : "Marisa Casillas"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "P.O. Box 310, 6500 AH Nijmegen, The Netherlands"
+    email         : "Marisa.Casillas@mpi.nl"
+  - name          : "Penelope Brown"
+    affiliation   : "1"
+  - name          : "Stephen C. Levinson"
+    affiliation   : "1"
+
+affiliation:
+  - id            : "1"
+    institution   : "Max Planck Institute for Psycholinguistics"
+
+#author_note: |
+#  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+abstract: |
+  To be completed later.
+
+keywords          : "Child-directed speech, linguistic input, non-WEIRD, vocal maturity, turn taking, interaction, Papuan"
+wordcount         : "XXXXX (XXXX not including references)"
+
+bibliography      : ["Yeli-CLE.bib"]
+
+figsintext        : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : yes
+mask              : no
+
+class             : "man"
+output            : papaja::apa6_pdf #apa6_pdf or apa6_word
+---
+
+```{r load_packages, include=FALSE, echo=FALSE, warning=FALSE}
+library(papaja)
+library(ggplot2)
+library(tidyverse)
+library(viridis)
+library(grid)
+library(gridExtra)
+library(ggpirate)
+library(lme4)
+library(glmmTMB)
+library(DHARMa)
+library(bbmle)
+library(broom.mixed)
+source("0-Helper.R")
+```
+
+```{r analysis_presets, include=FALSE}
+options(scipen=999)
+data.path <- "transcripts/anon/" # text files exported from ELAN
+metadata.path <- "metadata/"
+plot.path <- "plots/" # output plots
+shiny.input.path <- "shiny_input/"
+shiny.input.img.path <- "www/"
+#seg.index.file <- paste0(metadata.path, "Segment-order-inventory.csv")
+ptcp.info.file <- paste0(metadata.path, "recording-info.csv")
+#comparison.file <- paste0(metadata.path, "comparison_studies.csv")
+samplelabels <- c("High activity  ", "Random  ")
+col.sample.bu <- list(
+  scale_fill_manual(labels=samplelabels, values=viridis(2)),
+  scale_color_manual(labels=samplelabels, values=viridis(2)))
+col.sample.bu3 <- list(
+  scale_fill_manual(labels=samplelabels, values=viridis(3)),
+  scale_color_manual(labels=samplelabels, values=viridis(3)))
+allowed.overlap <- 1000 #ms
+allowed.gap <- 2000 #ms
+waking.hours <- 14
+rand.sample.dur <- 2.5
+```
+
+# Introduction {#intro}
+There is mounting evidence that children in many parts of the world typically acquire their language(s) with little direct speech from adults in the first few years of life. Indeed, recent studies that have directly measured the quantity of speech addressed to children under age five across a number of indigenous communities in southern Mexico (Shneidman & Goldin-Meadow, 2012; Casillas et al., forth), Bolivia (Cristia et al., 2017; Cychosz et al., in prep; Scaff et al., in prep), and northeastern Africa (Mastin et al., ??) have found that speech directly addressed to young children is infrequent. The quantitative findings of this work have, by and large, reinforced ethnographic descriptions of these and other small-scale non-Western communities (e.g., Ochs & Schieffelin, Brown, etc.). Moreover, recent work applying these techniques with North American children suggests that, even Western middle-class contexts, the quantity of directed speech to children is typically low: around 5--6 minutes per hour. How, then, do children manage to accumulate sufficient lingusitic evidence from other parts of their speech environment such that they become competent adult language users?
+
+Despite the linguistically and culturally diverse language environments of the human past and present, children---no matter where they grow up---typically learn the set of linguistic structures and patterns of language use relevant to their community such that they are able to pass on these learnable skills to the next generation without any explicit or universal framework for teaching or learning. And while young language learners do effect change on the lingusitic system they are learning (e.g., NSL, creoles, etc., REFS), they tend to learn the language of their parents and peers with high fidelity (REFS). However, this robust ability to transmit languages across generations does not preculde the possibility that there is meaningful variation in individual language skill and individual language-learning trajectories.
+
+Indeed, work focused on children growing up in (primarily) Western societies has shown convincingly that environmental effects can significantly impact children's language development: children who hear _more_ and _more pedagogical_ speech in their day-to-day lives (e.g., interactive book reading) show larger, faster-growing vocabularies, faster lexical retrieval, and possibly even earlier use of some morphosyntactic structures (REFS), with these different language measures typically intercorrelated (REFS). Additional evidence comes from children who are learning two or more languages, whose early vocabulary development is impacted by how much speech they hear in each language (Hoff REFS). In sum, while language learning on the scale of whole generations is robust, there is noticeable sensitivity to the precise language environment in which children find themselves, particularly with respect to their vocabulary development.
+
+This apparent paradox dissolves when we consider that some individual language skills may be more directly sensitive to environmental input (e.g., vocabulary size is increased by exposure to more words and word types) while other language skills are either highly robust (e.g., early categorical discrimination of sounds, the emergence of canonical babbling) or only indirectly affected by environmental input (e.g., mastery of frequent syntactic structures--I NEED A CLEARER EXAMPLE HERE). The mapping between sensitivity to experience and linguistic skills opens up the possibility for both theoretical and applied advances. Theoretically, this mapping sheds light on the phylogenetic roots of language. In modern application, it directs efforts at developmental intervention (e.g., in cases of clinical language delay) towards behaviors that could conceivably be altered by a change in environment.
+
+Part and parcel of exploring sensitivity to the speech environment is sketching out the cognitive toolkit that chilren may draw upon in inferring linguistic structure from what they see and hear. Consider that apparent robustness to environmental variation can come from multiple cognitive scenarios. On the one hand, robustness may appear in learning because of quasi-preprogrammed maturational factors (e.g., the onset of pointing). On the other, it may appear because there are several strategies children can rely on to extract information (e.g., attention to direct vs. overhearable speech). Identifying and investigating these individual mechanisms will be a crucial aspect of better understanding the human language learning ability.
+
+By systematically leveraging cross-cultural variation in children's language environments we can make progress on both fronts: (a) testing existing ideas about what linguistic skills are and aren't sensitive to linguistic experience on previously-untested populations and (b) identifying and testing alternative mechanisms that may help explain the (lack of) variation in language skills observed, despite large differences in linguistic environments.
+
+In the current paper we describe the language-learning environment of children growing up on Rossel Island, with a population of approximately 7000 people approximately 250 nautical miles off the south-east coast of Papua New Guinea. we chose to investigate language learning on Rossel Island for two reasons. First, prior ethnographic research has demonstrated that adult interactions with young children are often highly positively affective and intensely interactive in a face-to-face context, much like the prototype of interaction with young children in a Western context (Brown). On the other hand, reviews of prior work have suggested that child-directed speech in small-scale indigenous communities of this type has been found to be infrequent in most communities studied so far (e.g., ALEX??) and so frequent intensive CDS would be a rare opportunity to look at how this kind of a speech environment influences learning in a different language. Second, the language itself is elaborate in its morphosyntax and contains rare phonological features, setting it up as an excellent 'different' language on which current theories about the trajectory of early language development can be tested.
+
+## The community
+
+Yélî Dnye is a language spoken by approximately 5000 people, nearly all of whom reside on Rossel Island, a remote island 250 nautical miles off the mainland coast in Milne Bay Province, Papua New Guinea. While all the neighboring languages fall into the Austronesian family, Rossel is a presumed-Papuan isolate that features a phonological inventory and set of grammatical features that are completely unattested in other languages of the region. Partly due to its remoteness, most children on Rossel Island grow up speaking it monolingually at home, only beginning to learn English (the official lingua franca of Milne Bay Province) as they progress through school, which typically begins when a child is 7 or 8 years old.
+
+We were interested to investigate the language environment of children acquiring Yélî Dnye because prior ethnographic work had suggested that child-directed speech is highly frequent in this community, from mothers and other adult caregivers, but also from other children. Therefore we were interested in understanding how children's input environment influenced their acquisition of this language with all its rare structures.
+
+However, to our surprise we found that Yélî children were not spoken to very often at all. In fact, they were spoken to less often than the Tseltal children we have studied in other work, who are growing up in a community where children are indeed reportedly spoken to infrequently.
+
+Then two interesting issues arise. First, is it the quality of short interactions that give us an impression of quantity---should we abandon this assumption? Maybe we weren't even aware of it. Second, is it the quality of these short interactions that influences early language learning?
+
+# Method
+This study was completed as part of a larger comparative project on children's speech environments and linguistic development at two sites: a Tseltal Mayan community in southern Mexico and this Rossel Island community. Therefore all methods for annotation and analysis in this study parallel those reported elsewhere for Tseltal Mayan children's speech environments (Casillas, Brown, & Levinson, forthcoming).
+
+The data we present come from 7--9-hour recordings of a waking day at home for the child. Children wore the recording device, which was an elastic vest with a small stereo audio recorder across the chest (Olympus WS-832 or WS-853) and a small camera that captured photos of the child's frontal view at a fixed interval (every 15 seconds; Narrative Clip 1). The camera was additionally outfitted with a fisheye lens that, while distorting the images, allowed us to capture 180 degrees of children's frontal view. Because the camera and recorder are separate devices, they were synched by means of a single, external watch that was used to record the current time at start of recording on each device individually, with accuracy down to the second (photographed by the camera and spoken into the recorder). The photos are timestamped by the camera such that the precise intervals between photos are captured. These timestamps can be used with the cross-device time synchronization cue to create photo-linked audio files of each recording, which are formatted as videos (see urlrefs for scripts and more information). We chose to make long-format recordings of children's language experience at home to capture a range of different activity contexts and interlocutors at different times of day (REFS). Previous work investigating the trade-offs of short- versus long-format recordings of parental speech have demonstrated that the apparent quantity of speech children hear and some of the characteristics of that speech differs depending on recording duration (day-by-day tamislemonda REFS). However, short recordings often have the benefit of video data, which enables the analyst to take visual information into account in transcribing and interpreting the communicative behaviors captured. Those using daylong recording methods instead have traditionally had to sacrifice this visual context because of (current) technological limitations; there are no miniature, lightweight (e.g., 400g; 5cm x 5cm or less) video recorders on the market that can record for 7--16 hours. We aimed to generate generalizable baseline estimates of how much speech children hear in this community but wanted to maintain visual information for later transcription and interpretation, leading to us developing this novel daylong recording method (see also Abels REFS).
+
+We used this technique to create daylong recordings of 57 children under age 4;0 on Rossel Island in 2016 (Casillas et al HB), selecting 10 representative children between ages 0;0 and 3;0 for transcription and analysis in the current study. The 10 children were selected to be spread between the target age range (0;0--3;0) while also representing a range of typical maternal education levels found in the community and while being evenly split between male and female children (see also ACLEW REFS). For each child we then selected a series of non-overalapping sub-clips from the day for transription in the following order: nine randomly-selected 2.5-minute clips, five manually-selected 'peak' turn-taking activity 1-minute clips, five manually-selected 'peak' vocal activity 1-minute clips, and one 5-minute expansion of the best one-minute clip, for a total of 37.5 minutes of transcribed audio for each child (6.25 audio hours in total). The criteria for manual clip selection are identical to those described for the parallel study on Tseltal by Casillas and colleagues (forthcoming).
+
+We were limited to selecting sub-clips from 10 children for analysis because of the time-intensive nature of transcribing these naturalistic data; 1 minute of audio typically takes 60--70 minutes of time to be segmented into utterances, transcribed, annotated, and loosely translated into English (~400 hours). Given that Yélî Dnye is nearly exclusively spoken on Rossel Island, where here is no electricity and unreliable cell network coverage, transcription could only be completed over the course of three 4--6 week visits by our research group to the island in 2016, 2018, and 2019.
+
+```{r prepare_data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# Read in annotation files
+files <- list.files(path=data.path,pattern="*.txt")
+all.data <- data.frame()
+for (i in 1:length(files)) {
+#  print(files[i])
+  newfile <- read_csv(paste0(data.path, files[i]),
+                      col_types = cols(val = col_character()))
+  newfile$aclew_child_id <- unlist(strsplit(files[i], '\\.'))[1]
+  all.data <- rbind(all.data, newfile)
+}
+all.data$row <- c(1:nrow(all.data))
+
+# Read in supplementary data
+ptcp.info <- read_csv(ptcp.info.file, col_types = cols()) %>%
+  dplyr::select(-row)
+ptcp.info$aclew_child_id <- as.character(ptcp.info$aclew_child_id)
+#seg.info <- read_csv(seg.index.file)
+
+# Extract and convert start time of each sample
+seg.info <- filter(all.data, tier == "clip") %>%
+  select(-tier, -speaker, -row) %>%
+  # TO-DO: add real start times—these are bogus times
+  mutate(start.hhmmss = 090000,
+         start.sec = 32400,
+         start.hr = 9)
+
+# Add mean and sd values for participant-level predictors to ptcp.info
+ptcp.info <- ptcp.info %>%
+  mutate(
+    tchiyr.m = mean(age_mo_round),
+    motyr.m = mean(mat_age),
+    nsb.m = mean(number_older_sibs),
+    hsz.m = mean(household_size),
+    tchiyr.sd = sd(age_mo_round),
+    motyr.sd = sd(mat_age),
+    nsb.sd = sd(number_older_sibs),
+    hsz.sd = sd(household_size)
+    )
+
+# Merge in participant and segment info to the main data table
+codes <- all.data %>% filter(tier == "clip")
+
+all.data <- all.data %>%
+  filter(speaker != "") %>%
+  left_join(ptcp.info, by = "aclew_child_id") %>%
+  mutate(segment = "", sample = "",
+         sample_type = "", segment_dur = 0)
+
+for (i in 1:nrow(codes)) {
+  rec <- codes$aclew_child_id[i]
+  seg <- as.character(codes$val[i])
+  seg.on <- codes$start[i]
+  seg.off <- codes$stop[i]
+  seg.idx <- which(all.data$aclew_child_id == rec &
+                     all.data$start < seg.off &
+                     all.data$stop > seg.on)
+  all.data$segment[seg.idx] <- seg
+}
+
+# Label samples
+all.data$sample[which(
+  grepl('^random', all.data$segment))] <- "random"
+all.data$sample[which(
+  grepl('tt', all.data$segment))] <- "turn-taking"
+all.data$sample[which(
+  grepl('va', all.data$segment))] <- "high-activity"
+
+# Remove utterances that occur outside of the sample
+all.data <- filter(all.data, sample != "")
+# Clip utterances that start/end outside of the sampled clips
+seg.on.off <- seg.info %>% select(aclew_child_id, start, stop, val) %>%
+  rename(seg_start = "start", seg_stop = "stop", segment = val)
+# ...because of the split extensions with the same names
+# we have to be cautious
+for (i in 1:nrow(seg.on.off)) {
+  over.left.edge.idx <- which(all.data$aclew_child_id == seg.on.off$aclew_child_id[i] &
+                          all.data$start < seg.on.off$seg_stop[i] &
+                          all.data$stop > seg.on.off$seg_start[i] &
+                          all.data$start < seg.on.off$seg_start[i])
+  over.right.edge.idx <- which(all.data$aclew_child_id == seg.on.off$aclew_child_id[i] &
+                          all.data$start < seg.on.off$seg_stop[i] &
+                          all.data$stop > seg.on.off$seg_start[i] &
+                          all.data$stop > seg.on.off$seg_stop[i])
+  if (length(over.left.edge.idx) > 0) {
+    all.data$start[over.left.edge.idx] <- seg.on.off$seg_start[i]
+  }
+  
+  if (length(over.right.edge.idx) > 0) {
+    all.data$stop[over.right.edge.idx] <- seg.on.off$seg_stop[i]
+  }
+}
+
+# Label sample types and durations
+random.samples <- which(grepl('^random', all.data$segment))
+all.data$sample_type[random.samples] <- "random"
+all.data$segment_dur[random.samples] <- rand.sample.dur
+
+ext.samples <- which(grepl('^extension', all.data$segment))
+all.data$sample_type[ext.samples] <- "extension"
+all.data$segment_dur[ext.samples] <- 5
+
+tt.samples <- which(grepl('^tt', all.data$segment))
+all.data$sample_type[tt.samples] <- "turn-taking"
+all.data$segment_dur[tt.samples] <- 1
+
+va.samples <- which(grepl('^va', all.data$segment))
+all.data$sample_type[va.samples] <- "turn-taking"
+all.data$segment_dur[va.samples] <- 1
+
+# Add in segment start time
+all.data <- all.data %>%
+  left_join(dplyr::select(seg.info, c("aclew_child_id", "val", "start.hhmmss",
+                                      "start.sec", "start.hr")),
+            by = c("aclew_child_id" = "aclew_child_id", "segment" = "val"))
+```
+
+
+```{r demog_table_prep, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+sample.demog <- ptcp.info %>%
+  mutate(mat_age_rd = as.integer(round(mat_age, 0)),
+         fat_age_rd = as.integer(round(fat_age, 0)),
+         hszrd = as.integer(round(household_size + 1, 0))) %>%
+  select(age, child_sex, mat_age_rd, mat_ed, hszrd) %>%
+  rename("Age" = age, "Sex" = child_sex,
+         "Mother's age" = mat_age_rd, "Level of maternal education" = mat_ed,
+         "People in household" = hszrd)
+```
+
+```{r tab1, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+apa_table(sample.demog, caption="Demographic overview of the 10 children whose recordings are sampled in the current study, including from left to right: child's age (years;months.days); child's sex (M/F); mother's age (years); level of maternal education (none/primary/secondary/preparatory/university); and the number of people living in the child's household.")
+```
+
+
+```{r fig2, echo=FALSE, fig.cap="Recording duration (black line) and sampled clips (colored boxes) for each of the 10 recordings analyzed, sorted by child age in months.", message=FALSE, warning=FALSE, fig.height=4}
+ptcp.info <- mutate(ptcp.info,
+                    rec.start.hr = lubridate::hour(start_of_recording) +
+                      lubridate::minute(start_of_recording)/60 +
+                      lubridate::second(start_of_recording)/3600,
+                    rec.stop.hr = rec.start.hr + length_of_recording/3600) %>%
+  arrange(age_mo_round) %>%
+  mutate(order = seq(1:10))
+
+used.clips <- seg.info %>%
+#  filter(Include == 1) %>%
+  left_join(ptcp.info) %>%
+  mutate(clip.dur = ifelse(grepl(('random'), val), 5,
+                           ifelse(grepl('extension', val), 6, 1)),
+         sample.type = ifelse(grepl(('random'), val), "Random",
+                           ifelse(grepl('tt', val),
+                                  "Turn taking", "Vocal activity")))
+used.clips$sample.type = factor(used.clips$sample.type,
+                                levels = c("Random", "Turn taking", "Vocal activity"))
+  
+clip.distribution <- ggplot() +
+  geom_segment(data = ptcp.info,
+               aes(x = rec.start.hr, y = order, xend = rec.stop.hr, yend = order)) +
+  geom_segment(data = used.clips,
+               aes(x = start.hr, y = order, xend = start.hr + clip.dur/60, yend = order,
+                   color = sample.type), size = 3) +
+  theme_apa() +
+  theme(legend.position = "bottom") +
+  scale_x_continuous(breaks = 7:21) +
+  scale_y_continuous(breaks = 1:10, labels = ptcp.info$age_mo_round) +
+  ylab("Child age (mo)") + xlab("Time of day (hr)") + labs(color = "Sample type") +
+  scale_color_manual(values = c(viridis(3)[1], viridis(3)[2], "blue"))
+clip.distribution
+```
+
+
+```{r quantity_prep, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+# RANDOM
+# Get min/hr speech measures
+n.unique.rand.segs <- length(unique(all.data$segment[grepl("random", all.data$segment)]))
+n.unique.recs <- length(unique(all.data$aclew_child_id))
+all.rand.segments <- tibble(
+  aclew_child_id = rep(unique(all.data$aclew_child_id),
+                n.unique.rand.segs),
+  segment = rep(unique(all.data$segment[grepl("random", all.data$segment)]),
+                n.unique.recs))
+# XDS
+xds.per.seg.rand <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" &
+           grepl("xds@", tier)) %>%
+  group_by(aclew_child_id, segment, segment_dur) %>%
+  summarise(xds_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, xds_min = 0)) %>%
+  mutate(xds_mph = (xds_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# ODS
+ods.per.seg.rand <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" &
+           grepl("xds@", tier) & val != "T") %>%
+  group_by(aclew_child_id, segment, segment_dur) %>%
+  summarise(ods_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, ods_min = 0)) %>%
+  mutate(ods_mph = (ods_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# TDS
+tds.per.seg.rand <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" &
+           grepl("xds@", tier) & val == "T") %>%
+  group_by(aclew_child_id, segment, segment_dur) %>%
+  summarise(tds_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, tds_min = 0)) %>%
+  mutate(tds_mph = (tds_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# All CDS
+cds.per.seg.rand <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" &
+           grepl("xds@", tier) & (val == "T" | val == "C")) %>%
+  group_by(aclew_child_id, segment, segment_dur) %>%
+  summarise(cds_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, cds_min = 0)) %>%
+  mutate(cds_mph = (cds_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# Number of speakers per clip
+spkrs.per.seg.rand <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" &
+           !(grepl("@", tier))) %>%
+  group_by(aclew_child_id, segment) %>%
+  summarise(n_spkrs_clip = length(unique(speaker)))
+# All together
+quantity.rand <- xds.per.seg.rand %>%
+  full_join(ods.per.seg.rand, by = c("aclew_child_id", "segment", "segment_dur")) %>%
+  full_join(tds.per.seg.rand, by = c("aclew_child_id", "segment", "segment_dur")) %>%
+  full_join(cds.per.seg.rand, by = c("aclew_child_id", "segment", "segment_dur")) %>%
+  left_join(spkrs.per.seg.rand, by = c("aclew_child_id", "segment")) %>%
+  left_join(dplyr::select(seg.info, c("aclew_child_id", "val", "start.hr")),
+            by = c("aclew_child_id" = "aclew_child_id", "segment" = "val")) %>%
+  full_join(ptcp.info, by = "aclew_child_id") %>%
+  replace_na(list(xds_min = 0, xds_mph = 0,
+                  tds_min = 0, tds_mph = 0,
+                  cds_min = 0, cds_mph = 0,
+                  n_spkrs_clip = 0)) %>%
+  mutate(prop_tds = tds_min/xds_min)
+  # Don't replace NAs with 0s in this case; proportion is not meaningful w/o any speech
+quantity.rand.bychild <- quantity.rand %>%
+  group_by(aclew_child_id) %>%
+  summarise(
+    xds_min = mean(xds_min),
+    xds_mph = mean(xds_mph),
+    ods_min = mean(ods_min),
+    ods_mph = mean(ods_mph),
+    tds_min = mean(tds_min),
+    tds_mph = mean(tds_mph),
+    cds_min = mean(cds_min),
+    cds_mph = mean(cds_mph),
+    prop_tds = mean(prop_tds, na.rm = TRUE),
+    m_n_spkrs = mean(n_spkrs_clip)) %>%
+  full_join(ptcp.info, by = "aclew_child_id")
+
+# Get xds and tds min/hr by speaker type
+all.data$SpkrAge <- "Not known"
+all.data$SpkrAge[grepl("FA|MA|UA", all.data$speaker)] <- "Adult"
+all.data$SpkrAge[grepl("FC|MC|UC", all.data$speaker)] <- "Child"
+all.rand.segments.sa <- tibble(
+  aclew_child_id = rep(unique(all.data$aclew_child_id),
+                2*n.unique.rand.segs),
+  segment = rep(unique(all.data$segment[grepl("random", all.data$segment)]),
+                2*n.unique.recs),
+  SpkrAge = c(rep("Adult", (n.unique.rand.segs * n.unique.recs)),
+              rep("Child", (n.unique.rand.segs * n.unique.recs))))
+
+# Add in speaker sex
+all.data$SpkrSex <- "Not known"
+all.data$SpkrSex[grepl("FA|FC|FU", all.data$speaker)] <- "Female"
+all.data$SpkrSex[grepl("MA|MC|MU", all.data$speaker)] <- "Male"
+all.rand.segments.age.sx <- tibble(
+  aclew_child_id = rep(unique(all.data$aclew_child_id),
+                4*n.unique.rand.segs),
+  segment = rep(unique(all.data$segment[grepl("random", all.data$segment)]),
+                4*n.unique.recs),
+  SpkrAge = c(rep("Adult", (n.unique.rand.segs * n.unique.recs)),
+              rep("Child", (n.unique.rand.segs * n.unique.recs)),
+              rep("Adult", (n.unique.rand.segs * n.unique.recs)),
+              rep("Child", (n.unique.rand.segs * n.unique.recs))),
+  SpkrSex = c(rep("Female", (n.unique.rand.segs * (2 * n.unique.recs))),
+              rep("Male", (n.unique.rand.segs * (2 * n.unique.recs)))))
+
+# XDS
+xds.per.seg.rand.sa <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier)) %>%
+  group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
+  summarise(xds_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, xds_min.sa = 0)) %>%
+  mutate(xds_mph.sa = (xds_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# ODS
+ods.per.seg.rand.sa <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & val != "T") %>%
+  group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
+  summarise(ods_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, ods_min.sa = 0)) %>%
+  mutate(ods_mph.sa = (ods_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# TDS
+tds.per.seg.rand.sa <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & val == "T") %>%
+  group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
+  summarise(tds_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, tds_min.sa = 0)) %>%
+  mutate(tds_mph.sa = (tds_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# All CDS
+cds.per.seg.rand.sa <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & (val == "T" | val == "C")) %>%
+  group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
+  summarise(cds_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(segment_dur = rand.sample.dur, cds_min.sa = 0)) %>%
+  mutate(cds_mph.sa = (cds_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# Number of speakers per clip
+spkrs.per.seg.rand.sa <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           !(grepl("@", tier))) %>%
+  group_by(aclew_child_id, SpkrAge, segment) %>%
+  summarise(n_spkrs_clip = length(unique(speaker)))
+# All together
+quantity.rand.sa <- xds.per.seg.rand.sa %>%
+  full_join(ods.per.seg.rand.sa, by = c("aclew_child_id", "SpkrAge",
+                                        "segment", "segment_dur")) %>%
+  full_join(tds.per.seg.rand.sa, by = c("aclew_child_id", "SpkrAge",
+                                        "segment", "segment_dur")) %>%
+  full_join(cds.per.seg.rand.sa, by = c("aclew_child_id", "SpkrAge",
+                                        "segment", "segment_dur")) %>%
+  full_join(dplyr::select(quantity.rand, c("aclew_child_id", "segment", "tds_min")),
+            by = c("aclew_child_id", "segment")) %>%
+  full_join(spkrs.per.seg.rand.sa, by = c("aclew_child_id", "SpkrAge", "segment")) %>%
+  left_join(dplyr::select(seg.info, c("aclew_child_id", "val", "start.hr")),
+            by = c("aclew_child_id" = "aclew_child_id", "segment" = "val")) %>%
+  full_join(ptcp.info, by = "aclew_child_id") %>%
+  replace_na(list(xds_min.sa = 0, xds_mph.sa = 0,
+                  ods_min.sa = 0, ods_mph.sa = 0,
+                  tds_min.sa = 0, tds_mph.sa = 0,
+                  cds_min.sa = 0, cds_mph.sa = 0,
+                  n_spkrs_clip = 0)) %>%
+  mutate(prop_tds.sa = tds_min.sa/xds_min.sa,
+         prop_sa.tds = tds_min.sa/tds_min)
+  # Don't replace NAs with 0s in this case; proportion is not meaningful w/o any speech
+
+
+# NON-RANDOM
+# Get min/hr speech measures
+all.nonrand.segments <- seg.info %>%
+  filter(!(grepl("random", val))) %>%
+  select(aclew_child_id, val, dur) %>%
+  mutate(dur = dur/60000) %>%
+  group_by(aclew_child_id, val) %>%
+  summarize(segment_dur = sum(dur)) %>%
+  rename(segment = "val")
+all.nonrand.segments$sample <- ifelse(grepl("va", all.nonrand.segments$segment),
+                                      "high-activity","turn-taking")
+all.nonrand.segments$sample_type <- ifelse(
+  grepl("^va", all.nonrand.segments$segment), "high-activity",
+  ifelse(grepl("^tt", all.nonrand.segments$segment),"turn-taking",
+                                        "extension"))
+
+# XDS
+xds.per.seg.nonrand <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" &
+           grepl("xds@", tier)) %>%
+  group_by(aclew_child_id, segment) %>%
+  summarise(xds_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(xds_min = 0)) %>%
+  mutate(xds_mph = (xds_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# ODS
+ods.per.seg.nonrand <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" &
+           grepl("xds@", tier) & val != "T") %>%
+  group_by(aclew_child_id, segment) %>%
+  summarise(ods_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(ods_min = 0)) %>%
+  mutate(ods_mph = (ods_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# TDS
+tds.per.seg.nonrand <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" &
+           grepl("xds@", tier) & val == "T") %>%
+  group_by(aclew_child_id, segment) %>%
+  summarise(tds_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(tds_min = 0)) %>%
+  mutate(tds_mph = (tds_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# All CDS
+cds.per.seg.nonrand <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" &
+           grepl("xds@", tier) & (val == "T" | val == "C")) %>%
+  group_by(aclew_child_id, segment) %>%
+  summarise(cds_min = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  replace_na(list(cds_min = 0)) %>%
+  mutate(cds_mph = (cds_min/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment)
+# Number of speakers per clip
+spkrs.per.seg.nonrand <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           !(grepl("@", tier))) %>%
+  group_by(aclew_child_id, segment) %>%
+  summarise(n_spkrs_clip = length(unique(speaker)))
+# All together
+seg.distinct <- seg.info %>%
+  select(aclew_child_id, val, start.hr) %>%
+  distinct()
+quantity.nonrand <- xds.per.seg.nonrand %>%
+  full_join(ods.per.seg.nonrand, by = c("aclew_child_id", "segment",
+                                        "segment_dur", "sample", "sample_type")) %>%
+  full_join(tds.per.seg.nonrand, by = c("aclew_child_id", "segment",
+                                        "segment_dur", "sample", "sample_type")) %>%
+  full_join(cds.per.seg.nonrand, by = c("aclew_child_id", "segment",
+                                        "segment_dur", "sample", "sample_type")) %>%
+  full_join(ptcp.info, by = "aclew_child_id") %>%
+  full_join(spkrs.per.seg.nonrand, by = c("aclew_child_id", "segment")) %>%
+  left_join(seg.distinct,
+            by = c("aclew_child_id" = "aclew_child_id", "segment" = "val")) %>%
+  replace_na(list(xds_min = 0, xds_mph = 0,
+                  ods_min = 0, ods_mph = 0,
+                  tds_min = 0, tds_mph = 0,
+                  cds_min = 0, cds_mph = 0,
+                  n_spkrs_clip = 0)) %>%
+  mutate(prop_tds = tds_min/xds_min)
+  # Don't replace NAs with 0s in this case; proportion is not meaningful w/o any speech
+quantity.nonrand.bychild <- quantity.nonrand %>%
+  group_by(aclew_child_id, sample) %>%
+  summarise(
+    xds_min = mean(xds_min),
+    xds_mph = mean(xds_mph),
+    ods_min = mean(ods_min),
+    ods_mph = mean(ods_mph),
+    tds_min = mean(tds_min),
+    tds_mph = mean(tds_mph),
+    cds_min = mean(cds_min),
+    cds_mph = mean(cds_mph),
+    prop_tds = mean(prop_tds, na.rm = TRUE),
+    m_n_spkrs = mean(n_spkrs_clip)) %>%
+  full_join(ptcp.info, by = "aclew_child_id")
+
+# Get xds and tds min/hr by speaker type
+all.nonrand.segments.sa <- tibble(
+  aclew_child_id = rep(all.nonrand.segments$aclew_child_id, 2),
+  segment = rep(all.nonrand.segments$segment, 2),
+  segment_dur = rep(all.nonrand.segments$segment_dur, 2),
+  sample = rep(all.nonrand.segments$sample, 2),
+  sample_type = rep(all.nonrand.segments$sample_type, 2),
+  SpkrAge = c(rep("Adult", nrow(all.nonrand.segments)),
+              rep("Child", nrow(all.nonrand.segments))))
+# XDS
+xds.per.seg.nonrand.sa <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier)) %>%
+  group_by(aclew_child_id, SpkrAge, segment) %>%
+  summarise(xds_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(xds_min.sa = 0)) %>%
+  mutate(xds_mph.sa = (xds_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# ODS
+ods.per.seg.nonrand.sa <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & val != "T") %>%
+  group_by(aclew_child_id, SpkrAge, segment) %>%
+  summarise(ods_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(ods_min.sa = 0)) %>%
+  mutate(ods_mph.sa = (ods_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# TDS
+tds.per.seg.nonrand.sa <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & val == "T") %>%
+  group_by(aclew_child_id, SpkrAge, segment) %>%
+  summarise(tds_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(tds_min.sa = 0)) %>%
+  mutate(tds_mph.sa = (tds_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# All CDS
+cds.per.seg.nonrand.sa <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & (val == "T" | val == "C")) %>%
+  group_by(aclew_child_id, SpkrAge, segment) %>%
+  summarise(cds_min.sa = round(sum(dur)/60000,3)) %>%
+  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  replace_na(list(cds_min.sa = 0)) %>%
+  mutate(cds_mph.sa = (cds_min.sa/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge)
+# Number of speakers per clip
+spkrs.per.seg.nonrand.sa <- all.data %>%
+  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           !(grepl("@", tier))) %>%
+  group_by(aclew_child_id, SpkrAge, segment) %>%
+  summarise(n_spkrs_clip = length(unique(speaker)))
+# All together
+quantity.nonrand.sa <- xds.per.seg.nonrand.sa %>%
+  full_join(ods.per.seg.nonrand.sa, by = c("aclew_child_id", "SpkrAge",
+                                           "segment", "segment_dur",
+                                           "sample", "sample_type")) %>%
+  full_join(tds.per.seg.nonrand.sa, by = c("aclew_child_id", "SpkrAge",
+                                           "segment", "segment_dur",
+                                           "sample", "sample_type")) %>%
+  full_join(cds.per.seg.nonrand.sa, by = c("aclew_child_id", "SpkrAge",
+                                           "segment", "segment_dur",
+                                           "sample", "sample_type")) %>%
+  full_join(select(quantity.nonrand, c("aclew_child_id", "segment", "tds_min")),
+            by = c("aclew_child_id", "segment")) %>%
+  full_join(ptcp.info, by = "aclew_child_id") %>%
+  full_join(spkrs.per.seg.nonrand.sa, by = c("aclew_child_id", "SpkrAge", "segment")) %>%
+  left_join(seg.distinct,
+            by = c("aclew_child_id" = "aclew_child_id", "segment" = "val")) %>%
+  replace_na(list(xds_min.sa = 0, xds_mph.sa = 0,
+                  ods_min.sa = 0, ods_mph.sa = 0,
+                  tds_min.sa = 0, tds_mph.sa = 0,
+                  cds_min.sa = 0, cds_mph.sa = 0,
+                  n_spkrs_clip = 0)) %>%
+  mutate(prop_tds.sa = tds_min.sa/xds_min.sa,
+         prop_sa.tds = tds_min.sa/tds_min)
+  # Don't replace NAs with 0s in this case; proportion is not meaningful w/o any speech
+
+# Subset the non-random samples (used for differnt purposes)
+quantity.nonrand.tt <- filter(quantity.nonrand, sample == "turn-taking")
+quantity.nonrand.tt.sa <- filter(quantity.nonrand.sa, sample == "turn-taking")
+quantity.nonrand.va <- filter(quantity.nonrand, sample != "turn-taking")
+quantity.nonrand.va.sa <- filter(quantity.nonrand.sa, sample != "turn-taking")
+
+
+## Get variables ready for modeling
+# random sample
+quantity.rand$child_sex <- as.factor(quantity.rand$child_sex)
+quantity.rand$mat_ed <- as.factor(quantity.rand$mat_ed)
+nspkrs.m <- mean(quantity.rand$n_spkrs_clip)
+nspkrs.sd <- sd(quantity.rand$n_spkrs_clip)
+quantity.rand <- quantity.rand %>%
+  mutate(
+    xds_mph.nz = ifelse(xds_mph > 0, 1, 0),
+    ods_mph.nz = ifelse(ods_mph > 0, 1, 0),
+    tds_mph.nz = ifelse(tds_mph > 0, 1, 0),
+    cds_mph.nz = ifelse(cds_mph > 0, 1, 0),
+    tchiyr.std = ((age_mo_round - tchiyr.m)/tchiyr.sd),
+    chisx.std = recode_factor(child_sex,
+                              "M" = "M", "F" = "F"),
+    mated.std = recode_factor(mat_ed,
+                              "none" = "none", "primary" = "primary",
+                              "secondary" = "secondary", "preparatory" = "preparatory"),
+    mated.bin = recode_factor(mat_ed,
+                              "none" = "0-5", "primary" = "0-5",
+                              "secondary" = "6+", "preparatory" = "6+"),
+    motyr.std = ((mat_age - motyr.m)/motyr.sd),
+    nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
+    hsz.std = ((household_size - hsz.m)/hsz.sd),
+    nsk.std = ((n_spkrs_clip - nspkrs.m)/nspkrs.sd),
+    stthr.std = (start.hr - 12)/12,
+    stthr.tri = ifelse(start.hr < 11, "morning",
+                       ifelse(start.hr > 13, "afternoon", "midday")))
+quantity.rand$stthr.tri <- factor(quantity.rand$stthr.tri,
+                                  levels = c("midday", "morning", "afternoon"))
+quantity.rand$stthr.tri.a <- factor(quantity.rand$stthr.tri,
+                                  levels = c("afternoon", "midday", "morning"))
+quantity.rand$stthr.tri.o <- factor(quantity.rand$stthr.tri,
+                                  levels = c("morning", "afternoon", "midday"))
+
+quantity.rand.sa$child_sex <- as.factor(quantity.rand.sa$child_sex)
+quantity.rand.sa$mat_ed <- as.factor(quantity.rand.sa$mat_ed)
+nspkrs.sa.m <- mean(quantity.rand.sa$n_spkrs_clip)
+nspkrs.sa.sd <- sd(quantity.rand.sa$n_spkrs_clip)
+quantity.rand.sa <- quantity.rand.sa %>%
+  mutate(
+    xds_mph.sa.nz = ifelse(xds_mph.sa > 0, 1, 0),
+    ods_mph.sa.nz = ifelse(ods_mph.sa > 0, 1, 0),
+    tds_mph.sa.nz = ifelse(tds_mph.sa > 0, 1, 0),
+    cds_mph.sa.nz = ifelse(cds_mph.sa > 0, 1, 0),
+    tchiyr.std = ((age_mo_round - tchiyr.m)/tchiyr.sd),
+    chisx.std = recode_factor(child_sex,
+                              "M" = "M", "F" = "F"),
+    mated.std = recode_factor(mat_ed,
+                              "none" = "none", "primary" = "primary",
+                              "secondary" = "secondary", "preparatory" = "preparatory"),
+    mated.bin = recode_factor(mat_ed,
+                              "none" = "0-5", "primary" = "0-5",
+                              "secondary" = "6+", "preparatory" = "6+"),
+    motyr.std = ((mat_age - motyr.m)/motyr.sd),
+    nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
+    hsz.std = ((household_size - hsz.m)/hsz.sd),
+    nsk.std = ((n_spkrs_clip - nspkrs.sa.m)/nspkrs.sa.sd),
+    stthr.std = (start.hr - 12)/12,
+    stthr.tri = ifelse(start.hr < 11, "morning",
+                       ifelse(start.hr > 13, "afternoon", "midday")))
+quantity.rand.sa$stthr.tri <- factor(quantity.rand.sa$stthr.tri,
+                                     levels = c("midday", "morning", "afternoon"))
+quantity.rand.sa$stthr.tri.a <- factor(quantity.rand.sa$stthr.tri,
+                                       levels = c("afternoon", "midday", "morning"))
+quantity.rand.sa$stthr.tri.o <- factor(quantity.rand.sa$stthr.tri,
+                                       levels = c("morning", "afternoon", "midday"))
+
+
+# tt sample
+quantity.nonrand.tt$child_sex <- as.factor(quantity.nonrand.tt$child_sex)
+quantity.nonrand.tt$mat_ed <- as.factor(quantity.nonrand.tt$mat_ed)
+nspkrs.m <- mean(quantity.nonrand.tt$n_spkrs_clip)
+nspkrs.sd <- sd(quantity.nonrand.tt$n_spkrs_clip)
+quantity.nonrand.tt <- quantity.nonrand.tt %>%
+  mutate(
+    xds_mph.nz = ifelse(xds_mph > 0, 1, 0),
+    ods_mph.nz = ifelse(ods_mph > 0, 1, 0),
+    tds_mph.nz = ifelse(tds_mph > 0, 1, 0),
+    cds_mph.nz = ifelse(cds_mph > 0, 1, 0),
+    tchiyr.std = ((age_mo_round - tchiyr.m)/tchiyr.sd),
+    chisx.std = recode_factor(child_sex,
+                              "M" = "M", "F" = "F"),
+    mated.std = recode_factor(mat_ed,
+                              "none" = "none", "primary" = "primary",
+                              "secondary" = "secondary", "preparatory" = "preparatory"),
+    mated.bin = recode_factor(mat_ed,
+                              "none" = "0-5", "primary" = "0-5",
+                              "secondary" = "6+", "preparatory" = "6+"),
+    motyr.std = ((mat_age - motyr.m)/motyr.sd),
+    nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
+    hsz.std = ((household_size - hsz.m)/hsz.sd),
+    nsk.std = ((n_spkrs_clip - nspkrs.m)/nspkrs.sd),
+    stthr.std = (start.hr - 12)/12,
+    stthr.tri = ifelse(start.hr < 11, "morning",
+                       ifelse(start.hr > 13, "afternoon", "midday")))
+quantity.nonrand.tt$stthr.tri <- factor(quantity.nonrand.tt$stthr.tri,
+                                        levels = c("midday", "morning", "afternoon"))
+quantity.nonrand.tt$stthr.tri.a <- factor(quantity.nonrand.tt$stthr.tri,
+                                          levels = c("afternoon", "midday", "morning"))
+quantity.nonrand.tt$stthr.tri.o <- factor(quantity.nonrand.tt$stthr.tri,
+                                          levels = c("morning", "afternoon", "midday"))
+
+quantity.nonrand.tt.sa$child_sex <- as.factor(quantity.nonrand.tt.sa$child_sex)
+quantity.nonrand.tt.sa$mat_ed <- as.factor(quantity.nonrand.tt.sa$mat_ed)
+nspkrs.sa.m <- mean(quantity.nonrand.tt.sa$n_spkrs_clip)
+nspkrs.sa.sd <- sd(quantity.nonrand.tt.sa$n_spkrs_clip)
+quantity.nonrand.tt.sa <- quantity.nonrand.tt.sa %>%
+  mutate(
+    xds_mph.sa.nz = ifelse(xds_mph.sa > 0, 1, 0),
+    ods_mph.sa.nz = ifelse(ods_mph.sa > 0, 1, 0),
+    tds_mph.sa.nz = ifelse(tds_mph.sa > 0, 1, 0),
+    cds_mph.sa.nz = ifelse(cds_mph.sa > 0, 1, 0),
+    tchiyr.std = ((age_mo_round - tchiyr.m)/tchiyr.sd),
+    chisx.std = recode_factor(child_sex,
+                              "M" = "M", "F" = "F"),
+    mated.std = recode_factor(mat_ed,
+                              "none" = "none", "primary" = "primary",
+                              "secondary" = "secondary", "preparatory" = "preparatory"),
+    mated.bin = recode_factor(mat_ed,
+                              "none" = "0-5", "primary" = "0-5",
+                              "secondary" = "6+", "preparatory" = "6+"),
+    motyr.std = ((mat_age - motyr.m)/motyr.sd),
+    nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
+    hsz.std = ((household_size - hsz.m)/hsz.sd),
+    nsk.std = ((n_spkrs_clip - nspkrs.sa.m)/nspkrs.sa.sd),
+    stthr.std = (start.hr - 12)/12,
+    stthr.tri = ifelse(start.hr < 11, "morning",
+                       ifelse(start.hr > 13, "afternoon", "midday")))
+quantity.nonrand.tt.sa$stthr.tri <- factor(quantity.nonrand.tt.sa$stthr.tri,
+                                           levels = c("midday", "morning", "afternoon"))
+quantity.nonrand.tt.sa$stthr.tri.a <- factor(quantity.nonrand.tt.sa$stthr.tri,
+                                             levels = c("afternoon", "midday", "morning"))
+quantity.nonrand.tt.sa$stthr.tri.o <- factor(quantity.nonrand.tt.sa$stthr.tri,
+                                             levels = c("morning", "afternoon", "midday"))
+
+```
+
+```{r quantity_plots, message=FALSE, warning=FALSE, paged.print=FALSE}
+quantity.nonrand.tt.minimum <- dplyr::select(quantity.nonrand.tt,
+                                             age_mo_round, xds_mph, ods_mph, tds_mph,
+                                             prop_tds, n_spkrs_clip) %>%
+                                             mutate(Sample = "Turn taking")
+quantity.rand.minimum <- dplyr::select(quantity.rand,
+                                       age_mo_round, xds_mph, ods_mph, tds_mph,
+                                       prop_tds, n_spkrs_clip) %>%
+                                       mutate(Sample = "Random")
+quantity.rand_and_tt <- bind_rows(quantity.nonrand.tt.minimum, quantity.rand.minimum)
+
+quantity.nonrand.sa.tt.minimum <- dplyr::select(quantity.nonrand.tt.sa,
+                                             age_mo_round, prop_sa.tds, SpkrAge) %>%
+                                             mutate(Sample = "Turn taking")
+quantity.rand.sa.minimum <- dplyr::select(quantity.rand.sa,
+                                       age_mo_round, prop_sa.tds, SpkrAge) %>%
+                                       mutate(Sample = "Random")
+quantity.sa.rand_and_tt <- bind_rows(
+  quantity.nonrand.sa.tt.minimum, quantity.rand.sa.minimum)
+
+write_csv(quantity.rand_and_tt,
+          paste0(shiny.input.path,
+                 "quantity-scores_rand-and-tt.csv"))
+
+# ODS min/hr
+odsmph.segments.rand_and_tt <- ggplot(quantity.rand_and_tt,
+                          aes(x = age_mo_round, y = ods_mph, lty = Sample)) +
+  geom_boxplot(aes(group = interaction(age_mo_round, Sample),
+                   color = Sample), fill = "white", outlier.shape = NA,
+               lty = "solid", alpha = 0.4) +
+  geom_smooth(aes(fill = Sample, color = Sample), method = "lm") +
+  ylab("ODS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(-10,80),
+                     breaks=seq(0,80,20)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,80),xlim=c(0,38)) +
+  scale_color_manual(values = viridis(3)) +
+  scale_fill_manual(values = viridis(3)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4))
+
+# TDS min/hr
+tdsmph.segments.rand_and_tt <- ggplot(quantity.rand_and_tt,
+                          aes(x = age_mo_round, y = tds_mph, lty = Sample)) +
+  geom_boxplot(aes(group = interaction(age_mo_round, Sample),
+                   color = Sample), fill = "white", outlier.shape = NA,
+               lty = "solid", alpha = 0.4) +
+  geom_smooth(aes(fill = Sample, color = Sample), method = "lm") +
+  ylab("TCDS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(0,80),
+                     breaks=seq(0,80,20)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,80),xlim=c(0,38)) +
+  scale_color_manual(values = viridis(3)) +
+  scale_fill_manual(values = viridis(3)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4))
+
+# TDS min/hr - zoomed in
+tdsmph.segments.rand_and_tt.zoomedin <- ggplot(quantity.rand_and_tt,
+                          aes(x = age_mo_round, y = tds_mph, lty = Sample)) +
+  geom_boxplot(aes(group = interaction(age_mo_round, Sample),
+                   color = Sample), fill = "white", outlier.shape = NA,
+               lty = "solid", alpha = 0.4) +
+  geom_smooth(aes(fill = Sample, color = Sample), method = "lm") +
+  ylab("TCDS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(0,40),
+                     breaks=seq(0,40,10)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,40),xlim=c(0,38)) +
+  scale_color_manual(values = viridis(3)) +
+  scale_fill_manual(values = viridis(3)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4))
+
+# TDS prop
+tdsprp.segments.rand_and_tt <- ggplot(quantity.rand_and_tt,
+                          aes(x = age_mo_round, y = prop_tds, lty = Sample)) +
+  geom_boxplot(aes(group = interaction(age_mo_round, Sample),
+                   color = Sample), fill = "white", outlier.shape = NA,
+               lty = "solid", alpha = 0.4) +
+  geom_smooth(aes(fill = Sample, color = Sample), method = "lm") +
+  ylab("TCDS/All spch") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(-.2,1.2),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1),xlim=c(0,38)) +
+  scale_color_manual(values = viridis(3)) +
+  scale_fill_manual(values = viridis(3)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4))
+
+# prop TDS from children
+tdsprp.segments.rand_and_tt.sa <- ggplot(subset(quantity.sa.rand_and_tt,
+                                                SpkrAge == "Child"),
+                             aes(x = age_mo_round, y = prop_sa.tds, lty = Sample)) +
+  geom_boxplot(aes(group = interaction(age_mo_round, Sample),
+                   color = Sample), fill = "white", outlier.shape = NA,
+               lty = "solid", alpha = 0.4) +
+  geom_smooth(aes(fill = Sample, color = Sample), method = "lm") +
+  ylab("Prop of TCDS") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(-.2,1.2),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1), xlim=c(0,38)) +
+  scale_color_manual(values = viridis(3)) +
+  scale_fill_manual(values = viridis(3)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4))
+
+## TOD plots
+quantity.nonrand.tt$Sample <- "Turn taking"
+quantity.rand$Sample <- "Random"
+quantity.rand_and_tt.all <- bind_rows(quantity.nonrand.tt, quantity.rand)
+quantity.rand_and_tt.all$stthr.tri.centered <- factor(
+  quantity.rand_and_tt.all$stthr.tri,
+  levels = c("morning", "midday", "afternoon"))
+quantity.rand_and_tt.all$SplitAge <- ifelse(
+  quantity.rand_and_tt.all$age_mo_round < 13, "Under 1;0", "1;0+")
+quantity.rand_and_tt.all$SplitAge <- factor(quantity.rand_and_tt.all$SplitAge,
+  levels = c("Under 1;0", "1;0+"))
+
+write_csv(quantity.rand_and_tt.all,
+          paste0(shiny.input.path,
+                 "quantity-scores_rand-and-tt-TOD.csv"))
+
+tod.tcds <- ggplot(data = quantity.rand_and_tt.all, aes(
+  y = round(tds_mph, 0), x = stthr.tri.centered,
+  group = interaction(SplitAge, stthr.tri.centered),
+  color = Sample,
+  fill = Sample,
+  alpha = SplitAge)) +
+  geom_jitter() +
+  geom_boxplot(color = "black") +
+  facet_grid(~ Sample) +
+  ylab("TCDS (min/hr)") + xlab("Time of day")	+
+  labs(alpha = "Age") +
+  scale_y_continuous(limits=c(-10,40),
+                     breaks=c(0,10,20, 30, 40)) +
+  scale_color_manual(guide = FALSE, values = viridis(3)) +
+  scale_fill_manual(guide = FALSE, values = viridis(3)) +
+  scale_alpha_discrete(range = c(0.2, 0.8)) +
+  coord_cartesian(ylim=c(0,40)) +
+  theme_apa() +
+  theme(legend.position="right",
+        axis.line = element_line(color="black", size = 0.4)) +
+  guides(alpha = guide_legend(override.aes = list(
+    fill = c("gray80", "gray30"))))
+
+tod.ods <- ggplot(data = quantity.rand_and_tt.all, aes(
+  y = round(ods_mph, 0), x = stthr.tri.centered,
+  group = interaction(SplitAge, stthr.tri.centered),
+  color = Sample,
+  fill = Sample,
+  alpha = SplitAge)) +
+  geom_jitter() +
+  geom_boxplot(color = "black") +
+  facet_grid(~ Sample) +
+  ylab("ODS (min/hr)") + xlab("Time of day")	+
+  labs(alpha = "Age") +
+  scale_y_continuous(limits=c(-10,80),
+                     breaks=seq(0,80,20)) +
+  scale_color_manual(guide = FALSE, values = viridis(3)) +
+  scale_fill_manual(guide = FALSE, values = viridis(3)) +
+  scale_alpha_discrete(range = c(0.2, 0.8)) +
+  coord_cartesian(ylim=c(0,80)) +
+  theme_apa() +
+  theme(legend.position="right",
+        axis.line = element_line(color="black", size = 0.4)) +
+  guides(alpha = guide_legend(override.aes = list(
+    fill = c("gray80", "gray30"))))
+
+# individual TOD plots
+tod.tcds.rand <- ggplot(
+  data = subset(quantity.rand_and_tt.all, Sample == "Random"), aes(
+  y = round(tds_mph, 0), x = stthr.tri.centered,
+  group = interaction(SplitAge, stthr.tri.centered),
+  color = Sample,
+  fill = Sample,
+  alpha = SplitAge)) +
+  geom_jitter() +
+  geom_boxplot(color = "black") +
+  ylab("TCDS (min/hr)") + xlab("")	+
+  ggtitle("Random") +
+  labs(alpha = "Age") +
+  scale_y_continuous(limits=c(-10,40),
+                     breaks=c(0,10,20, 30, 40)) +
+  scale_color_manual(guide = FALSE, values = viridis(3)) +
+  scale_fill_manual(guide = FALSE, values = viridis(3)) +
+  scale_alpha_discrete(range = c(0.2, 0.8)) +
+  coord_cartesian(ylim=c(0,40)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4),
+        plot.title = element_text(hjust = 0.5))
+
+tod.ods.rand <- ggplot(
+  data = subset(quantity.rand_and_tt.all, Sample == "Random"), aes(
+  y = round(ods_mph, 0), x = stthr.tri.centered,
+  group = interaction(SplitAge, stthr.tri.centered),
+  color = Sample,
+  fill = Sample,
+  alpha = SplitAge)) +
+  geom_jitter() +
+  geom_boxplot(color = "black") +
+  ylab("ODS (min/hr)") + xlab("")	+
+  ggtitle("Random") +
+  labs(alpha = "Age") +
+  scale_y_continuous(limits=c(-10,80),
+                     breaks=seq(0,80,20)) +
+  scale_color_manual(guide = FALSE, values = viridis(3)) +
+  scale_fill_manual(guide = FALSE, values = viridis(3)) +
+  scale_alpha_discrete(range = c(0.2, 0.8)) +
+  coord_cartesian(ylim=c(0,80)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4),
+        plot.title = element_text(hjust = 0.5))
+
+tod.tcds.tt <- ggplot(
+  data = subset(quantity.rand_and_tt.all, Sample == "Turn taking"), aes(
+  y = round(tds_mph, 0), x = stthr.tri.centered,
+  group = interaction(SplitAge, stthr.tri.centered),
+  color = Sample,
+  fill = Sample,
+  alpha = SplitAge)) +
+  geom_jitter() +
+  geom_boxplot(color = "black") +
+  ylab("TCDS (min/hr)") + xlab("Time of day")	+
+  ggtitle("Turn taking") +
+  labs(alpha = "Age") +
+  scale_y_continuous(limits=c(-10,40),
+                     breaks=c(0,10,20, 30, 40)) +
+  scale_color_manual(guide = FALSE,
+                     values = c("#21908CFF", "#21908CFF", "#FDE725FF")) +
+  scale_fill_manual(guide = FALSE,
+                    values = c("#21908CFF", "#21908CFF", "#FDE725FF")) +
+  scale_alpha_discrete(range = c(0.2, 0.8)) +
+  coord_cartesian(ylim=c(0,40)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4),
+        plot.title = element_text(hjust = 0.5))
+
+tod.ods.tt <- ggplot(
+  data = subset(quantity.rand_and_tt.all, Sample == "Turn taking"), aes(
+  y = round(ods_mph, 0), x = stthr.tri.centered,
+  group = interaction(SplitAge, stthr.tri.centered),
+  color = Sample,
+  fill = Sample,
+  alpha = SplitAge)) +
+  geom_jitter() +
+  geom_boxplot(color = "black") +
+  ylab("ODS (min/hr)") + xlab("Time of day")	+
+  ggtitle("Turn taking") +
+  labs(alpha = "Age") +
+  scale_y_continuous(limits=c(-10,80),
+                     breaks=seq(0,80,20)) +
+  scale_color_manual(guide = FALSE,
+                     values = c("#21908CFF", "#21908CFF", "#FDE725FF")) +
+  scale_fill_manual(guide = FALSE,
+                    values = c("#21908CFF", "#21908CFF", "#FDE725FF")) +
+  scale_alpha_discrete(range = c(0.2, 0.8)) +
+  coord_cartesian(ylim=c(0,80)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4),
+        plot.title = element_text(hjust = 0.5))
+
+
+### alternate for presentation
+# TDS min/hr - zoomed in
+tdsmph.segments.rand_and_tt.zoomedin.1 <- ggplot(quantity.rand,
+                          aes(x = age_mo_round, y = tds_mph)) +
+  geom_boxplot(aes(group = age_mo_round), fill = "gray50", color = "black",
+               outlier.shape = NA,
+               lty = "solid") +
+  geom_smooth(fill = "black", color = "black", method = "lm") +
+  ylab("TCDS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(0,40),
+                     breaks=seq(0,40,10)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,40),xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+		panel.grid.major = element_blank(),
+		panel.grid.minor = element_blank(),
+		axis.text.x = element_text(color="black"),
+	  axis.title.x = element_text(color="black"),
+	  axis.text.y = element_text(color="black"),
+	  axis.title.y = element_text(color="black"),
+	  strip.text = element_text(color="black"),
+		axis.ticks = element_line(color = "black"),
+		axis.line = element_line(color="black", size = 0.4),
+		legend.position = "none")
+
+tdsmph.segments.rand_and_tt.zoomedin.2 <- ggplot(quantity.nonrand.tt,
+                          aes(x = age_mo_round, y = tds_mph)) +
+  geom_boxplot(aes(group = age_mo_round), fill = "pink", color = "red",
+               outlier.shape = NA,
+               lty = "solid", alpha = 0.4) +
+  geom_smooth(fill = "red", color = "red", method = "lm") +
+  ylab("TCDS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(0,40),
+                     breaks=seq(0,40,10)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,40),xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+		panel.grid.major = element_blank(),
+		panel.grid.minor = element_blank(),
+		axis.text.x = element_text(color="black"),
+	  axis.title.x = element_text(color="black"),
+	  axis.text.y = element_text(color="black"),
+	  axis.title.y = element_text(color="black"),
+	  strip.text = element_text(color="black"),
+		axis.ticks = element_line(color = "black"),
+		axis.line = element_line(color="black", size = 0.4),
+		legend.position = "none")
+
+png(paste("diff_figs/","tcds.1.png", sep=""),
+    width=500, height=400,units="px", bg = "transparent")
+print(tdsmph.segments.rand_and_tt.zoomedin.1)
+dev.off()
+png(paste("diff_figs/","tcds.2.png", sep=""),
+    width=500, height=400,units="px", bg = "transparent")
+print(tdsmph.segments.rand_and_tt.zoomedin.2)
+dev.off()
+
+odsmph.segments.rand_and_tt.1 <- ggplot(quantity.rand,
+                          aes(x = age_mo_round, y = ods_mph)) +
+  geom_boxplot(aes(group = age_mo_round), fill = "gray50", color = "black",
+               outlier.shape = NA,
+               lty = "solid") +
+  geom_smooth(fill = "black", color = "black", method = "lm") +
+  ylab("ODS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(-10,80),
+                     breaks=seq(0,80,20)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,80),xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+		panel.grid.major = element_blank(),
+		panel.grid.minor = element_blank(),
+		axis.text.x = element_text(color="black"),
+	  axis.title.x = element_text(color="black"),
+	  axis.text.y = element_text(color="black"),
+	  axis.title.y = element_text(color="black"),
+	  strip.text = element_text(color="black"),
+		axis.ticks = element_line(color = "black"),
+		axis.line = element_line(color="black", size = 0.4),
+		legend.position = "none")
+
+odsmph.segments.rand_and_tt.2 <- ggplot(quantity.nonrand.tt,
+                          aes(x = age_mo_round, y = ods_mph)) +
+  geom_boxplot(aes(group = age_mo_round), fill = "pink", color = "red",
+               outlier.shape = NA,
+               lty = "solid") +
+  geom_smooth(fill = "red", color = "red", method = "lm") +
+  ylab("ODS (min/hr)") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(-10,80),
+                     breaks=seq(0,80,20)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,80),xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+		panel.grid.major = element_blank(),
+		panel.grid.minor = element_blank(),
+		axis.text.x = element_text(color="black"),
+	  axis.title.x = element_text(color="black"),
+	  axis.text.y = element_text(color="black"),
+	  axis.title.y = element_text(color="black"),
+	  strip.text = element_text(color="black"),
+		axis.ticks = element_line(color = "black"),
+		axis.line = element_line(color="black", size = 0.4),
+		legend.position = "none")
+
+png(paste("diff_figs/","ods.1.png", sep=""),
+    width=500, height=400,units="px", bg = "transparent")
+print(odsmph.segments.rand_and_tt.1)
+dev.off()
+png(paste("diff_figs/","ods.2.png", sep=""),
+    width=500, height=400,units="px", bg = "transparent")
+print(odsmph.segments.rand_and_tt.2)
+dev.off()
+
+
+```
+
+```{r fig3, echo=FALSE, fig.cap="Estimates of TCDS min/hr (left) and ODS min/hr (right) across the sampled age range. Each box plot summarizes the data for one child from the randomly sampled clips (purple; solid) or the turn taking clips (green; dashed). Bands on the linear trends show 95% confidence intervals.", message=FALSE, warning=FALSE, fig.height=2.5}
+grid.arrange(tdsmph.segments.rand_and_tt.zoomedin,
+             odsmph.segments.rand_and_tt, nrow=1, ncol=2)
+```
+
+
+``` {r fig5, echo=FALSE, fig.cap="Estimates of TCDS min/hr (left panels) and ODS min/hr (right panels) across the recorded day in the random clips (top panels) and turn-taking (bottom panels) clips. Each box plot summarizes the data for children age 1;0 and younger (light) or age 1;0 and older (dark) at the given time of day.", message=FALSE, warning=FALSE, fig.height=4}
+grid.arrange(tod.tcds.rand, tod.ods.rand,
+             tod.tcds.tt, tod.ods.tt, nrow=2, ncol=2)
+```
+
+``` {r chitcdscorrs, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Aggregate to one point per child and then test a correlation with age
+# random
+propchitcds.rand <- subset(quantity.rand.sa[
+  which(!is.na(quantity.rand.sa$prop_sa.tds)),],
+  SpkrAge == "Child")
+propchitcds.rand.corr_age <- propchitcds.rand %>%
+  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
+  summarise(avg_prpchitcds = mean(prop_sa.tds))
+propchitcds.rand.corr_age.test <- cor.test(
+  ~ age_mo_round + avg_prpchitcds,
+  data = propchitcds.rand.corr_age, method = "spearman")
+# turn taking
+propchitcds.tt <- subset(quantity.nonrand.tt.sa[
+  which(!is.na(quantity.nonrand.tt.sa$prop_sa.tds)),],
+  SpkrAge == "Child")
+propchitcds.tt.corr_age <- propchitcds.tt %>%
+  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
+  summarise(avg_prpchitcds = mean(prop_sa.tds))
+propchitcds.tt.corr_age.test <- cor.test(
+  ~ age_mo_round + avg_prpchitcds,
+  data = propchitcds.tt.corr_age, method = "spearman")
+
+tds.per.seg.rand.age.sx <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
+           grepl("xds@", tier) & val == "T") %>%
+  group_by(aclew_child_id, SpkrAge, SpkrSex, segment, segment_dur) %>%
+  summarise(tds_min.age.sx = round(sum(dur)/60000,3)) %>%
+  full_join(all.rand.segments.age.sx, by = c("aclew_child_id", "segment", "SpkrAge", "SpkrSex")) %>%
+  replace_na(list(segment_dur = 5, tds_min.age.sx = 0)) %>%
+  mutate(tds_mph.age.sx = (tds_min.age.sx/segment_dur)*60) %>%
+  arrange(aclew_child_id, segment, SpkrAge, SpkrSex) %>%
+  group_by(aclew_child_id, SpkrAge, SpkrSex) %>%
+  summarize(m_tds_mph.age.sx = mean(tds_mph.age.sx))
+tds.per.seg.rand.age.sx.FA <- filter(tds.per.seg.rand.age.sx,
+                                     SpkrAge == "Adult" & SpkrSex == "Female") %>%
+  rename(m_tds_mph.age.sx.FA = m_tds_mph.age.sx)
+tds.per.seg.rand.age.sx.MA <- filter(tds.per.seg.rand.age.sx,
+                                     SpkrAge == "Adult" & SpkrSex == "Male") %>%
+  rename(m_tds_mph.age.sx.MA = m_tds_mph.age.sx)
+adu.sx.ratio <- full_join(tds.per.seg.rand.age.sx.FA, tds.per.seg.rand.age.sx.MA,
+                          by = "aclew_child_id") %>%
+  mutate(ratioFAMA = m_tds_mph.age.sx.FA/m_tds_mph.age.sx.MA) %>%
+  dplyr::select(aclew_child_id, ratioFAMA)
+
+```
+
+``` {r descriptive_stats, message=FALSE, warning=FALSE, paged.print=FALSE}
+#TCDS
+## random
+round(mean(quantity.rand.bychild$tds_mph),2)
+round(median(quantity.rand.bychild$tds_mph),2)
+round(min(quantity.rand.bychild$tds_mph),2)
+round(max(quantity.rand.bychild$tds_mph),2)
+## tt
+round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+
+# proportion TCDS from adults
+round(mean(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+round(median(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+round(min(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+round(max(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+chitcds.age.rho <- round(propchitcds.rand.corr_age.test$estimate[[1]],2)
+chitcds.age.p <- round(propchitcds.rand.corr_age.test$p.value[[1]],2)
+
+# ODS
+## random
+round(mean(quantity.rand.bychild$ods_mph),2)
+round(median(quantity.rand.bychild$ods_mph),2)
+round(min(quantity.rand.bychild$ods_mph),2)
+round(max(quantity.rand.bychild$ods_mph),2)
+## tt
+round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+
+```
+
+
+## Vocal maturity
+``` {r vocmat_prep, message=FALSE, warning=FALSE, paged.print=FALSE}
+# all vocalization types
+chi.vm.lx.utts <- all.data %>%
+  filter((tier == "vcm@CHI" | tier == "lex@CHI" | tier == "mwu@CHI") & !is.na(val)) %>%
+  mutate(voc.rating = ifelse(val == "M", 4,
+                             ifelse((val == "1" | val == "W"), 3,
+                                    ifelse((val == "0" | val == "C"), 2,
+                                           ifelse(val == "N", 1, 0))))) %>%
+  filter(voc.rating > 0) %>%
+  group_by(aclew_child_id, segment, sample, start) %>%
+  summarise(max_voc.rtg = max(voc.rating))
+all.voc.types.per.child <- tibble(
+  aclew_child_id = rep(ptcp.info$aclew_child_id, 4),
+  max_voc.rtg = c(rep(1, length(ptcp.info$aclew_child_id)),
+                  rep(2, length(ptcp.info$aclew_child_id)),
+                  rep(3, length(ptcp.info$aclew_child_id)),
+                  rep(4, length(ptcp.info$aclew_child_id)))
+)
+chi.nvocs <- chi.vm.lx.utts %>%
+  group_by(aclew_child_id) %>%
+  summarise(n_vocs = n())
+chi.vm.lx.voc.type.props <- chi.vm.lx.utts %>%
+  group_by(aclew_child_id, max_voc.rtg) %>%
+  summarise(n_voc.type = n()) %>%
+  full_join(all.voc.types.per.child, by = c("aclew_child_id", "max_voc.rtg")) %>%
+  replace_na(list(n_voc.type = 0)) %>%
+  full_join(chi.nvocs, by = "aclew_child_id") %>%
+  mutate(prop_voc.type = round(n_voc.type/n_vocs, 3)) %>%
+  arrange(aclew_child_id, max_voc.rtg) %>%
+  full_join(ptcp.info, by = "aclew_child_id")
+
+# speech-like vs. non-speech-like only, only under 19mo
+chi.vm.lx.utts.all <- all.data %>%
+  filter((tier == "vcm@CHI" | tier == "lex@CHI" | tier == "mwu@CHI") &
+           !is.na(val) & age_mo_round < 19) %>%
+  mutate(voc.rating = ifelse(val == "M", 1,
+                             ifelse((val == "1" | val == "W"), 1,
+                                    ifelse((val == "0" | val == "C"), 1, 0)))) %>%
+  group_by(aclew_child_id, segment, sample, start) %>%
+  summarise(max_voc.rtg = max(voc.rating))
+all.voc.types.per.child.all <- tibble(
+  aclew_child_id = rep(ptcp.info$aclew_child_id, 2),
+  max_voc.rtg = c(rep(0, length(ptcp.info$aclew_child_id)),
+                  rep(1, length(ptcp.info$aclew_child_id)))
+)
+chi.nvocs.all <- chi.vm.lx.utts.all %>%
+  group_by(aclew_child_id) %>%
+  summarise(n_vocs = n())
+chi.vm.lx.voc.type.props.bin <- chi.vm.lx.utts.all %>%
+  group_by(aclew_child_id, max_voc.rtg) %>%
+  summarise(n_voc.type = n()) %>%
+  left_join(all.voc.types.per.child.all, by = c("aclew_child_id", "max_voc.rtg")) %>%
+  replace_na(list(n_voc.type = 0)) %>%
+  left_join(chi.nvocs.all, by = "aclew_child_id") %>%
+  mutate(prop_voc.type = round(n_voc.type/n_vocs, 3)) %>%
+  arrange(aclew_child_id, max_voc.rtg) %>%
+  left_join(ptcp.info, by = "aclew_child_id")
+```
+
+``` {r vocmat_plots, message=FALSE, warning=FALSE, paged.print=FALSE}
+chi.vm.lx.voc.type.props <- chi.vm.lx.voc.type.props %>%
+  mutate(voc.type = factor(as.factor(max_voc.rtg),
+                           labels = c("NCB", "CB", "SW", "MW")))
+write_csv(chi.vm.lx.voc.type.props,
+          paste0(shiny.input.path,
+                 "all_vocmat-types_proportions.csv"))
+voc.mat.by.age <- ggplot(
+  data = chi.vm.lx.voc.type.props,
+  aes(x = age_mo_round, y = prop_voc.type, group = as.factor(voc.type))) +
+  geom_point(aes(color = as.factor(voc.type))) +
+  geom_smooth(aes(color = as.factor(voc.type),
+                  fill = as.factor(voc.type)), method = "loess") +
+  ylab("Prop of linguistic vocs") + xlab("Child age (mo)") +
+  labs(fill='Voc type') +
+  labs(color='Voc type') +
+  scale_color_manual(values = c("gray80", "gray54",
+                                  "gray27", "black")) +
+  scale_fill_manual(values = c("gray80", "gray54",
+                                  "gray27", "black")) +
+  scale_y_continuous(limits=c(-0.5,1.5),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1), xlim=c(0,38)) +
+  theme_apa() + theme(
+    legend.position = c(0.9, 0.85),
+    legend.background = element_rect(fill="transparent"),
+    axis.line = element_line(color="black", size = 0.4))
+
+voc.mat.by.age.1 <- ggplot(
+    data = subset(chi.vm.lx.voc.type.props, voc.type == "NCB"),
+    aes(x = age_mo_round, y = prop_voc.type)) +
+  geom_point(color = "red") +
+  geom_smooth(color = "red", fill = "red", method = "loess") +
+  ylab("Prop of linguistic vocs") + xlab("Child age (mo)") +
+  scale_y_continuous(limits=c(-0.5,1.5),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1), xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+	panel.grid.major = element_blank(),
+	panel.grid.minor = element_blank(),
+	axis.text.x = element_text(color="black"),
+	axis.title.x = element_text(color="black"),
+	axis.text.y = element_text(color="black"),
+	axis.title.y = element_text(color="black"),
+	strip.text = element_text(color="black"),
+	axis.ticks = element_line(color = "black"),
+	axis.line = element_line(color="black", size = 0.4),
+	legend.position = "none")
+
+voc.mat.by.age.2 <- ggplot(
+    data = subset(chi.vm.lx.voc.type.props, voc.type == "CB"),
+    aes(x = age_mo_round, y = prop_voc.type)) +
+  geom_point(color = "orange") +
+  geom_smooth(color = "orange", fill = "orange", method = "loess") +
+  ylab("Prop of linguistic vocs") + xlab("Child age (mo)") +
+  scale_y_continuous(limits=c(-0.5,1.5),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1), xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+	panel.grid.major = element_blank(),
+	panel.grid.minor = element_blank(),
+	axis.text.x = element_text(color="black"),
+	axis.title.x = element_text(color="black"),
+	axis.text.y = element_text(color="black"),
+	axis.title.y = element_text(color="black"),
+	strip.text = element_text(color="black"),
+	axis.ticks = element_line(color = "black"),
+	axis.line = element_line(color="black", size = 0.4),
+	legend.position = "none")
+
+voc.mat.by.age.3 <- ggplot(
+    data = subset(chi.vm.lx.voc.type.props, voc.type == "SW"),
+    aes(x = age_mo_round, y = prop_voc.type)) +
+  geom_point(color = "green") +
+  geom_smooth(color = "green", fill = "green", method = "loess") +
+  ylab("Prop of linguistic vocs") + xlab("Child age (mo)") +
+  scale_y_continuous(limits=c(-0.5,1.5),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1), xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+	panel.grid.major = element_blank(),
+	panel.grid.minor = element_blank(),
+	axis.text.x = element_text(color="black"),
+	axis.title.x = element_text(color="black"),
+	axis.text.y = element_text(color="black"),
+	axis.title.y = element_text(color="black"),
+	strip.text = element_text(color="black"),
+	axis.ticks = element_line(color = "black"),
+	axis.line = element_line(color="black", size = 0.4),
+	legend.position = "none")
+
+voc.mat.by.age.4 <- ggplot(
+    data = subset(chi.vm.lx.voc.type.props, voc.type == "MW"),
+    aes(x = age_mo_round, y = prop_voc.type)) +
+  geom_point(color = "blue") +
+  geom_smooth(color = "blue", fill = "blue", method = "loess") +
+  ylab("Prop of linguistic vocs") + xlab("Child age (mo)") +
+  scale_y_continuous(limits=c(-0.5,1.5),
+                     breaks=seq(0,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1), xlim=c(0,38)) +
+  theme_apa() +
+  basic.theme + theme(
+	panel.grid.major = element_blank(),
+	panel.grid.minor = element_blank(),
+	axis.text.x = element_text(color="black"),
+	axis.title.x = element_text(color="black"),
+	axis.text.y = element_text(color="black"),
+	axis.title.y = element_text(color="black"),
+	strip.text = element_text(color="black"),
+	axis.ticks = element_line(color = "black"),
+	axis.line = element_line(color="black", size = 0.4),
+	legend.position = "none")
+
+png(paste("diff_figs/","vocmat.1.png", sep=""),
+    width=600, height=400,units="px", bg = "transparent")
+print(voc.mat.by.age.1)
+dev.off()
+png(paste("diff_figs/","vocmat.2.png", sep=""),
+    width=600, height=400,units="px", bg = "transparent")
+print(voc.mat.by.age.2)
+dev.off()
+png(paste("diff_figs/","vocmat.3.png", sep=""),
+    width=600, height=400,units="px", bg = "transparent")
+print(voc.mat.by.age.3)
+dev.off()
+png(paste("diff_figs/","vocmat.4.png", sep=""),
+    width=600, height=400,units="px", bg = "transparent")
+print(voc.mat.by.age.4)
+```
+
+
+```{r fig6, echo=FALSE, fig.cap="Proportion of vocalization types used by children across age (NCB = Non-canonical babble, CB = Canonical babble, SW = single word utterance, MW = multi-word utterance).", message=FALSE, warning=FALSE, fig.height=3.5}
+voc.mat.by.age
+```
+
+# Acknowledgements {#acknowledgements}
+This paper was written using the papaja library in RStudio [@R-papaja].
+
+\newpage
+
+# References {#refs}
+
+```{r create_r-references}
+r_refs(file = "Yeli-CLE.bib")
+```
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id = "refs"></div>
+\endgroup

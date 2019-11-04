@@ -14,6 +14,6 @@ for (i in 1:length(files)) {
   transcription.tiers <- which(newfile$tier == newfile$speaker)
   newfile$val[transcription.tiers] <- "0."
   uniq.tiers <- unique(newfile$tier)
-  newfile <- newfile %>% filter(!(str_detect(tier, "AudioOnly|Notes|context|code_num|on_off")))
+  newfile <- newfile %>% filter(!(str_detect(tier, "AudioOnly|Notes|context|code_num|on_off|tlen")))
   write_csv(newfile, paste0(anon.data.path, files[i]))
 }
