@@ -52,6 +52,7 @@ library(glmmTMB)
 library(DHARMa)
 library(bbmle)
 library(broom.mixed)
+library(lubridate)
 source("0-Helper.R")
 ```
 
@@ -62,9 +63,7 @@ metadata.path <- "metadata/"
 plot.path <- "plots/" # output plots
 shiny.input.path <- "shiny_input/"
 shiny.input.img.path <- "www/"
-#seg.index.file <- paste0(metadata.path, "Segment-order-inventory.csv")
 ptcp.info.file <- paste0(metadata.path, "recording-info.csv")
-#comparison.file <- paste0(metadata.path, "comparison_studies.csv")
 samplelabels <- c("High activity  ", "Random  ")
 col.sample.bu <- list(
   scale_fill_manual(labels=samplelabels, values=viridis(2)),
@@ -132,9 +131,6 @@ We were limited to selecting sub-clips from 10 children for analysis because of 
 We used the ACLEW Annotation Scheme (REFS) in ELAN (ELAN REFS) to transcribe and annotate all hearable speech---both near and distant---in the clips. We first segmented out the utterances and ascribed them to individual speakers (e.g., older brother, mother, aunt, etc.). We then annotated the vocal maturity of each utterance produced by the target child (non-canonical babble/canonical babble/single word/multi-word/unsure) and annotated the addressee of all speech from other speakers (addressed to the target child/one or more other children/one or more adults/a mix of adults and children/any animal/other/unsure). Transcription and annotation was done together by the first author and one of three native speakers of Yélî Dnye who worked on this dataset. All of these research assistants knew all the families in the recordings, and were able to use their personal familiarity, the discourse context, and information from the accompanying photos in reporting what was said and to whom speech was addressed for each utterance. Detailed manuals and self-guided training materials, including a 'gold standard test' for this annotation scheme can be found at URL (REFS).
 
 
-
-
-
 ```{r prepare_data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 # Read in annotation files
 files <- list.files(path=data.path,pattern="*.txt")
@@ -152,15 +148,38 @@ all.data$row <- c(1:nrow(all.data))
 ptcp.info <- read_csv(ptcp.info.file, col_types = cols()) %>%
   dplyr::select(-row)
 ptcp.info$aclew_child_id <- as.character(ptcp.info$aclew_child_id)
-#seg.info <- read_csv(seg.index.file)
 
 # Extract and convert start time of each sample
+rec.time.info <- ptcp.info %>%
+  select(aclew_child_id, start_of_recording, length_of_recording) %>%
+  mutate(
+    start.hh = substr(start_of_recording, 1, 2),
+    start.mm = substr(start_of_recording, 4, 5),
+    start.ss = substr(start_of_recording, 7, 8),
+    start_of_recording.ms = period_to_seconds(hms(start_of_recording))*1000,
+    stop_of_recording.ms = start_of_recording.ms + length_of_recording*1000,
+    stop_of_recording = paste(
+      str_pad(hour(seconds_to_period(stop_of_recording.ms/1000)), 2, "left", pad = "0"),
+      str_pad(minute(seconds_to_period(stop_of_recording.ms/1000)), 2, "left", pad = "0"),
+      str_pad(second(seconds_to_period(stop_of_recording.ms/1000)), 2, "left", pad = "0"), sep = ":"),
+    length_of_recording.ms = length_of_recording*1000) %>%
+  rename(length_of_recording.s = length_of_recording) %>%
+  select(aclew_child_id,
+         start_of_recording, stop_of_recording, length_of_recording.s,
+         start_of_recording.ms, stop_of_recording.ms, length_of_recording.ms,
+         start.hh, start.mm, start.ss)
+
 seg.info <- filter(all.data, tier == "clip") %>%
   select(-tier, -speaker, -row) %>%
-  # TO-DO: add real start times—these are bogus times
-  mutate(start.hhmmss = 090000,
-         start.sec = 32400,
-         start.hr = 9)
+  left_join(rec.time.info) %>%
+  mutate(
+    start.ms = start_of_recording.ms + start,
+    start.sec = start.ms/1000,
+    start.hhmmss = paste(
+      str_pad(hour(seconds_to_period(start.sec)), 2, "left", pad = "0"),
+      str_pad(minute(seconds_to_period(start.sec)), 2, "left", pad = "0"),
+      str_pad(second(seconds_to_period(start.sec)), 2, "left", pad = "0"), sep = ":"),
+    start.hr = start.ms/3600000)
 
 # Add mean and sd values for participant-level predictors to ptcp.info
 ptcp.info <- ptcp.info %>%
@@ -270,30 +289,34 @@ apa_table(sample.demog, caption="Demographic overview of the 10 children whose r
 
 
 ```{r fig2, echo=FALSE, fig.cap="Recording duration (black line) and sampled clips (colored boxes) for each of the 10 recordings analyzed, sorted by child age in months.", message=FALSE, warning=FALSE, fig.height=4}
-ptcp.info <- mutate(ptcp.info,
-                    rec.start.hr = lubridate::hour(start_of_recording) +
-                      lubridate::minute(start_of_recording)/60 +
-                      lubridate::second(start_of_recording)/3600,
-                    rec.stop.hr = rec.start.hr + length_of_recording/3600) %>%
+ptcp.info <- ptcp.info %>%
   arrange(age_mo_round) %>%
   mutate(order = seq(1:10))
 
 used.clips <- seg.info %>%
-#  filter(Include == 1) %>%
-  left_join(ptcp.info) %>%
-  mutate(clip.dur = ifelse(grepl(('random'), val), 5,
-                           ifelse(grepl('extension', val), 6, 1)),
-         sample.type = ifelse(grepl(('random'), val), "Random",
-                           ifelse(grepl('tt', val),
-                                  "Turn taking", "Vocal activity")))
+  mutate(
+    alt.seg.name = gsub("ext-", "", val)) %>%
+  group_by(aclew_child_id, alt.seg.name) %>%
+  summarize(start.hhmmss = min(start.hhmmss),
+            start.hr = min(start.hr),
+            start.rec.hr = min(start_of_recording.ms)/3600000,
+            end.rec.hr = min(stop_of_recording.ms)/3600000,
+            clip.dur = sum(dur)/60000) %>%
+  rename(segment = alt.seg.name) %>%
+  mutate(sample.type = case_when(
+      grepl('random', segment) ~ "Random",
+      grepl('tt', segment) ~ "Turn taking",
+      grepl('va', segment) ~ "Vocal activity")) %>%
+  left_join(ptcp.info)
 used.clips$sample.type = factor(used.clips$sample.type,
                                 levels = c("Random", "Turn taking", "Vocal activity"))
   
-clip.distribution <- ggplot() +
-  geom_segment(data = ptcp.info,
-               aes(x = rec.start.hr, y = order, xend = rec.stop.hr, yend = order)) +
-  geom_segment(data = used.clips,
-               aes(x = start.hr, y = order, xend = start.hr + clip.dur/60, yend = order,
+clip.distribution <- ggplot(data = used.clips) +
+  geom_segment(data = filter(used.clips, segment == "random-1"),
+               aes(x = start.rec.hr, y = order,
+                   xend = end.rec.hr, yend = order)) +
+  geom_segment(aes(x = start.hr, y = order,
+                   xend = start.hr + clip.dur/60, yend = order,
                    color = sample.type), size = 3) +
   theme_apa() +
   theme(legend.position = "bottom") +
