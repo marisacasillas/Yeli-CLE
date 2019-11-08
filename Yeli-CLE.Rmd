@@ -78,6 +78,68 @@ rand.sample.dur <- 2.5
 ```
 
 # Introduction {#intro}
+
+- it's hard to get a grasp on what children hear
+- traditionally we have used short video recordings, at home or in the lab to get an idea of how that caregiver and child interact
+- more recently we've used much longer recordings to track children's language use across a range of activity and interlocutor contexts with age
+- the idea here is that we'll get more generalizable, reliable measures of what children are actually hearing
+- though it may be the case that it takes several days of recording for an estimate to stabilize (anderson & fausey)
+- and there's no guarantee that the estimates we get at the scale of whole days are predictive for language development or are representative of meaningful differences in caregiving style and/or linguistic ideology.
+- it may be, for example, that key moments throughout the day are much more important than the average behavior for the day
+
+- more here on 'what are we trying to get at?'
+
+- two recent studies have examined the impact of recording method on our resulting perspective of the input, showing that short recordings tend to suggest that there is more input available to kids than there is on average over the course of a day, and that there are some qualitative differences, but that the average ranking of kids on these measures stays the same (tamis-lemonda & bergelson).
+- describe TLM
+- describe B
+- of course, lack of visual information (e.g., no information from gaze/gesture), so implicitly limited in another way
+- in sum, short- and long-recordings tell slightly different stories about children's language inputs, each with their plusses and minuses, depending on how the information will be applied
+
+- compare that result to the case of children growing up in a variety of ethnolinuistically related indigenous Mayan communities in southern Mexico.
+- a number of studies, primarily from the field of language socialization have used ethnographic methods and microanalysis of videos of short interaction in the last four decades to establish a relatively consistent picture of Mayan caregiving environments across this region: they shape infants' and young children's worlds such that the infants attend to what is going on around them, rather than expecting to be the center of attention; in other words, direct talk to infants in a dyadic context is rare, at least until children begin to initiate responses themselves (REFS)
+- furthermore, children typically grow up surrounded by many children (their siblings and cousins) who, along with other relatives, become some of the child's multiple caregivers by the time they are 5 or 6 (REFS).
+- Really lovely work by Laura Shneidman used short videos of interaction to follow up on these ethnographic reports using methods typically found in developmental psychology
+- she found interactional patterns that aligned well with past reports: infants were very rarely spoken to, but the frequency with which children were addressed increased rapidly with age, mostly due to an enormous influx of direct speech from other children
+- those results matched the prior work done in that set of communities (Gaskins) as well as the general child-directed langauge pattern for the region as a whole
+- however, we followed up on ethnographic report as well, this time using daylong recording methods, and bringing them to one of the related communities where a similar caregiver interactional style had been described.
+- our results were only partly consistent with the prior ethnographic work at this same community, other Mayan communities, and with the Shneidman work: indeed we found that infants and young children were only directly spoken to rarely, but that there was no significant increase with age and that the vast majority of the speech came from adults (usually women), even between ages 2 and 3 when children are old enough to follow their older siblings and cousins around
+
+- these divergent results don't suggest that the ethnographic work is wrong; only that it's not representative with respect to what happens over the course of an entire day. but the divergence does raise an important issue faced by developmental psychology as it expands its study of child language to more diverse speech communities: studying this as a community outsider is hard; it's difficult to know what's typical/representative when one can't observe everything
+- observing as much as possible may also work against our ability to pinpoint meaningful differences in cargiving style and language ideology if those behaviors are most overtly observable during short, sparsely distributed interactions that are otherwise averaged out in the noise of a whole day recording
+- it's possible that a lot of the language socialization work and, indeed, possibly even a lot of the language learning (REFS) happens during these short periods
+- of course, some of these short periods may occur outside of the typical outsider's view: many of the interactional bursts from adult speakers that did occur in our prior study were in contexts where visitors, even other community members, are not typically invited (e.g., in the bedroom as the child was waking from an afternoon sleep)
+- one of our co-authors has worked closely with members of this community for over 40 years but didn't previously have a chance to observe interactions of that sort.
+- so, again, these methods may have different roles in what they can tell us about children's language environments, a difference exasperated when the reesarcher is not themselves a member of the community under study
+
+- if we want to encourage more work on non-WEIRD communities it will be important to establish how different methods of measuring the input impact the conclusions that are likely to be made by an someone visiting the community as an outsider.
+- until there are trained researchers working on this topic who were born and raised as members of these communities—what we should be trying to cultivate for the longer term—this is a quandary we will continue to face.
+
+- in this study we present analysis of daylong recordings from a small-scale indigenous community in which prior ethnographic work has painted a rather different picture of early caregiver-child interaction from what we have seen so far in the Mayan data: child-centric, face-to-face interaction from the first days of infancy on Rossel Island, Papua New Guinea (PNG). In what follows we will give a background on the ethnographic work done with this community previously, our methods for following up on these findings with daylong recordings, and a discussion of the differences that arose. This study was completed as part of a larger comparative project focusing on children's speech environments and linguistic development at two sites: the Tseltal Mayan community mentioned above (Casillas et al., forthcoming) and this Rossel Island community. Therefore all methods for annotation and analysis in this study parallel those reported elsewhere for Tseltal Mayan children's speech environments (Casillas, Brown, & Levinson, forthcoming).
+
+
+## What's the story?
+CDS quality vs. quantity; ideologies of caregiving; ideologies of language development; pedagogy vs. responsiveness; language socialization
+
+Prior ethnographic work suggests that the Rosselers are highly socially interactive with their kids from early on; they stick out, even in comparison to Westerners in how often they bid their kids' attention, they have an obvious babytalk register, and there is a general sense that infants are fun/toy-like beings that is open to Rosselers of all stripes (siblings just two years older as well as elderly big men).
+
+We might conclude from this description that Rosselers 'like to' talk to children, and we would therefore predict that they do so pretty often (on par with what we see in middle-class Western homes) and that, accordingly, their speech to children would have the same types of interactional functions and implications for language development << i don't have data for that first part... yet!!!
+
+And if they don't do it often? What does it mean?
+- orientation toward infants as social partners isn't a great predictor of how much speech they get
+- other factors in the environment shape attention to the infant (e.g., number of other, more capable interactants around)
+- future work: is orientation toward infants predictive of the *type* of type of speech they get?
+
+Then two interesting issues arise. First, is it the quality of short interactions that give us an impression of quantity---should we abandon this assumption? Maybe we weren't even aware of it. Second, is it the quality of these short interactions that influences early language learning?
+
+
+
+
+
+
+
+
+
+
 There is mounting evidence that children in many parts of the world typically acquire their language(s) with little direct speech from adults in the first few years of life. Indeed, recent studies that have directly measured the quantity of speech addressed to children under age five across a number of indigenous communities in southern Mexico (Shneidman & Goldin-Meadow, 2012; Casillas et al., forth), Bolivia (Cristia et al., 2017; Cychosz et al., in prep; Scaff et al., in prep), and northeastern Africa (Mastin et al., ??) have found that speech directly addressed to young children in these communities is infrequent. The quantitative findings of this work have, by and large, reinforced previous ethnographic descriptions of these and other small-scale non-Western communities (e.g., Ochs & Schieffelin, Brown, etc.). Moreover, recent work applying these techniques with North American children suggests that, even Western middle-class contexts, the quantity of directed speech to children is typically low---around 5--6 minutes per hour (Bunce et al., in prep)---cutting previous estimates nearly in half (Bergelson, Casillas, et al., 2019). The question underscored by this research is clear: what is the role of child-directed speech in language learning?
 
 Despite the linguistically and culturally diverse language environments of the human past and present, children---no matter where they grow up---typically learn the set of linguistic structures and patterns of language use that are relevant to their community and pass this knowledge on to the next generation without any explicit or universal framework for teaching or learning. And while young language learners do effect change on the lingusitic systems they acquire (e.g., NSL, creoles, etc., REFS), they tend to learn the language of their parents and peers with high fidelity (REFS). However, within generations of learners there is meaningful variation in individual language skill and individual language-learning trajectories, influenced by both intrinsic and extrinsic factors (REFS).
@@ -102,19 +164,6 @@ We were interested to investigate the language environment of children acquiring
 
 However, to our surprise we found that Yélî children were not spoken to very often at all. In fact, they were spoken to less often than the Tseltal children we have studied in other work, who are growing up in a community where children are indeed reportedly spoken to infrequently.
 
-Then two interesting issues arise. First, is it the quality of short interactions that give us an impression of quantity---should we abandon this assumption? Maybe we weren't even aware of it. Second, is it the quality of these short interactions that influences early language learning?
-
-## What's the story?
-CDS quality vs. quantity; ideologies of caregiving; ideologies of language development; pedagogy vs. responsiveness; language socialization
-
-Prior ethnographic work suggests that the Rosselers are highly socially interactive with their kids from early on; they stick out, even in comparison to Westerners in how often they bid their kids' attention, they have an obvious babytalk register, and there is a general sense that infants are fun/toy-like beings that is open to Rosselers of all stripes (siblings just two years older as well as elderly big men).
-
-We might conclude from this description that Rosselers 'like to' talk to children, and we would therefore predict that they do so pretty often (on par with what we see in middle-class Western homes) and that, accordingly, their speech to children would have the same types of interactional functions and implications for language development << i don't have data for that first part... yet!!!
-
-And if they don't do it often? What does it mean?
-- orientation toward infants as social partners isn't a great predictor of how much speech they get
-- other factors in the environment shape attention to the infant (e.g., number of other, more capable interactants around)
-- future work: is orientation toward infants predictive of the *type* of type of speech they get?
 
 
 ## Our predictions
