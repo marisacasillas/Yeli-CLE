@@ -4,7 +4,7 @@ library(tidyverse)
 raw.data.path <- "transcripts/raw/" # text files exported from ELAN
 anon.data.path <- "transcripts/anon/" # text files to use as input to analysis
 
-files <- list.files(path=raw.data.path,pattern="*.txt")
+files <- list.files(path=raw.data.path,pattern="\\d+.txt")
 all.data <- data.frame()
 for (i in 1:length(files)) {
   print(files[i])
