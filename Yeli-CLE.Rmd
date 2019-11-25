@@ -70,9 +70,6 @@ col.sample.bu <- list(
 col.sample.bu3 <- list(
   scale_fill_manual(labels=samplelabels, values=viridis(3)),
   scale_color_manual(labels=samplelabels, values=viridis(3)))
-allowed.overlap <- 1000 #ms
-allowed.gap <- 2000 #ms
-waking.hours <- 14
 rand.sample.dur <- 2.5
 ```
 
@@ -140,40 +137,45 @@ for (i in 1:length(files)) {
 all.data$row <- c(1:nrow(all.data))
 
 # Read in supplementary data
-ptcp.info <- read_csv(ptcp.info.file, col_types = cols()) %>%
-  dplyr::select(-row)
+ptcp.info <- read_csv(ptcp.info.file, col_types = cols())
 ptcp.info$aclew_child_id <- as.character(ptcp.info$aclew_child_id)
 
 # Extract and convert start time of each sample
 rec.time.info <- ptcp.info %>%
-  select(aclew_child_id, start_of_recording, length_of_recording) %>%
+  select(aclew_child_id, start_of_wav, length_of_wav) %>%
   mutate(
-    start.hh = substr(start_of_recording, 1, 2),
-    start.mm = substr(start_of_recording, 4, 5),
-    start.ss = substr(start_of_recording, 7, 8),
-    start_of_recording.ms = period_to_seconds(hms(start_of_recording))*1000,
-    stop_of_recording.ms = start_of_recording.ms + length_of_recording*1000,
-    stop_of_recording = paste(
-      str_pad(hour(seconds_to_period(stop_of_recording.ms/1000)), 2, "left", pad = "0"),
-      str_pad(minute(seconds_to_period(stop_of_recording.ms/1000)), 2, "left", pad = "0"),
-      str_pad(second(seconds_to_period(stop_of_recording.ms/1000)), 2, "left", pad = "0"), sep = ":"),
-    length_of_recording.ms = length_of_recording*1000) %>%
-  rename(length_of_recording.s = length_of_recording) %>%
+    start.hh = substr(start_of_wav, 1, 2),
+    start.mm = substr(start_of_wav, 4, 5),
+    start.ss = substr(start_of_wav, 7, 8),
+    start_of_wav.ms = period_to_seconds(hms(start_of_wav))*1000,
+    stop_of_wav.ms = start_of_wav.ms + length_of_wav*1000,
+    stop_of_wav = paste(
+      str_pad(hour(seconds_to_period(
+        stop_of_wav.ms/1000)), 2, "left", pad = "0"),
+      str_pad(minute(seconds_to_period(
+        stop_of_wav.ms/1000)), 2, "left", pad = "0"),
+      str_pad(second(seconds_to_period(
+        stop_of_wav.ms/1000)), 2, "left", pad = "0"), sep = ":"),
+    length_of_wav.ms = length_of_wav*1000) %>%
+  rename(length_of_wav.s = length_of_wav) %>%
   select(aclew_child_id,
-         start_of_recording, stop_of_recording, length_of_recording.s,
-         start_of_recording.ms, stop_of_recording.ms, length_of_recording.ms,
+         start_of_wav, stop_of_wav, length_of_wav.s,
+         start_of_wav.ms, stop_of_wav.ms, length_of_wav.ms,
          start.hh, start.mm, start.ss)
 
 seg.info <- filter(all.data, tier == "clip") %>%
   select(-tier, -speaker, -row) %>%
   left_join(rec.time.info) %>%
   mutate(
-    start.ms = start_of_recording.ms + start,
+    start.ms = start_of_wav.ms + start,
     start.sec = start.ms/1000,
     start.hhmmss = paste(
-      str_pad(hour(seconds_to_period(start.sec)), 2, "left", pad = "0"),
-      str_pad(minute(seconds_to_period(start.sec)), 2, "left", pad = "0"),
-      str_pad(second(seconds_to_period(start.sec)), 2, "left", pad = "0"), sep = ":"),
+      str_pad(hour(seconds_to_period(start.sec)),
+        2, "left", pad = "0"),
+      str_pad(minute(seconds_to_period(start.sec)),
+        2, "left", pad = "0"),
+      str_pad(second(seconds_to_period(start.sec)), 2,
+        "left", pad = "0"), sep = ":"),
     start.hr = start.ms/3600000)
 
 # Add mean and sd values for participant-level predictors to ptcp.info
@@ -271,8 +273,8 @@ sample.demog <- ptcp.info %>%
   mutate(mat_age_rd = as.integer(round(mat_age, 0)),
          fat_age_rd = as.integer(round(fat_age, 0)),
          hszrd = as.integer(round(household_size + 1, 0))) %>%
-  select(age, child_sex, mat_age_rd, mat_ed, hszrd) %>%
-  rename("Age" = age, "Sex" = child_sex,
+  select(age_childes, child_sex, mat_age_rd, mat_ed, hszrd) %>%
+  rename("Age" = age_childes, "Sex" = child_sex,
          "Mother's age" = mat_age_rd, "Level of maternal education" = mat_ed,
          "People in household" = hszrd)
 ```
@@ -292,8 +294,8 @@ used.clips <- seg.info %>%
   group_by(aclew_child_id, alt.seg.name) %>%
   summarize(start.hhmmss = min(start.hhmmss),
             start.hr = min(start.hr),
-            start.rec.hr = min(start_of_recording.ms)/3600000,
-            end.rec.hr = min(stop_of_recording.ms)/3600000,
+            start.rec.hr = min(start_of_wav.ms)/3600000,
+            end.rec.hr = min(stop_of_wav.ms)/3600000,
             clip.dur = sum(dur)/60000) %>%
   rename(segment = alt.seg.name) %>%
   mutate(sample.type = case_when(
