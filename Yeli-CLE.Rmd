@@ -312,7 +312,9 @@ used.clips <- seg.info %>%
       grepl('va', segment) ~ "Vocal activity")) %>%
   left_join(ptcp.info)
 used.clips$sample.type = factor(used.clips$sample.type,
-                                levels = c("Random", "Turn taking", "Vocal activity"))
+                                levels = c(
+                                  "Random", "Turn taking",
+                                  "Vocal activity"))
   
 clip.distribution <- ggplot(data = used.clips) +
   geom_segment(data = filter(used.clips, segment == "random-1"),
@@ -333,12 +335,14 @@ clip.distribution
 ```{r quantity_prep, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 # RANDOM
 # Get min/hr speech measures
-n.unique.rand.segs <- length(unique(all.data$segment[grepl("random", all.data$segment)]))
+n.unique.rand.segs <- length(unique(
+  all.data$segment[grepl("random", all.data$segment)]))
 n.unique.recs <- length(unique(all.data$aclew_child_id))
 all.rand.segments <- tibble(
   aclew_child_id = rep(unique(all.data$aclew_child_id),
                 n.unique.rand.segs),
-  segment = rep(unique(all.data$segment[grepl("random", all.data$segment)]),
+  segment = rep(unique(all.data$segment[grepl(
+    "random", all.data$segment)]),
                 n.unique.recs))
 # XDS
 xds.per.seg.rand <- all.data %>%
