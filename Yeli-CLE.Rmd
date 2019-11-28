@@ -71,6 +71,8 @@ col.sample.bu3 <- list(
   scale_fill_manual(labels=samplelabels, values=viridis(3)),
   scale_color_manual(labels=samplelabels, values=viridis(3)))
 rand.sample.dur <- 2.5
+ext.sample.dur <- 5
+peak.sample.dur <- 1
 ```
 
 # Introduction {#intro}
@@ -128,7 +130,6 @@ We conducted all analyses in R, using the glmmTMB package to run generalized lin
 files <- list.files(path=data.path,pattern="*.txt")
 all.data <- data.frame()
 for (i in 1:length(files)) {
-#  print(files[i])
   newfile <- read_csv(paste0(data.path, files[i]),
                       col_types = cols(val = col_character()))
   newfile$aclew_child_id <- unlist(strsplit(files[i], '\\.'))[1]
@@ -163,7 +164,7 @@ rec.time.info <- ptcp.info %>%
          start_of_wav.ms, stop_of_wav.ms, length_of_wav.ms,
          start.hh, start.mm, start.ss)
 
-seg.info <- filter(all.data, tier == "clip") %>%
+seg.info <- filter(all.data, tier == "code") %>%
   select(-tier, -speaker, -row) %>%
   left_join(rec.time.info) %>%
   mutate(
@@ -191,14 +192,14 @@ ptcp.info <- ptcp.info %>%
     hsz.sd = sd(household_size)
     )
 
-# Merge in participant and segment info to the main data table
-codes <- all.data %>% filter(tier == "clip")
+# Merge participant and segment info to the main data table
+codes <- filter(all.data, tier == "code")
 
 all.data <- all.data %>%
   filter(speaker != "") %>%
   left_join(ptcp.info, by = "aclew_child_id") %>%
   mutate(segment = "", sample = "",
-         sample_type = "", segment_dur = 0)
+         sample_type = "", clip_dur = 0)
 
 for (i in 1:nrow(codes)) {
   rec <- codes$aclew_child_id[i]
@@ -209,63 +210,69 @@ for (i in 1:nrow(codes)) {
                      all.data$start < seg.off &
                      all.data$stop > seg.on)
   all.data$segment[seg.idx] <- seg
+  all.data$clip_dur[seg.idx] <- codes$dur[i]
 }
 
-# Label samples
+# Remove utterances that occur outside of the annotated clips
 all.data$sample[which(
   grepl('^random', all.data$segment))] <- "random"
 all.data$sample[which(
   grepl('tt', all.data$segment))] <- "turn-taking"
 all.data$sample[which(
-  grepl('va', all.data$segment))] <- "high-activity"
-
-# Remove utterances that occur outside of the sample
+  grepl('va', all.data$segment))] <- "vocal-activity"
 all.data <- filter(all.data, sample != "")
-# Clip utterances that start/end outside of the sampled clips
-seg.on.off <- seg.info %>% select(aclew_child_id, start, stop, val) %>%
-  rename(seg_start = "start", seg_stop = "stop", segment = val)
-# ...because of the split extensions with the same names
-# we have to be cautious
+# shorten utterance bouncaries that extend outside of the annotated clips
+# NOTE: because of the split extensions with the same names
+# we have to be cautious (e.g., if there are two 'ext-va-1' codes)
+# for a given recording
+seg.on.off <- seg.info %>%
+  select(aclew_child_id, start, stop, val) %>%
+  rename(clip_start = "start", clip_stop = "stop", segment = val) %>%
+  mutate(clip_dur = clip_stop - clip_start)
 for (i in 1:nrow(seg.on.off)) {
   over.left.edge.idx <- which(all.data$aclew_child_id == seg.on.off$aclew_child_id[i] &
-                          all.data$start < seg.on.off$seg_stop[i] &
-                          all.data$stop > seg.on.off$seg_start[i] &
-                          all.data$start < seg.on.off$seg_start[i])
+                          all.data$start < seg.on.off$clip_stop[i] &
+                          all.data$stop > seg.on.off$clip_start[i] &
+                          all.data$start < seg.on.off$clip_start[i])
   over.right.edge.idx <- which(all.data$aclew_child_id == seg.on.off$aclew_child_id[i] &
-                          all.data$start < seg.on.off$seg_stop[i] &
-                          all.data$stop > seg.on.off$seg_start[i] &
-                          all.data$stop > seg.on.off$seg_stop[i])
+                          all.data$start < seg.on.off$clip_stop[i] &
+                          all.data$stop > seg.on.off$clip_start[i] &
+                          all.data$stop > seg.on.off$clip_stop[i])
   if (length(over.left.edge.idx) > 0) {
-    all.data$start[over.left.edge.idx] <- seg.on.off$seg_start[i]
+    all.data$start[over.left.edge.idx] <- seg.on.off$clip_start[i]
   }
   
   if (length(over.right.edge.idx) > 0) {
-    all.data$stop[over.right.edge.idx] <- seg.on.off$seg_stop[i]
+    all.data$stop[over.right.edge.idx] <- seg.on.off$clip_stop[i]
   }
 }
 
-# Label sample types and durations
-random.samples <- which(grepl('^random', all.data$segment))
-all.data$sample_type[random.samples] <- "random"
-all.data$segment_dur[random.samples] <- rand.sample.dur
+# Add basic segment info to all.data
+all.data <- all.data %>%
+  left_join(seg.on.off) %>%
+  mutate(
+    sample_type = case_when(
+      grepl("^ran", segment) ~ "random",
+      grepl("^ext", segment) ~ "extension",
+      grepl("^tt", segment) ~ "turn-taking",
+      grepl("^va", segment) ~ "vocal-activity"
+    ),
+    segment_dur = case_when(
+      sample_type == "random" ~ rand.sample.dur,
+      sample_type == "extension" ~ ext.sample.dur,
+      sample_type == "turn-taking" |
+        sample_type == "vocal-activity" ~ peak.sample.dur
+    ))
 
-ext.samples <- which(grepl('^extension', all.data$segment))
-all.data$sample_type[ext.samples] <- "extension"
-all.data$segment_dur[ext.samples] <- 5
-
-tt.samples <- which(grepl('^tt', all.data$segment))
-all.data$sample_type[tt.samples] <- "turn-taking"
-all.data$segment_dur[tt.samples] <- 1
-
-va.samples <- which(grepl('^va', all.data$segment))
-all.data$sample_type[va.samples] <- "turn-taking"
-all.data$segment_dur[va.samples] <- 1
 
 # Add in segment start time
+mini.clip.info <- select(seg.info, c("aclew_child_id", "val",
+  "start.hhmmss", "start.sec", "start.hr", "start")) %>%
+  rename("segment" = "val", "clip.start.hhmmss" = "start.hhmmss",
+    "clip.start.sec" = "start.sec", "clip.start.hr" = "start.hr",
+    "clip_start" = "start")
 all.data <- all.data %>%
-  left_join(dplyr::select(seg.info, c("aclew_child_id", "val", "start.hhmmss",
-                                      "start.sec", "start.hr")),
-            by = c("aclew_child_id" = "aclew_child_id", "segment" = "val"))
+  left_join(mini.clip.info)
 ```
 
 ```{r demog_table_prep, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
@@ -274,6 +281,7 @@ sample.demog <- ptcp.info %>%
          fat_age_rd = as.integer(round(fat_age, 0)),
          hszrd = as.integer(round(household_size + 1, 0))) %>%
   select(age_childes, child_sex, mat_age_rd, mat_ed, hszrd) %>%
+  arrange(age_childes) %>%
   rename("Age" = age_childes, "Sex" = child_sex,
          "Mother's age" = mat_age_rd, "Level of maternal education" = mat_ed,
          "People in household" = hszrd)
