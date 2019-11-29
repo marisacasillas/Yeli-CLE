@@ -36,7 +36,7 @@ lineno            : yes
 mask              : no
 
 class             : "man"
-output            : papaja::apa6_word #apa6_pdf or apa6_word
+output            : papaja::apa6_pdf #apa6_pdf or apa6_word
 ---
 
 ```{r load_packages, include=FALSE, echo=FALSE, warning=FALSE}
@@ -1275,6 +1275,189 @@ grid.arrange(tdsmph.segments.rand_and_tt.zoomedin,
 grid.arrange(tod.tcds.rand, tod.ods.rand,
              tod.tcds.tt, tod.ods.tt, nrow=2, ncol=2)
 ```
+
+```{r tcds_models, message=FALSE, warning=FALSE, paged.print=FALSE}
+## TCDS random sample ####
+tcds.random.distribution <- ggplot(quantity.rand,
+                            aes(round(tds_mph,0))) +
+  geom_histogram(binwidth = 2) +
+  ylab("# of clips") +
+  xlab ("TCDS min/hr") +
+  basic.theme
+ggsave(paste0(shiny.input.img.path, "TCDS_random_distribution.png"),
+       plot = tcds.random.distribution,
+       width = 8, height = 6, dpi = 300)
+#sd(round(quantity.rand$tds_mph,0))^2
+#mean(round(quantity.rand$tds_mph,0))
+# mean is much smaller than variance
+tds.rand.zinb <- glmmTMB(round(tds_mph,0) ~
+                           tchiyr.std +
+                           stthr.tri +
+                           hsz.std +
+                           nsk.std +
+                           tchiyr.std:stthr.tri +
+                           tchiyr.std:nsk.std +
+                           (1|aclew_child_id),
+                         data=quantity.rand,
+                         ziformula=~nsk.std,
+                         family="nbinom1")
+#tds.rand.zinb.res = simulateResiduals(tds.rand.zinb)
+#plot(tds.rand.zinb.res, rank = T) # (manually saved)
+#summary(tds.rand.zinb)
+# Data: quantity.rand
+# 
+#      AIC      BIC   logLik deviance df.resid 
+#    416.5    449.0   -195.3    390.5       77 
+# 
+# Random effects:
+# 
+# Conditional model:
+#  Groups         Name        Variance       Std.Dev.  
+#  aclew_child_id (Intercept) 0.000000000797 0.00002823
+# Number of obs: 90, groups:  aclew_child_id, 10
+# 
+# Overdispersion parameter for nbinom1 family (): 3.37 
+# 
+# Conditional model:
+#                               Estimate Std. Error z value Pr(>|z|)   
+# (Intercept)                    0.69020    0.31898   2.164  0.03048 * 
+# tchiyr.std                     0.73104    0.22844   3.200  0.00137 **
+# stthr.trimorning               0.80009    0.35930   2.227  0.02596 * 
+# stthr.triafternoon             0.25885    0.35412   0.731  0.46480   
+# hsz.std                       -0.20738    0.12268  -1.690  0.09096 . 
+# nsk.std                       -0.04380    0.16428  -0.267  0.78976   
+# tchiyr.std:stthr.trimorning   -0.58894    0.30302  -1.944  0.05194 . 
+# tchiyr.std:stthr.triafternoon -0.59649    0.29170  -2.045  0.04087 * 
+# tchiyr.std:nsk.std            -0.02804    0.10818  -0.259  0.79546   
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# Zero-inflation model:
+#             Estimate Std. Error z value Pr(>|z|)
+# (Intercept)   -9.281     11.509  -0.806    0.420
+# nsk.std       -5.655      7.444  -0.760    0.447
+# save for reporting
+tds.rand.zinb.disp <- round(sigma(tds.rand.zinb), 2)
+tds.rand.zinb.COEF.age <-
+  coef(summary(tds.rand.zinb))[[1]]["tchiyr.std",] 
+tds.rand.zinb.COEF.midd.morn <-
+  coef(summary(tds.rand.zinb))[[1]]["stthr.trimorning",] 
+tds.rand.zinb.COEF.midd.aft <-
+  coef(summary(tds.rand.zinb))[[1]]["stthr.triafternoon",] 
+tds.rand.zinb.COEF.age.midd.morn <-
+  coef(summary(tds.rand.zinb))[[1]]["tchiyr.std:stthr.trimorning",]
+tds.rand.zinb.COEF.age.midd.aft <-
+  coef(summary(tds.rand.zinb))[[1]]["tchiyr.std:stthr.triafternoon",]
+tds.rand.zinb.COEF.agensk <-
+  coef(summary(tds.rand.zinb))[[1]]["tchiyr.std:nsk.std",]
+
+# test the other two-way effects of time of day
+tds.rand.zinb.v2 <- glmmTMB(round(tds_mph,0) ~
+                           tchiyr.std +
+                           stthr.tri.a +
+                           hsz.std +
+                           nsk.std +
+                           tchiyr.std:stthr.tri.a +
+                           tchiyr.std:nsk.std +
+                           (1|aclew_child_id),
+                         data=quantity.rand,
+                         ziformula=~nsk.std,
+                         family="nbinom1")
+#summary(tds.rand.zinb.v2)
+# stthr.tri.amorning             0.541238   0.257256   2.104      0.0354 *  
+# tchiyr.std:stthr.tri.amorning  0.007545   0.270156   0.028      0.9777  
+# save for reporting
+tds.rand.zinb.v2.COEF.aft.morn <-
+  coef(summary(tds.rand.zinb.v2))[[1]]["stthr.tri.amorning",] 
+tds.rand.zinb.v2.COEF.age.aft.morn <-
+  coef(summary(tds.rand.zinb.v2))[[1]]["tchiyr.std:stthr.tri.amorning",] 
+
+## TCDS tt sample ####
+tcds.tt.distribution <- ggplot(quantity.nonrand.tt,
+                            aes(round(tds_mph,0))) +
+  geom_histogram(binwidth = 2) +
+  ylab("# of clips") +
+  xlab ("TCDS min/hr") +
+  basic.theme
+ggsave(paste0(shiny.input.img.path, "TCDS_turntaking_distribution.png"),
+       plot = tcds.tt.distribution,
+       width = 8, height = 6, dpi = 300)
+#sd(round(quantity.nonrand.tt$tds_mph,0))^2
+#mean(round(quantity.nonrand.tt$tds_mph,0))
+# mean is much smaller than variance but reasonably normal
+# not zero-inflated (nature of this sample)
+tds.tt.nb <- glmmTMB(round(tds_mph,0) ~
+                       tchiyr.std +
+                       stthr.tri +
+                       hsz.std +
+                       nsk.std +
+                       tchiyr.std:stthr.tri +
+                       tchiyr.std:nsk.std +
+                       (1|aclew_child_id),
+                     data=quantity.nonrand.tt,
+                     family="nbinom1")
+#tds.tt.nb.res = simulateResiduals(tds.tt.nb)
+#plot(tds.tt.nb.res, rank = T) # (manually saved)
+#summary(tds.tt.nb)
+# Data: quantity.nonrand.tt
+# 
+#      AIC      BIC   logLik deviance df.resid 
+#    388.5    410.6   -183.3    366.5       44 
+# 
+# Random effects:
+# 
+# Conditional model:
+#  Groups         Name        Variance       Std.Dev.  
+#  aclew_child_id (Intercept) 0.000000002313 0.00004809
+# Number of obs: 55, groups:  aclew_child_id, 10
+# 
+# Overdispersion parameter for nbinom1 family (): 2.91 
+# 
+# Conditional model:
+#                               Estimate Std. Error z value  Pr(>|z|)    
+# (Intercept)                    2.38897    0.25269   9.454  <0.00002 ***
+# tchiyr.std                    -0.62835    0.27007  -2.327  0.0200 *  
+# stthr.trimorning               0.21896    0.28390   0.771  0.4406    
+# stthr.triafternoon             0.33756    0.27312   1.236  0.2165    
+# hsz.std                       -0.02033    0.07661  -0.265  0.7907    
+# nsk.std                       -0.04457    0.08565  -0.520  0.6028    
+# tchiyr.std:stthr.trimorning    0.53280    0.28184   1.890  0.0587 .  
+# tchiyr.std:stthr.triafternoon  0.60509    0.27867   2.171  0.0299 *  
+# tchiyr.std:nsk.std            -0.15095    0.11158  -1.353  0.1761    
+# save for reporting
+tds.tt.nb.disp <- round(sigma(tds.tt.nb), 2)
+tds.tt.nb.COEF.age <-
+  coef(summary(tds.tt.nb))[[1]]["tchiyr.std",] 
+tds.tt.nb.COEF.midd.morn <-
+  coef(summary(tds.tt.nb))[[1]]["stthr.trimorning",] 
+tds.tt.nb.COEF.midd.aft <-
+  coef(summary(tds.tt.nb))[[1]]["stthr.triafternoon",] 
+tds.tt.nb.COEF.age.midd.morn <-
+  coef(summary(tds.tt.nb))[[1]]["tchiyr.std:stthr.trimorning",]
+tds.tt.nb.COEF.age.midd.aft <-
+  coef(summary(tds.tt.nb))[[1]]["tchiyr.std:stthr.triafternoon",]
+tds.tt.nb.COEF.agensk <-
+  coef(summary(tds.tt.nb))[[1]]["tchiyr.std:nsk.std",]
+
+# test the other two-way effects of time of day
+tds.tt.nb.v2 <- glmmTMB(round(tds_mph,0) ~
+                       tchiyr.std +
+                       stthr.tri.a +
+                       hsz.std +
+                       nsk.std +
+                       tchiyr.std:stthr.tri.a +
+                       tchiyr.std:nsk.std +
+                       (1|aclew_child_id),
+                     data=quantity.nonrand.tt,
+                     family="nbinom1")
+#summary(tds.tt.nb.v2)
+# stthr.tri.amorning            -0.11860    0.17254  -0.687  0.4919    
+# tchiyr.std:stthr.tri.amorning -0.07229    0.17299  -0.418  0.6760    
+# no results to save for reporting
+```
+
+
+
 
 ``` {r chitcdscorrs, message=FALSE, warning=FALSE, paged.print=FALSE}
 # Aggregate to one point per child and then test a correlation with age

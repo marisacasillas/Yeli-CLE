@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  14 NOV 2019 13:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  29 NOV 2019 16:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1062,63 +1062,72 @@ File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 ] [2] [3]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[4] [5]
+[4] [5] [6] [7] [8]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[6] [7] [8] [9]
+[9]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[10] <Yeli-CLE_files/figure-latex/fig2-1.pdf, id=88, 442.65375pt x 256.96pt>
+[10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[11] [12]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[13] [14] <Yeli-CLE_files/figure-latex/fig2-1.pdf, id=115, 442.65375pt x 256.96
+pt>
 File: Yeli-CLE_files/figure-latex/fig2-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig2-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig2-1.pdf used on input l
-ine 449.
+ine 579.
 (pdftex.def)             Requested size: 442.67966pt x 256.97504pt.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 455.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 585.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [11] <Yeli-CLE_files/figure-latex/fig3-1.pdf, id=94, 461.725pt x 170.6375pt>
+)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[15] <Yeli-CLE_files/figure-latex/fig3-1.pdf, id=122, 461.725pt x 170.6375pt>
 File: Yeli-CLE_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig3-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig3-1.pdf used on input l
-ine 477.
+ine 607.
 (pdftex.def)             Requested size: 461.72388pt x 170.63707pt.
-<Yeli-CLE_files/figure-latex/fig5-1.pdf, id=95, 461.725pt x 279.0425pt>
+<Yeli-CLE_files/figure-latex/fig5-1.pdf, id=123, 461.725pt x 279.0425pt>
 File: Yeli-CLE_files/figure-latex/fig5-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig5-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig5-1.pdf used on input l
-ine 487.
+ine 617.
 (pdftex.def)             Requested size: 461.72388pt x 279.04181pt.
-
-Underfull \vbox (badness 1902) has occurred while \output is active []
-
-[12] [13 <./Yeli-CLE_files/figure-latex/fig2-1.pdf>] [14 <./Yeli-CLE_files/figu
-re-latex/fig3-1.pdf>] <Yeli-CLE_files/figure-latex/fig6-1.pdf, id=130, 461.725p
-t x 244.915pt>
+[16 <./Yeli-CLE_files/figure-latex/fig2-1.pdf>] [17 <./Yeli-CLE_files/figure-la
+tex/fig3-1.pdf>] [18 <./Yeli-CLE_files/figure-latex/fig5-1.pdf>] <Yeli-CLE_file
+s/figure-latex/fig6-1.pdf, id=171, 461.725pt x 244.915pt>
 File: Yeli-CLE_files/figure-latex/fig6-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig6-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig6-1.pdf used on input l
-ine 594.
+ine 724.
 (pdftex.def)             Requested size: 461.72388pt x 244.91438pt.
-[15 <./Yeli-CLE_files/figure-latex/fig5-1.pdf>] AED endfloat: Processing end Fi
-gures and Tables [16 <./Yeli-CLE_files/figure-latex/fig6-1.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 620.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 620.
+[19 <./Yeli-CLE_files/figure-latex/fig6-1.pdf>] [20]
+Underfull \vbox (badness 2351) has occurred while \output is active []
+
+[21] AED endfloat: Processing end Figures and Tables [22]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 799.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 799.
 (./Yeli-CLE.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 620.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 620.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 799.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 799.
 Package rerunfilecheck Info: File `Yeli-CLE.out' has not changed.
-(rerunfilecheck)             Checksum: 7EED56464D1C3D1BD27C6E7CEB6B6DCE;1151.
+(rerunfilecheck)             Checksum: C2905E5635DBAAA76D84069BA95E134D;1417.
  ) 
 Here is how much of TeX's memory you used:
- 15465 strings out of 493089
- 228227 string characters out of 6134842
- 343181 words of memory out of 5000000
- 18589 multiletter control sequences out of 15000+600000
- 50762 words of font info for 80 fonts, out of 8000000 for 9000
+ 15488 strings out of 493089
+ 228534 string characters out of 6134842
+ 341264 words of memory out of 5000000
+ 18593 multiletter control sequences out of 15000+600000
+ 50853 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 43i,10n,47p,795b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 43i,10n,47p,795b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
 texlive/2015/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
 15/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2015/texmf-di
@@ -1126,10 +1135,10 @@ st/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
 e1/public/lm/lmri12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
 lm/lmss8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmtt12.p
 fb>
-Output written on Yeli-CLE.pdf (16 pages, 210775 bytes).
+Output written on Yeli-CLE.pdf (22 pages, 224424 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
- 34 named destinations out of 1000 (max. 500000)
- 6237 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 256 PDF objects out of 1000 (max. 8388607)
+ 211 compressed objects within 3 object streams
+ 51 named destinations out of 1000 (max. 500000)
+ 6253 words of extra memory for PDF output out of 10000 (max. 10000000)
 
