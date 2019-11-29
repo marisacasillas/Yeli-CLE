@@ -450,48 +450,53 @@ all.rand.segments.age.sx <- tibble(
 
 # XDS
 xds.per.seg.rand.sa <- all.data %>%
-  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier)) %>%
+  filter(sample == "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier)) %>%
   group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
   summarise(xds_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.rand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(segment_dur = rand.sample.dur, xds_min.sa = 0)) %>%
   mutate(xds_mph.sa = (xds_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # ODS
 ods.per.seg.rand.sa <- all.data %>%
-  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & val != "T") %>%
+  filter(sample == "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier) & val != "T") %>%
   group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
   summarise(ods_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.rand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(segment_dur = rand.sample.dur, ods_min.sa = 0)) %>%
   mutate(ods_mph.sa = (ods_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # TDS
 tds.per.seg.rand.sa <- all.data %>%
-  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & val == "T") %>%
+  filter(sample == "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier) & val == "T") %>%
   group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
   summarise(tds_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.rand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(segment_dur = rand.sample.dur, tds_min.sa = 0)) %>%
   mutate(tds_mph.sa = (tds_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # All CDS
 cds.per.seg.rand.sa <- all.data %>%
-  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & (val == "T" | val == "C")) %>%
+  filter(sample == "random" & speaker != "CHI"
+    & SpkrAge != "Not known" & grepl("xds@", tier) &
+      (val == "T" | val == "C")) %>%
   group_by(aclew_child_id, SpkrAge, segment, segment_dur) %>%
   summarise(cds_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.rand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.rand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(segment_dur = rand.sample.dur, cds_min.sa = 0)) %>%
   mutate(cds_mph.sa = (cds_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # Number of speakers per clip
 spkrs.per.seg.rand.sa <- all.data %>%
-  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           !(grepl("@", tier))) %>%
+  filter(sample == "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & !(grepl("@", tier))) %>%
   group_by(aclew_child_id, SpkrAge, segment) %>%
   summarise(n_spkrs_clip = length(unique(speaker)))
 # All together
@@ -526,13 +531,18 @@ all.nonrand.segments <- seg.info %>%
   mutate(dur = dur/60000) %>%
   group_by(aclew_child_id, val) %>%
   summarize(segment_dur = sum(dur)) %>%
-  rename(segment = "val")
-all.nonrand.segments$sample <- ifelse(grepl("va", all.nonrand.segments$segment),
-                                      "high-activity","turn-taking")
-all.nonrand.segments$sample_type <- ifelse(
-  grepl("^va", all.nonrand.segments$segment), "high-activity",
-  ifelse(grepl("^tt", all.nonrand.segments$segment),"turn-taking",
-                                        "extension"))
+  rename(segment = "val") %>%
+  mutate(
+    sample = case_when(
+      grepl("va", segment) ~ "vocal-activity",
+      grepl("tt", segment) ~ "turn-taking"
+    ),
+    sample_type = case_when(
+      grepl("^ext", segment) ~ "extension",
+      grepl("^va", segment) ~ "vocal-activity",
+      grepl("^tt", segment) ~ "turn-taking"
+    )
+  )
 
 # XDS
 xds.per.seg.nonrand <- all.data %>%
@@ -540,7 +550,8 @@ xds.per.seg.nonrand <- all.data %>%
            grepl("xds@", tier)) %>%
   group_by(aclew_child_id, segment) %>%
   summarise(xds_min = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  full_join(all.nonrand.segments,
+    by = c("aclew_child_id", "segment")) %>%
   replace_na(list(xds_min = 0)) %>%
   mutate(xds_mph = (xds_min/segment_dur)*60) %>%
   arrange(aclew_child_id, segment)
@@ -550,7 +561,8 @@ ods.per.seg.nonrand <- all.data %>%
            grepl("xds@", tier) & val != "T") %>%
   group_by(aclew_child_id, segment) %>%
   summarise(ods_min = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  full_join(all.nonrand.segments,
+    by = c("aclew_child_id", "segment")) %>%
   replace_na(list(ods_min = 0)) %>%
   mutate(ods_mph = (ods_min/segment_dur)*60) %>%
   arrange(aclew_child_id, segment)
@@ -560,7 +572,8 @@ tds.per.seg.nonrand <- all.data %>%
            grepl("xds@", tier) & val == "T") %>%
   group_by(aclew_child_id, segment) %>%
   summarise(tds_min = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  full_join(all.nonrand.segments,
+    by = c("aclew_child_id", "segment")) %>%
   replace_na(list(tds_min = 0)) %>%
   mutate(tds_mph = (tds_min/segment_dur)*60) %>%
   arrange(aclew_child_id, segment)
@@ -570,20 +583,22 @@ cds.per.seg.nonrand <- all.data %>%
            grepl("xds@", tier) & (val == "T" | val == "C")) %>%
   group_by(aclew_child_id, segment) %>%
   summarise(cds_min = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments, by = c("aclew_child_id", "segment")) %>%
+  full_join(all.nonrand.segments,
+    by = c("aclew_child_id", "segment")) %>%
   replace_na(list(cds_min = 0)) %>%
   mutate(cds_mph = (cds_min/segment_dur)*60) %>%
   arrange(aclew_child_id, segment)
 # Number of speakers per clip
 spkrs.per.seg.nonrand <- all.data %>%
-  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           !(grepl("@", tier))) %>%
+  filter(sample != "random" & speaker != "CHI"
+    & !(grepl("@", tier))) %>%
   group_by(aclew_child_id, segment) %>%
   summarise(n_spkrs_clip = length(unique(speaker)))
 # All together
 seg.distinct <- seg.info %>%
-  select(aclew_child_id, val, start.hr) %>%
-  distinct()
+  group_by(aclew_child_id, val) %>%
+  summarize(start.hr.min = min(start.hr)) %>%
+  rename(start.hr = start.hr.min)
 quantity.nonrand <- xds.per.seg.nonrand %>%
   full_join(ods.per.seg.nonrand, by = c("aclew_child_id", "segment",
                                         "segment_dur", "sample", "sample_type")) %>%
@@ -628,48 +643,53 @@ all.nonrand.segments.sa <- tibble(
               rep("Child", nrow(all.nonrand.segments))))
 # XDS
 xds.per.seg.nonrand.sa <- all.data %>%
-  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier)) %>%
+  filter(sample != "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier)) %>%
   group_by(aclew_child_id, SpkrAge, segment) %>%
   summarise(xds_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.nonrand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(xds_min.sa = 0)) %>%
   mutate(xds_mph.sa = (xds_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # ODS
 ods.per.seg.nonrand.sa <- all.data %>%
-  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & val != "T") %>%
+  filter(sample != "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier) & val != "T") %>%
   group_by(aclew_child_id, SpkrAge, segment) %>%
   summarise(ods_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.nonrand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(ods_min.sa = 0)) %>%
   mutate(ods_mph.sa = (ods_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # TDS
 tds.per.seg.nonrand.sa <- all.data %>%
-  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & val == "T") %>%
+  filter(sample != "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier) & val == "T") %>%
   group_by(aclew_child_id, SpkrAge, segment) %>%
   summarise(tds_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.nonrand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(tds_min.sa = 0)) %>%
   mutate(tds_mph.sa = (tds_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # All CDS
 cds.per.seg.nonrand.sa <- all.data %>%
-  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & (val == "T" | val == "C")) %>%
+  filter(sample != "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & grepl("xds@", tier) &
+      (val == "T" | val == "C")) %>%
   group_by(aclew_child_id, SpkrAge, segment) %>%
   summarise(cds_min.sa = round(sum(dur)/60000,3)) %>%
-  full_join(all.nonrand.segments.sa, by = c("aclew_child_id", "segment", "SpkrAge")) %>%
+  full_join(all.nonrand.segments.sa,
+    by = c("aclew_child_id", "segment", "SpkrAge")) %>%
   replace_na(list(cds_min.sa = 0)) %>%
   mutate(cds_mph.sa = (cds_min.sa/segment_dur)*60) %>%
   arrange(aclew_child_id, segment, SpkrAge)
 # Number of speakers per clip
 spkrs.per.seg.nonrand.sa <- all.data %>%
-  filter(sample != "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           !(grepl("@", tier))) %>%
+  filter(sample != "random" & speaker != "CHI" &
+      SpkrAge != "Not known" & !(grepl("@", tier))) %>%
   group_by(aclew_child_id, SpkrAge, segment) %>%
   summarise(n_spkrs_clip = length(unique(speaker)))
 # All together
@@ -683,7 +703,7 @@ quantity.nonrand.sa <- xds.per.seg.nonrand.sa %>%
   full_join(cds.per.seg.nonrand.sa, by = c("aclew_child_id", "SpkrAge",
                                            "segment", "segment_dur",
                                            "sample", "sample_type")) %>%
-  full_join(select(quantity.nonrand, c("aclew_child_id", "segment", "tds_min")),
+  full_join(dplyr::select(quantity.nonrand, c("aclew_child_id", "segment", "tds_min")),
             by = c("aclew_child_id", "segment")) %>%
   full_join(ptcp.info, by = "aclew_child_id") %>%
   full_join(spkrs.per.seg.nonrand.sa, by = c("aclew_child_id", "SpkrAge", "segment")) %>%
@@ -701,8 +721,8 @@ quantity.nonrand.sa <- xds.per.seg.nonrand.sa %>%
 # Subset the non-random samples (used for differnt purposes)
 quantity.nonrand.tt <- filter(quantity.nonrand, sample == "turn-taking")
 quantity.nonrand.tt.sa <- filter(quantity.nonrand.sa, sample == "turn-taking")
-quantity.nonrand.va <- filter(quantity.nonrand, sample != "turn-taking")
-quantity.nonrand.va.sa <- filter(quantity.nonrand.sa, sample != "turn-taking")
+quantity.nonrand.va <- filter(quantity.nonrand, sample == "vocal-activity")
+quantity.nonrand.va.sa <- filter(quantity.nonrand.sa, sample == "vocal-activity")
 
 
 ## Get variables ready for modeling
@@ -724,8 +744,8 @@ quantity.rand <- quantity.rand %>%
                               "none" = "none", "primary" = "primary",
                               "secondary" = "secondary", "preparatory" = "preparatory"),
     mated.bin = recode_factor(mat_ed,
-                              "none" = "0-5", "primary" = "0-5",
-                              "secondary" = "6+", "preparatory" = "6+"),
+                              "none" = "0-6", "primary" = "0-6",
+                              "secondary" = "7+", "preparatory" = "7+"),
     motyr.std = ((mat_age - motyr.m)/motyr.sd),
     nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
     hsz.std = ((household_size - hsz.m)/hsz.sd),
@@ -757,8 +777,8 @@ quantity.rand.sa <- quantity.rand.sa %>%
                               "none" = "none", "primary" = "primary",
                               "secondary" = "secondary", "preparatory" = "preparatory"),
     mated.bin = recode_factor(mat_ed,
-                              "none" = "0-5", "primary" = "0-5",
-                              "secondary" = "6+", "preparatory" = "6+"),
+                              "none" = "0-6", "primary" = "0-6",
+                              "secondary" = "7+", "preparatory" = "7+"),
     motyr.std = ((mat_age - motyr.m)/motyr.sd),
     nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
     hsz.std = ((household_size - hsz.m)/hsz.sd),
@@ -792,8 +812,8 @@ quantity.nonrand.tt <- quantity.nonrand.tt %>%
                               "none" = "none", "primary" = "primary",
                               "secondary" = "secondary", "preparatory" = "preparatory"),
     mated.bin = recode_factor(mat_ed,
-                              "none" = "0-5", "primary" = "0-5",
-                              "secondary" = "6+", "preparatory" = "6+"),
+                              "none" = "0-6", "primary" = "0-6",
+                              "secondary" = "7+", "preparatory" = "7+"),
     motyr.std = ((mat_age - motyr.m)/motyr.sd),
     nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
     hsz.std = ((household_size - hsz.m)/hsz.sd),
@@ -825,8 +845,8 @@ quantity.nonrand.tt.sa <- quantity.nonrand.tt.sa %>%
                               "none" = "none", "primary" = "primary",
                               "secondary" = "secondary", "preparatory" = "preparatory"),
     mated.bin = recode_factor(mat_ed,
-                              "none" = "0-5", "primary" = "0-5",
-                              "secondary" = "6+", "preparatory" = "6+"),
+                              "none" = "0-6", "primary" = "0-6",
+                              "secondary" = "7+", "preparatory" = "7+"),
     motyr.std = ((mat_age - motyr.m)/motyr.sd),
     nsb.std = ((number_older_sibs - nsb.m)/nsb.sd),
     hsz.std = ((household_size - hsz.m)/hsz.sd),
