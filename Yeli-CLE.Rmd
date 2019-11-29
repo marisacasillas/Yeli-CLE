@@ -1271,11 +1271,6 @@ grid.arrange(tdsmph.segments.rand_and_tt.zoomedin,
              odsmph.segments.rand_and_tt, nrow=1, ncol=2)
 ```
 
-``` {r fig5, echo=FALSE, fig.cap="Estimates of TCDS min/hr (left panels) and ODS min/hr (right panels) across the recorded day in the random clips (top panels) and turn-taking (bottom panels) clips. Each box plot summarizes the data for children age 1;0 and younger (light) or age 1;0 and older (dark) at the given time of day.", message=FALSE, warning=FALSE, fig.height=4}
-grid.arrange(tod.tcds.rand, tod.ods.rand,
-             tod.tcds.tt, tod.ods.tt, nrow=2, ncol=2)
-```
-
 ```{r tcds_models, message=FALSE, warning=FALSE, paged.print=FALSE}
 ## TCDS random sample ####
 tcds.random.distribution <- ggplot(quantity.rand,
@@ -1456,8 +1451,10 @@ tds.tt.nb.v2 <- glmmTMB(round(tds_mph,0) ~
 # no results to save for reporting
 ```
 
-
-
+``` {r fig4, echo=FALSE, fig.cap="Estimates of TCDS min/hr (left panels) and ODS min/hr (right panels) across the recorded day in the random clips (top panels) and turn-taking (bottom panels) clips. Each box plot summarizes the data for children age 1;0 and younger (light) or age 1;0 and older (dark) at the given time of day.", message=FALSE, warning=FALSE, fig.height=4}
+grid.arrange(tod.tcds.rand, tod.ods.rand,
+             tod.tcds.tt, tod.ods.tt, nrow=2, ncol=2)
+```
 
 ``` {r chitcdscorrs, message=FALSE, warning=FALSE, paged.print=FALSE}
 # Aggregate to one point per child and then test a correlation with age
@@ -1506,38 +1503,201 @@ adu.sx.ratio <- full_join(tds.per.seg.rand.age.sx.FA, tds.per.seg.rand.age.sx.MA
 
 ```
 
+```{r ods_models, message=FALSE, warning=FALSE, paged.print=FALSE}
+## ODS random sample ####
+ods.random.distribution <- ggplot(quantity.rand,
+                            aes(round(ods_mph,0))) +
+  geom_histogram(binwidth = 2) +
+  ylab("# of clips") +
+  xlab ("ODS min/hr") +
+  basic.theme
+ggsave(paste0(shiny.input.img.path, "ODS_random_distribution.png"),
+       plot = ods.random.distribution,
+       width = 8, height = 6, dpi = 300)
+#sd(round(quantity.rand$ods_mph,0))^2
+#mean(round(quantity.rand$ods_mph,0))
+# mean is much smaller than variance
+# not a huge inflated zero bin, so using nb
+ods.rand.nb <- glmmTMB(round(ods_mph,0) ~
+                           tchiyr.std +
+                           stthr.tri +
+                           hsz.std +
+                           nsk.std +
+                           tchiyr.std:stthr.tri +
+                           tchiyr.std:nsk.std +
+                           (1|aclew_child_id),
+                         data=quantity.rand,
+                         family="nbinom1")
+#ods.rand.nb.res = simulateResiduals(ods.rand.nb)
+#plot(ods.rand.nb.res, rank = T) # (manually saved)
+#summary(ods.rand.nb)
+# Data: quantity.rand
+# 
+#      AIC      BIC   logLik deviance df.resid 
+#    763.7    791.2   -370.9    741.7       79 
+# 
+# Random effects:
+# 
+# Conditional model:
+#  Groups         Name        Variance       Std.Dev.  
+#  aclew_child_id (Intercept) 0.000000001982 0.00004452
+# Number of obs: 90, groups:  aclew_child_id, 10
+# 
+# Overdispersion parameter for nbinom1 family (): 9.14 
+# 
+# Conditional model:
+#                               Estimate Std. Error z value Pr(>|z|)    
+# (Intercept)                    3.25730    0.13578  23.990 < 0.00002 ***
+# tchiyr.std                    -0.57083    0.17424  -3.276 0.00105 ** 
+# stthr.trimorning               0.19634    0.16469   1.192 0.23318    
+# stthr.triafternoon             0.25683    0.15264   1.683 0.09245 .  
+# hsz.std                       -0.01817    0.05623  -0.323 0.74660    
+# nsk.std                        0.49921    0.04959  10.067 < 0.00002 ***
+# tchiyr.std:stthr.trimorning    0.65195    0.20165   3.233 0.00122 ** 
+# tchiyr.std:stthr.triafternoon  0.28330    0.19815   1.430 0.15279    
+# tchiyr.std:nsk.std             0.04333    0.04987   0.869 0.38487    
+# save for reporting
+ods.rand.nb.disp <- round(sigma(ods.rand.nb), 2)
+ods.rand.nb.COEF.age <-
+  coef(summary(ods.rand.nb))[[1]]["tchiyr.std",] 
+ods.rand.nb.COEF.midd.morn <-
+  coef(summary(ods.rand.nb))[[1]]["stthr.trimorning",] 
+ods.rand.nb.COEF.midd.aft <-
+  coef(summary(ods.rand.nb))[[1]]["stthr.triafternoon",] 
+ods.rand.nb.COEF.nsk <-
+  coef(summary(ods.rand.nb))[[1]]["nsk.std",] 
+ods.rand.nb.COEF.age.midd.morn <-
+  coef(summary(ods.rand.nb))[[1]]["tchiyr.std:stthr.trimorning",]
+ods.rand.nb.COEF.age.midd.aft <-
+  coef(summary(ods.rand.nb))[[1]]["tchiyr.std:stthr.triafternoon",]
+
+# test the other two-way effects of time of day
+ods.rand.nb.v2 <- glmmTMB(round(ods_mph,0) ~
+                              tchiyr.std +
+                              stthr.tri.a +
+                              hsz.std +
+                              nsk.std +
+                              tchiyr.std:stthr.tri.a +
+                              tchiyr.std:nsk.std +
+                              (1|aclew_child_id),
+                            data=quantity.rand,
+                            family="nbinom1")
+#ods.rand.nb.v2.res = simulateResiduals(ods.rand.nb.v2)
+#summary(ods.rand.nb.v2)
+# stthr.tri.amorning            -0.06049    0.12552   -0.48              0.62985    
+# tchiyr.std:stthr.tri.amorning  0.36865    0.14760    2.50              0.01250 *  
+# save for reporting
+ods.rand.nb.v2.COEF.aft.morn <-
+  coef(summary(ods.rand.nb.v2))[[1]]["stthr.tri.amorning",] 
+ods.rand.nb.v2.COEF.age.aft.morn <-
+  coef(summary(ods.rand.nb.v2))[[1]]["tchiyr.std:stthr.tri.amorning",] 
+
+## ODS tt sample ####
+ods.tt.distribution <- ggplot(quantity.nonrand.tt,
+                            aes(round(ods_mph,0))) +
+  geom_histogram(binwidth = 2) +
+  ylab("# of clips") +
+  xlab ("ODS min/hr") +
+  basic.theme
+ggsave(paste0(shiny.input.img.path, "ODS_turntaking_distribution.png"),
+       plot = ods.tt.distribution,
+       width = 8, height = 6, dpi = 300)
+#sd(round(quantity.nonrand.tt$ods_mph,0))^2
+#mean(round(quantity.nonrand.tt$ods_mph,0))
+# mean is much smaller than variance
+ods.tt.nb <- glmmTMB(round(ods_mph,0) ~
+                         tchiyr.std +
+                         stthr.tri +
+                         hsz.std +
+                         nsk.std +
+                         tchiyr.std:stthr.tri +
+                         tchiyr.std:nsk.std +
+                         (1|aclew_child_id),
+                       data=quantity.nonrand.tt,
+                       family="nbinom1")
+#ods.tt.nb.res = simulateResiduals(ods.tt.nb)
+#plot(ods.tt.nb.res, rank = T) # (manually saved)
+#summary(ods.tt.nb)
+# Data: quantity.nonrand.tt
+# 
+#      AIC      BIC   logLik deviance df.resid 
+#    427.2    449.3   -202.6    405.2       44 
+# 
+# Random effects:
+# 
+# Conditional model:
+#  Groups         Name        Variance Std.Dev.
+#  aclew_child_id (Intercept) 0.0762   0.276   
+# Number of obs: 55, groups:  aclew_child_id, 10
+# 
+# Overdispersion parameter for nbinom1 family (): 4.66 
+# 
+# Conditional model:
+#                               Estimate Std. Error z value Pr(>|z|)    
+# (Intercept)                    2.61645    0.33147   7.893 0.0000294 ***
+# tchiyr.std                    -0.04506    0.33390  -0.135 0.893    
+# stthr.trimorning               0.42969    0.34340   1.251 0.211    
+# stthr.triafternoon             0.34822    0.34745   1.002 0.316    
+# hsz.std                        0.03336    0.12176   0.274 0.784    
+# nsk.std                        0.55972    0.08283   6.757 0.00001405625 ***
+# tchiyr.std:stthr.trimorning   -0.14627    0.33242  -0.440 0.660    
+# tchiyr.std:stthr.triafternoon  0.02957    0.35086   0.084 0.933    
+# tchiyr.std:nsk.std            -0.16430    0.10849  -1.514 0.130    
+# save for reporting
+ods.tt.nb.disp <- round(sigma(ods.tt.nb), 2)
+ods.tt.nb.COEF.age <-
+  coef(summary(ods.tt.nb))[[1]]["tchiyr.std",] 
+ods.tt.nb.COEF.nsk <-
+  coef(summary(ods.tt.nb))[[1]]["nsk.std",] 
+
+# test the other two-way effects of time of day
+ods.tt.nb.v2 <- glmmTMB(round(ods_mph,0) ~
+                            tchiyr.std +
+                            stthr.tri.a +
+                            hsz.std +
+                            nsk.std +
+                            tchiyr.std:stthr.tri.a +
+                            tchiyr.std:nsk.std +
+                            (1|aclew_child_id),
+                          data=quantity.nonrand.tt,
+                          family="nbinom1")
+#summary(ods.tt.nb.v2)
+# no additional results to report
+```
+
+
 ``` {r descriptive_stats, message=FALSE, warning=FALSE, paged.print=FALSE}
-#TCDS
-## random
-round(mean(quantity.rand.bychild$tds_mph),2)
-round(median(quantity.rand.bychild$tds_mph),2)
-round(min(quantity.rand.bychild$tds_mph),2)
-round(max(quantity.rand.bychild$tds_mph),2)
-## tt
-round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-
-# proportion TCDS from adults
-round(mean(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-round(median(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-round(min(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-round(max(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-chitcds.age.rho <- round(propchitcds.rand.corr_age.test$estimate[[1]],2)
-chitcds.age.p <- round(propchitcds.rand.corr_age.test$p.value[[1]],2)
-
-# ODS
-## random
-round(mean(quantity.rand.bychild$ods_mph),2)
-round(median(quantity.rand.bychild$ods_mph),2)
-round(min(quantity.rand.bychild$ods_mph),2)
-round(max(quantity.rand.bychild$ods_mph),2)
-## tt
-round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
-round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
-round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
-round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+# #TCDS
+# ## random
+# round(mean(quantity.rand.bychild$tds_mph),2)
+# round(median(quantity.rand.bychild$tds_mph),2)
+# round(min(quantity.rand.bychild$tds_mph),2)
+# round(max(quantity.rand.bychild$tds_mph),2)
+# ## tt
+# round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+# round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+# round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+# round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
+# 
+# # proportion TCDS from adults
+# round(mean(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+# round(median(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+# round(min(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+# round(max(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
+# chitcds.age.rho <- round(propchitcds.rand.corr_age.test$estimate[[1]],2)
+# chitcds.age.p <- round(propchitcds.rand.corr_age.test$p.value[[1]],2)
+# 
+# # ODS
+# ## random
+# round(mean(quantity.rand.bychild$ods_mph),2)
+# round(median(quantity.rand.bychild$ods_mph),2)
+# round(min(quantity.rand.bychild$ods_mph),2)
+# round(max(quantity.rand.bychild$ods_mph),2)
+# ## tt
+# round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+# round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+# round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+# round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
 
 ```
 
