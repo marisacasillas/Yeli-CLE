@@ -36,7 +36,7 @@ lineno            : yes
 mask              : no
 
 class             : "man"
-output            : papaja::apa6_pdf #apa6_pdf or apa6_word
+output            : papaja::apa6_word #apa6_pdf or apa6_word
 ---
 
 ```{r load_packages, include=FALSE, echo=FALSE, warning=FALSE}
@@ -1706,11 +1706,24 @@ ods.tt.nb.v2 <- glmmTMB(round(ods_mph,0) ~
 ``` {r vocmat_prep, message=FALSE, warning=FALSE, paged.print=FALSE}
 # all vocalization types
 chi.vm.lx.utts <- all.data %>%
-  filter((tier == "vcm@CHI" | tier == "lex@CHI" | tier == "mwu@CHI") & !is.na(val)) %>%
-  mutate(voc.rating = ifelse(val == "M", 4,
-                             ifelse((val == "1" | val == "W"), 3,
-                                    ifelse((val == "0" | val == "C"), 2,
-                                           ifelse(val == "N", 1, 0))))) %>%
+  filter(
+    (tier == "vcm@CHI" |
+        tier == "lex@CHI" |
+        tier == "mwu@CHI") &
+      !is.na(val)) %>%
+  mutate(voc.rating = case_when(
+    val == "M" ~ 4,
+    val == "1" | val == "W" ~ 3,
+    val == "C" ~ 2,
+    # since the intial Tseltal-CLE analysis, lex = '0' is
+    # no longer informative about babble type so it gets
+    # a minimum value (equal to non-canonical babble)
+    # this doesn't affect the current analysis since
+    # we take the maximum score for an utterance below
+    # so if it's N+0, it'll be 1, if it's C+0, it'll be 2
+    val == "0" | val == "N" ~ 1,
+    TRUE ~ 0 # includes crying, laughing, unsure
+  )) %>%
   filter(voc.rating > 0) %>%
   group_by(aclew_child_id, segment, sample, start) %>%
   summarise(max_voc.rtg = max(voc.rating))
@@ -1733,33 +1746,6 @@ chi.vm.lx.voc.type.props <- chi.vm.lx.utts %>%
   mutate(prop_voc.type = round(n_voc.type/n_vocs, 3)) %>%
   arrange(aclew_child_id, max_voc.rtg) %>%
   full_join(ptcp.info, by = "aclew_child_id")
-
-# speech-like vs. non-speech-like only, only under 19mo
-chi.vm.lx.utts.all <- all.data %>%
-  filter((tier == "vcm@CHI" | tier == "lex@CHI" | tier == "mwu@CHI") &
-           !is.na(val) & age_mo_round < 19) %>%
-  mutate(voc.rating = ifelse(val == "M", 1,
-                             ifelse((val == "1" | val == "W"), 1,
-                                    ifelse((val == "0" | val == "C"), 1, 0)))) %>%
-  group_by(aclew_child_id, segment, sample, start) %>%
-  summarise(max_voc.rtg = max(voc.rating))
-all.voc.types.per.child.all <- tibble(
-  aclew_child_id = rep(ptcp.info$aclew_child_id, 2),
-  max_voc.rtg = c(rep(0, length(ptcp.info$aclew_child_id)),
-                  rep(1, length(ptcp.info$aclew_child_id)))
-)
-chi.nvocs.all <- chi.vm.lx.utts.all %>%
-  group_by(aclew_child_id) %>%
-  summarise(n_vocs = n())
-chi.vm.lx.voc.type.props.bin <- chi.vm.lx.utts.all %>%
-  group_by(aclew_child_id, max_voc.rtg) %>%
-  summarise(n_voc.type = n()) %>%
-  left_join(all.voc.types.per.child.all, by = c("aclew_child_id", "max_voc.rtg")) %>%
-  replace_na(list(n_voc.type = 0)) %>%
-  left_join(chi.nvocs.all, by = "aclew_child_id") %>%
-  mutate(prop_voc.type = round(n_voc.type/n_vocs, 3)) %>%
-  arrange(aclew_child_id, max_voc.rtg) %>%
-  left_join(ptcp.info, by = "aclew_child_id")
 ```
 
 ``` {r vocmat_plots, message=FALSE, warning=FALSE, paged.print=FALSE}
