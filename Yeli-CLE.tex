@@ -509,46 +509,43 @@ be found at URL (REFS).
 In what follows we first analyze the nine randomly selected 2.5-minute
 clips from each child to establish a baseline view of their speech
 environment, focusing on the effects of child age, time of day,
-household size, and number of speakers on the rate of child-directed and
-overhearable speech present. Next, we repeat these analyses, focusing
-instead only on the turn-taking clips to gain a view of the speech
-environment as it appears during the peak interactions for the day. This
-latter set of analyses may more closely mirror results from prior
-ethnographic work. To demonstrate typical development in this context we
-briefly present one measure of language development: a coarse trajectory
-mapping children's use of babble, first words, and multi-word
-utterances. Finally, we wrap up by integrating the divergent
-perspectives on Yélî children's speech environment across methods and
-relating these findings to the larger literature on child-directed
-speech and its role in language development.
+household size, and number of speakers on the rate of target
+child-directed (TCDS) and other-directed speech (ODS) present. Next, we
+repeat these analyses, focusing instead only on the turn-taking clips to
+gain a view of the speech environment as it appears during the peak
+interactions for the day. This latter set of analyses may more closely
+mirror results from prior ethnographic work. To demonstrate typical
+development in this context we briefly present one measure of language
+development: a coarse trajectory mapping children's use of babble, first
+words, and multi-word utterances. Finally, we wrap up by integrating the
+divergent perspectives on Yélî children's speech environment across
+methods and relating these findings to the larger literature on
+child-directed speech and its role in language development.
 
 \subsection{Statistical models}\label{statistical-models}
 
 We conducted all analyses in R, using the glmmTMB package to run
 generalized linear mixed-effects regressions on our dependent measures
 (Brooks et al., 2017; R Core Team, 2018). We used ggplot2 to generate
-all plots (Wickham, 2009). The dataset and scripts used to generate this
-manuscript and analyses can be found at
-\url{https://github.com/marisacasillas/Yeli-CLE}. As explained in
-previous work (REFS Casillas et al. forthcoming, Bunce et al, in prep),
-child-directed and overhearable speech minutes per hour are naturally
-restricted to non-negative (0--infinity) values, causing the
-distributional variance of those measures to become non-gaussian
-(positively skewed). We therefore use negative binomial regressions,
-which can better fit non-negative, overdispersed data (Brooks et al.,
-2017; Smithson \& Merkle, 2013). In cases when there were extra zeroes
-in the data (e.g., no hearable speech because the child was alone), we
-added a zero-inflation model to the regression. This method creates two
-models: (a) a binary model to evaluate the likelihood of the variable's
-presence (e.g., no vs.~some directed speech) and (b) a count model of
-the variable (e.g., \enquote{3} vs. \enquote{5} minutes of directed
-speech), with an extra parameter indicating data dispersion. More
-conventional, gaussian linear mixed-effects regressions with logged
+all plots (Wickham, 2009). The dataset and scripts used in this study
+can be found at \url{https://github.com/marisacasillas/Yeli-CLE}. As in
+previous work on child speech environment measures (REFS Casillas et al.
+forthcoming, Bunce et al, in prep), TCDS and ODS minutes per hour are
+naturally restricted to non-negative (0--infinity) values, causing the
+distributional variance of those measures to become positively skewed.
+To address this issue we use negative binomial regressions, which can
+better fit non-negative, overdispersed data (Brooks et al., 2017;
+Smithson \& Merkle, 2013). There were also many cases of zero minutes of
+TCDS across the clips---for example, this often occurred in the randomly
+sampled clips when the child was sleeping in a quiet area. To handle
+this additional distributional characteristic of the data, we added a
+zero-inflation model to TCDS analysis which, in addition to the count
+model of TCDS (e.g., testing effects of age on the input rate), creates
+a a binary model to evaluate the likelihood of TCDS being used at all.
+More conventional, gaussian linear mixed-effects regressions with logged
 dependent variables are available in the Supplementary Materials. The
 results of those alternative models are qualitatively similar to what we
 report here.
-
-\section{Results}\label{results}
 
 \begin{table}[tbp]
 \begin{center}
@@ -582,6 +579,21 @@ Age & \multicolumn{1}{c}{Sex} & \multicolumn{1}{c}{Mother's age} & \multicolumn{
 age in months.}
 \end{figure}
 
+\section{Results}\label{results}
+
+The models included the following predictors: child age (months;
+centered and standardized), household size (number of people; centered
+and standardized), number of non-target-child speakers present in that
+clip (centered and standardized), and time of day at the start of the
+clip (factor: \enquote{morning} = before 11:00; \enquote{midday} =
+11:00--13:00; \enquote{afternoon} = after 13:00). In addition, we
+included two-way interactions: (a) child age and the number of speakers
+present and (b) child age and time of day. We also added a random effect
+of child. For the zero-inflation model of TCDS, we included the number
+of speakers present. We limit our discussion here to significant effects
+in the models; full model results, including gaussian alternative
+models, are available in the Supplementary Materials.
+
 \begin{verbatim}
 ## pdf 
 ##   2
@@ -612,6 +624,51 @@ turn taking clips (green; dashed). Bands on the linear trends show 95\%
 confidence intervals.}
 \end{figure}
 
+\subsection{Target-child-directed speech
+(TCDS)}\label{target-child-directed-speech-tcds}
+
+In the random sample, these 10 children heard an average of 3.13 minutes
+of speech directly addressed to them per hour (median = 2.95; range =
+1.58--6.26; \protect\hyperlink{fig3}{Figure 3}). For comparison, this is
+slightly less than reported values using a near-identical method of data
+collection, annotation, and analysis in a Tseltal Mayan community (3.6
+minutes per hour for children under 3;0; Casillas et al., fortchoming)
+and comparable to what has been reported using a similar method in a
+Tsimane community (4.8 minutes per hour for children under 3;0 including
+all hearable speech; 1.6 minutes when excluding overlap and far-away
+speech; Scaff et al., in prep).
+
+The zero-inflated negative binomial regression of TCDS minutes per hour
+(N = 90, log-likelihood = -195.26, overdispersion estimate = 3.37)
+suggested significant effects of child age, time of day, and their
+interaction on the rate at which children hear speech addressed directly
+to them. First, the older children heard significantly more TCDS per
+hour (B = 0.73, SD = 0.23, z = 3.20, p = 0.00), with an average increase
+of 0.73 minutes per hour for every month of development. Overall, these
+children were also more likely to hear TCDS in the mornings (see
+\protect\hyperlink{fig4}{Figure 4} for an overview of time-of-day
+findings), with significantly higher TCDS rates in the morning compared
+to both midday (B = 0.80, SD = 0.36, z = 2.23, p = 0.03) and the
+afternoon (B = 0.54, SD = 0.26, z = 2.10, p = 0.04), and no significant
+difference in TCDS rate between midday and the afternoon. However, the
+time-of-day pattern changed with child age. Older children were more
+likely than younger children to show a peak in TCDS during midday
+instead; they were more likely to hear a decrease in TCDS between midday
+and the afternoon (B = -0.60, SD = 0.29, z = -2.04, p = 0.04) and were
+marginally more likely to hear less TCDS in the morning than at midday
+(B = -0.59, SD = 0.30, z = -1.94, p = 0.05). There were no other
+significant effects in either the count or the zero-inflation model.
+
+Children heard TCDS from a variety of different speakers. Overall, most
+TCDS came from adults (mean = 72.65\%, median = 75.51\%, range =
+41.41--100\%). On average, 77.23\% of the adult TCDS per clip came from
+women, and an average of 82.35\% of the total adult TCDS minutes came
+from women. That said, an increasing quantity of TCDS came from other
+children; a Spearman's correlation showed a significant positive
+relationship between the average proportion of child TCDS in a clip and
+target child age (Spearman's \emph{rho} = 0.78; \emph{p} = 0.01;
+\protect\hyperlink{fig5}{Figure 5}).
+
 \begin{figure}
 \centering
 \includegraphics{Yeli-CLE_files/figure-latex/fig4-1.pdf}
@@ -620,6 +677,14 @@ min/hr (right panels) across the recorded day in the random clips (top
 panels) and turn-taking (bottom panels) clips. Each box plot summarizes
 the data for children age 1;0 and younger (light) or age 1;0 and older
 (dark) at the given time of day.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{Yeli-CLE_files/figure-latex/fig5-1.pdf}
+\caption{\label{fig:fig5}By-child average proportion of TCDS from other
+children in a clip; shown for the random (purple) and turn taking
+(green) samples, and sorted by child age.}
 \end{figure}
 
 \subsection{Vocal maturity}\label{vocal-maturity}

@@ -36,7 +36,7 @@ lineno            : yes
 mask              : no
 
 class             : "man"
-output            : papaja::apa6_word #apa6_pdf or apa6_word
+output            : papaja::apa6_pdf #apa6_pdf or apa6_word
 ---
 
 ```{r load_packages, include=FALSE, echo=FALSE, warning=FALSE}
@@ -117,13 +117,10 @@ We were limited to selecting sub-clips from 10 children for analysis because of 
 
 We used the ACLEW Annotation Scheme (REFS) in ELAN (ELAN REFS) to transcribe and annotate all hearable speech---both near and distant---in the clips. We first segmented out the utterances and ascribed them to individual speakers (e.g., older brother, mother, aunt, etc.). We then annotated the vocal maturity of each utterance produced by the target child (non-canonical babble/canonical babble/single word/multi-word/unsure) and annotated the addressee of all speech from other speakers (addressed to the target child/one or more other children/one or more adults/a mix of adults and children/any animal/other/unsure). Transcription and annotation was done together by the first author and one of three community members (all native speakers of Yélî Dnye). The community-based research assistants personally knew all the families in the recordings, and were able to use their own experience, the discourse context, and information from the accompanying photos in reporting what was said and to whom speech was addressed for each utterance. Detailed manuals and self-guided training materials, including a 'gold standard test' for this annotation scheme can be found at URL (REFS).
 
-In what follows we first analyze the nine randomly selected 2.5-minute clips from each child to establish a baseline view of their speech environment, focusing on the effects of child age, time of day, household size, and number of speakers on the rate of child-directed and overhearable speech present. Next, we repeat these analyses, focusing instead only on the turn-taking clips to gain a view of the speech environment as it appears during the peak interactions for the day. This latter set of analyses may more closely mirror results from prior ethnographic work. To demonstrate typical development in this context we briefly present one measure of language development: a coarse trajectory mapping children's use of babble, first words, and multi-word utterances. Finally, we wrap up by integrating the divergent perspectives on Yélî children's speech environment across methods and relating these findings to the larger literature on child-directed speech and its role in language development.
+In what follows we first analyze the nine randomly selected 2.5-minute clips from each child to establish a baseline view of their speech environment, focusing on the effects of child age, time of day, household size, and number of speakers on the rate of target child-directed (TCDS) and other-directed speech (ODS) present. Next, we repeat these analyses, focusing instead only on the turn-taking clips to gain a view of the speech environment as it appears during the peak interactions for the day. This latter set of analyses may more closely mirror results from prior ethnographic work. To demonstrate typical development in this context we briefly present one measure of language development: a coarse trajectory mapping children's use of babble, first words, and multi-word utterances. Finally, we wrap up by integrating the divergent perspectives on Yélî children's speech environment across methods and relating these findings to the larger literature on child-directed speech and its role in language development.
 
 ## Statistical models
-We conducted all analyses in R, using the glmmTMB package to run generalized linear mixed-effects regressions on our dependent measures [@brooks2017modeling; @R-base]. We used ggplot2 to generate all plots [@R-ggplot2]. The dataset and scripts used to generate this manuscript and analyses can be found at https://github.com/marisacasillas/Yeli-CLE. As explained in previous work (REFS Casillas et al. forthcoming, Bunce et al, in prep), child-directed and overhearable speech minutes per hour are naturally restricted to non-negative (0--infinity) values, causing the distributional variance of those measures to become non-gaussian (positively skewed). We therefore use negative binomial regressions, which can better fit non-negative, overdispersed data [@brooks2017modeling; @smithson2013generalized]. In cases when there were extra zeroes in the data (e.g., no hearable speech because the child was alone), we added a zero-inflation model to the regression. This method creates two models: (a) a binary model to evaluate the likelihood of the variable's presence (e.g., no vs. some directed speech) and (b) a count model of the variable (e.g., '3' vs. '5' minutes of directed speech), with an extra parameter indicating data dispersion. More conventional, gaussian linear mixed-effects regressions with logged dependent variables are available in the Supplementary Materials. The results of those alternative models are qualitatively similar to what we report here.
-
-# Results {#results}
-<!--Our model predictors were as follows: child age (months), household size (number of people), and number of non-target-child speakers present in that clip, all centered and standardized, plus time of day at the start of the clip (as a factor; "morning" = up until 11:00; "midday" = 11:00--13:00; and "afternoon" = 13:00 onwards). In addition, the model included two-way interactions between child age and: (a) the number of speakers present, (b) household size, and (c) time of day. We also added a random effect of child. For the zero-inflation models, we included the number of speakers present. We only report significant effects in the main text; full model outputs are available in the Supplementary Materials.-->
+We conducted all analyses in R, using the glmmTMB package to run generalized linear mixed-effects regressions on our dependent measures [@brooks2017modeling; @R-base]. We used ggplot2 to generate all plots [@R-ggplot2]. The dataset and scripts used in this study can be found at https://github.com/marisacasillas/Yeli-CLE. As in previous work on child speech environment measures (REFS Casillas et al. forthcoming, Bunce et al, in prep), TCDS and ODS minutes per hour are naturally restricted to non-negative (0--infinity) values, causing the distributional variance of those measures to become positively skewed. To address this issue we use negative binomial regressions, which can better fit non-negative, overdispersed data [@brooks2017modeling; @smithson2013generalized]. There were also many cases of zero minutes of TCDS across the clips---for example, this often occurred in the randomly sampled clips when the child was sleeping in a quiet area. To handle this additional distributional characteristic of the data, we added a zero-inflation model to TCDS analysis which, in addition to the count model of TCDS (e.g., testing effects of age on the input rate), creates a a binary model to evaluate the likelihood of TCDS being used at all. More conventional, gaussian linear mixed-effects regressions with logged dependent variables are available in the Supplementary Materials. The results of those alternative models are qualitatively similar to what we report here.
 
 ```{r prepare_data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 # Read in annotation files
@@ -331,6 +328,9 @@ clip.distribution <- ggplot(data = used.clips) +
   scale_color_manual(values = c(viridis(3)[1], viridis(3)[2], "blue"))
 clip.distribution
 ```
+
+# Results {#results}
+The models included the following predictors: child age (months; centered and standardized), household size (number of people; centered and standardized), number of non-target-child speakers present in that clip (centered and standardized), and time of day at the start of the clip (factor: "morning" = before 11:00; "midday" = 11:00--13:00; "afternoon" = after 13:00). In addition, we included two-way interactions: (a) child age and the number of speakers present and (b) child age and time of day. We also added a random effect of child. For the zero-inflation model of TCDS, we included the number of speakers present. We limit our discussion here to significant effects in the models; full model results, including gaussian alternative models, are available in the Supplementary Materials.
 
 ```{r quantity_prep, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 # RANDOM
@@ -1451,56 +1451,116 @@ tds.tt.nb.v2 <- glmmTMB(round(tds_mph,0) ~
 # no results to save for reporting
 ```
 
+## Target-child-directed speech (TCDS)
+In the random sample, these 10 children heard an average of `r round(mean(quantity.rand.bychild$tds_mph),2)` minutes of speech directly addressed to them per hour (median = `r round(median(quantity.rand.bychild$tds_mph),2)`; range = `r round(min(quantity.rand.bychild$tds_mph),2)`--`r round(max(quantity.rand.bychild$tds_mph),2)`; [Figure 3](#fig3)). For comparison, this is slightly less than reported values using a near-identical method of data collection, annotation, and analysis in a Tseltal Mayan community (3.6 minutes per hour for children under 3;0; Casillas et al., fortchoming) and comparable to what has been reported using a similar method in a Tsimane community (4.8 minutes per hour for children under 3;0 including all hearable speech; 1.6 minutes when excluding overlap and far-away speech; Scaff et al., in prep).
+
+The zero-inflated negative binomial regression of TCDS minutes per hour (N = `r nobs(tds.rand.zinb)`, log-likelihood = `r logLik(tds.rand.zinb)[1]`, overdispersion estimate = `r tds.rand.zinb.disp`) suggested significant effects of child age, time of day, and their interaction on the rate at which children hear speech addressed directly to them. First, the older children heard significantly more TCDS per hour (B = `r round(tds.rand.zinb.COEF.age[[1]],2)`, SD = `r round(tds.rand.zinb.COEF.age[[2]],2)`, z = `r round(tds.rand.zinb.COEF.age[[3]],2)`, p = `r round(tds.rand.zinb.COEF.age[[4]],3)`), with an average increase of `r round(tds.rand.zinb.COEF.age[[1]],2)` minutes per hour for every month of development. Overall, these children were also more likely to hear TCDS in the mornings (see [Figure 4](#fig4) for an overview of time-of-day findings), with significantly higher TCDS rates in the morning compared to both midday (B = `r round(tds.rand.zinb.COEF.midd.morn[[1]],2)`, SD = `r round(tds.rand.zinb.COEF.midd.morn[[2]],2)`, z = `r round(tds.rand.zinb.COEF.midd.morn[[3]],2)`, p = `r round(tds.rand.zinb.COEF.midd.morn[[4]],2)`) and the afternoon (B = `r round(tds.rand.zinb.v2.COEF.aft.morn[[1]],2)`, SD = `r round(tds.rand.zinb.v2.COEF.aft.morn[[2]],2)`, z = `r round(tds.rand.zinb.v2.COEF.aft.morn[[3]],2)`, p = `r round(tds.rand.zinb.v2.COEF.aft.morn[[4]],2)`), and no significant difference in TCDS rate between midday and the afternoon. However, the time-of-day pattern changed with child age. Older children were more likely than younger children to show a peak in TCDS during midday instead; they were more likely to hear a decrease in TCDS between midday and the afternoon (B = `r round(tds.rand.zinb.COEF.age.midd.aft[[1]],2)`, SD = `r round(tds.rand.zinb.COEF.age.midd.aft[[2]],2)`, z = `r round(tds.rand.zinb.COEF.age.midd.aft[[3]],2)`, p = `r round(tds.rand.zinb.COEF.age.midd.aft[[4]],2)`) and were marginally more likely to hear less TCDS in the morning than at midday (B = `r round(tds.rand.zinb.COEF.age.midd.morn[[1]],2)`, SD = `r round(tds.rand.zinb.COEF.age.midd.morn[[2]],2)`, z = `r round(tds.rand.zinb.COEF.age.midd.morn[[3]],2)`, p = `r round(tds.rand.zinb.COEF.age.midd.morn[[4]],2)`). There were no other significant effects in either the count or the zero-inflation model.
+
+``` {r chitcdscorrs, message=FALSE, warning=FALSE, paged.print=FALSE}
+# Aggregate to one point per child and then test a correlation with age
+# (exclude clips with no TCDS; no way to compute proportion TCDS from kids
+# for that clip if there's no TCDS!)
+# random
+propchitcds.rand <- quantity.rand.sa %>%
+  filter(SpkrAge == "Child" & !is.na(prop_sa.tds))
+propchitcds.rand.corr_age <- propchitcds.rand %>%
+  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
+  summarise(avg_prpchitcds = mean(prop_sa.tds)) %>%
+  mutate(Sample = "Random")
+propchitcds.rand.corr_age.test <- cor.test(
+  ~ age_mo_round + avg_prpchitcds,
+  data = propchitcds.rand.corr_age, method = "spearman")
+# turn taking
+propchitcds.tt <- quantity.nonrand.tt.sa %>%
+  filter(SpkrAge == "Child" & !is.na(prop_sa.tds))
+propchitcds.tt.corr_age <- propchitcds.tt %>%
+  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
+  summarise(avg_prpchitcds = mean(prop_sa.tds)) %>%
+  mutate(Sample = "Turn taking")
+propchitcds.tt.corr_age.test <- cor.test(
+  ~ age_mo_round + avg_prpchitcds,
+  data = propchitcds.tt.corr_age, method = "spearman")
+propchitcds.corr_age.rand_and_tt <- bind_rows(
+  propchitcds.rand.corr_age, propchitcds.tt.corr_age)
+
+propchitcds.plot.rand_and_tt <- ggplot(
+  propchitcds.corr_age.rand_and_tt,
+  aes(x = age_mo_round, y = avg_prpchitcds, lty = Sample)) +
+  geom_smooth(aes(fill = Sample, color = Sample), method = "lm") +
+  geom_point(aes(color = Sample)) +
+  ylab("Mean proportion C-TCDS") + xlab("Child age (mo)")	+
+  scale_y_continuous(limits=c(-1,1),
+                     breaks=seq(-1,1,0.2)) +
+  scale_x_continuous(limits=c(0,38),
+                     breaks=seq(0,38,6)) +
+  coord_cartesian(ylim=c(0,1),xlim=c(0,38)) +
+  scale_color_manual(values = viridis(3)) +
+  scale_fill_manual(values = viridis(3)) +
+  theme_apa() +
+  theme(legend.position="none",
+        axis.line = element_line(color="black", size = 0.4))
+
+# proportion of TCDS from adults
+# random
+propadutcds.rand <- quantity.rand.sa %>%
+  filter(SpkrAge == "Adult" & !is.na(prop_sa.tds)) %>%
+  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
+  summarise(avg_prpadutcds = mean(prop_sa.tds))
+# turn taking
+propadutcds.tt <- quantity.nonrand.tt.sa %>%
+  filter(SpkrAge == "Adult" & !is.na(prop_sa.tds)) %>%
+  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
+  summarise(avg_prpadutcds = mean(prop_sa.tds))
+
+# Speech from MA vs. FA
+# random
+tds.per.seg.rand.age.sx <- all.data %>%
+  filter(sample == "random" & speaker != "CHI" &
+      grepl("xds@", tier) & val == "T" &
+      SpkrAge == "Adult" & SpkrSex != "Not known") %>%
+  group_by(aclew_child_id, SpkrSex, segment, segment_dur) %>%
+  summarise(tds_min.age.sx = round(sum(dur)/60000,3)) %>%
+  spread(SpkrSex, tds_min.age.sx) %>%
+  replace_na(list(Female = 0, Male = 0)) %>%
+  mutate(FA_percent = Female/(Female + Male)) %>%
+  group_by(aclew_child_id) %>%
+  summarize(
+    avg_FA_percent = mean(FA_percent),
+    tot_MA = sum(Male),
+    tot_FA = sum(Female),
+    tot_percent_FA = tot_FA/(tot_FA + tot_MA)
+  ) %>%
+  left_join(ptcp.info)
+# turn taking
+tds.per.seg.tt.age.sx <- all.data %>%
+  filter(sample == "turn-taking" & speaker != "CHI" &
+      grepl("xds@", tier) & val == "T" &
+      SpkrAge == "Adult" & SpkrSex != "Not known") %>%
+  group_by(aclew_child_id, SpkrSex, segment, segment_dur) %>%
+  summarise(tds_min.age.sx = round(sum(dur)/60000,3)) %>%
+  spread(SpkrSex, tds_min.age.sx) %>%
+  replace_na(list(Female = 0, Male = 0)) %>%
+  mutate(FA_percent = Female/(Female + Male)) %>%
+  group_by(aclew_child_id) %>%
+  summarize(
+    avg_FA_percent = mean(FA_percent),
+    tot_MA = sum(Male),
+    tot_FA = sum(Female),
+    tot_percent_FA = tot_FA/(tot_FA + tot_MA)
+  ) %>%
+  left_join(ptcp.info)
+
+```
+
+Children heard TCDS from a variety of different speakers. Overall, most TCDS came from adults (mean = `r round(mean(propadutcds.rand$avg_prpadutcds), 4)*100`%, median = `r round(median(propadutcds.rand$avg_prpadutcds), 4)*100`%, range = `r round(min(propadutcds.rand$avg_prpadutcds), 4)*100`--`r round(max(propadutcds.rand$avg_prpadutcds), 4)*100`%). On average, `r round(mean(tds.per.seg.rand.age.sx$avg_FA_percent), 4)*100`% of the adult TCDS per clip came from women, and an average of `r round(mean(tds.per.seg.rand.age.sx$tot_percent_FA), 4)*100`% of the total adult TCDS minutes came from women. That said, an increasing quantity of TCDS came from other children (child-TCDS; 'C-TCDS'); a Spearman's correlation showed a significant positive relationship between the average proportion of child TCDS in a clip and target child age (Spearman's _rho_ = `r round(propchitcds.rand.corr_age.test$estimate[[1]],2)`; _p_ = `r round(propchitcds.rand.corr_age.test$p.value[[1]],2)`; [Figure 5](#fig5)).
+
 ``` {r fig4, echo=FALSE, fig.cap="Estimates of TCDS min/hr (left panels) and ODS min/hr (right panels) across the recorded day in the random clips (top panels) and turn-taking (bottom panels) clips. Each box plot summarizes the data for children age 1;0 and younger (light) or age 1;0 and older (dark) at the given time of day.", message=FALSE, warning=FALSE, fig.height=4}
 grid.arrange(tod.tcds.rand, tod.ods.rand,
              tod.tcds.tt, tod.ods.tt, nrow=2, ncol=2)
 ```
 
-``` {r chitcdscorrs, message=FALSE, warning=FALSE, paged.print=FALSE}
-# Aggregate to one point per child and then test a correlation with age
-# random
-propchitcds.rand <- subset(quantity.rand.sa[
-  which(!is.na(quantity.rand.sa$prop_sa.tds)),],
-  SpkrAge == "Child")
-propchitcds.rand.corr_age <- propchitcds.rand %>%
-  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
-  summarise(avg_prpchitcds = mean(prop_sa.tds))
-propchitcds.rand.corr_age.test <- cor.test(
-  ~ age_mo_round + avg_prpchitcds,
-  data = propchitcds.rand.corr_age, method = "spearman")
-# turn taking
-propchitcds.tt <- subset(quantity.nonrand.tt.sa[
-  which(!is.na(quantity.nonrand.tt.sa$prop_sa.tds)),],
-  SpkrAge == "Child")
-propchitcds.tt.corr_age <- propchitcds.tt %>%
-  group_by(aclew_child_id, tchiyr.std, age_mo_round) %>%
-  summarise(avg_prpchitcds = mean(prop_sa.tds))
-propchitcds.tt.corr_age.test <- cor.test(
-  ~ age_mo_round + avg_prpchitcds,
-  data = propchitcds.tt.corr_age, method = "spearman")
-
-tds.per.seg.rand.age.sx <- all.data %>%
-  filter(sample == "random" & speaker != "CHI" & SpkrAge != "Not known" &
-           grepl("xds@", tier) & val == "T") %>%
-  group_by(aclew_child_id, SpkrAge, SpkrSex, segment, segment_dur) %>%
-  summarise(tds_min.age.sx = round(sum(dur)/60000,3)) %>%
-  full_join(all.rand.segments.age.sx, by = c("aclew_child_id", "segment", "SpkrAge", "SpkrSex")) %>%
-  replace_na(list(segment_dur = 5, tds_min.age.sx = 0)) %>%
-  mutate(tds_mph.age.sx = (tds_min.age.sx/segment_dur)*60) %>%
-  arrange(aclew_child_id, segment, SpkrAge, SpkrSex) %>%
-  group_by(aclew_child_id, SpkrAge, SpkrSex) %>%
-  summarize(m_tds_mph.age.sx = mean(tds_mph.age.sx))
-tds.per.seg.rand.age.sx.FA <- filter(tds.per.seg.rand.age.sx,
-                                     SpkrAge == "Adult" & SpkrSex == "Female") %>%
-  rename(m_tds_mph.age.sx.FA = m_tds_mph.age.sx)
-tds.per.seg.rand.age.sx.MA <- filter(tds.per.seg.rand.age.sx,
-                                     SpkrAge == "Adult" & SpkrSex == "Male") %>%
-  rename(m_tds_mph.age.sx.MA = m_tds_mph.age.sx)
-adu.sx.ratio <- full_join(tds.per.seg.rand.age.sx.FA, tds.per.seg.rand.age.sx.MA,
-                          by = "aclew_child_id") %>%
-  mutate(ratioFAMA = m_tds_mph.age.sx.FA/m_tds_mph.age.sx.MA) %>%
-  dplyr::select(aclew_child_id, ratioFAMA)
-
+``` {r fig5, echo=FALSE, fig.cap="By-child average proportion of TCDS from other children in a clip; shown for the random (purple) and turn taking (green) samples, and sorted by child age.", message=FALSE, warning=FALSE, fig.height=2.5}
+propchitcds.plot.rand_and_tt
 ```
 
 ```{r ods_models, message=FALSE, warning=FALSE, paged.print=FALSE}
