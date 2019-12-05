@@ -522,6 +522,16 @@ quantity.rand.sa <- xds.per.seg.rand.sa %>%
          prop_sa.tds = tds_min.sa/tds_min)
   # Don't replace NAs with 0s in this case; proportion is not meaningful w/o any speech
 
+perc_CHI_nspkrs_per_clip <- quantity.rand.sa %>%
+  spread(SpkrAge, n_spkrs_clip) %>%
+  group_by(aclew_child_id, segment) %>%
+  summarize(
+    n_ADU = max(Adult, na.rm = TRUE),
+    n_CHI = max(Child, na.rm = TRUE),
+    ) %>%
+  mutate(
+    perc_ADU = n_ADU / (n_ADU + n_CHI)
+    )
 
 # NON-RANDOM
 # Get min/hr speech measures
@@ -1552,15 +1562,11 @@ tds.per.seg.tt.age.sx <- all.data %>%
 
 ```
 
-Children heard TCDS from a variety of different speakers. Overall, most TCDS came from adults (mean = `r round(mean(propadutcds.rand$avg_prpadutcds), 4)*100`%, median = `r round(median(propadutcds.rand$avg_prpadutcds), 4)*100`%, range = `r round(min(propadutcds.rand$avg_prpadutcds), 4)*100`--`r round(max(propadutcds.rand$avg_prpadutcds), 4)*100`%). On average, `r round(mean(tds.per.seg.rand.age.sx$avg_FA_percent), 4)*100`% of the adult TCDS per clip came from women, and an average of `r round(mean(tds.per.seg.rand.age.sx$tot_percent_FA), 4)*100`% of the total adult TCDS minutes came from women. That said, an increasing quantity of TCDS came from other children (child-TCDS; 'C-TCDS'); a Spearman's correlation showed a significant positive relationship between the average proportion of child TCDS in a clip and target child age (Spearman's _rho_ = `r round(propchitcds.rand.corr_age.test$estimate[[1]],2)`; _p_ = `r round(propchitcds.rand.corr_age.test$p.value[[1]],2)`; [Figure 5](#fig5)).
+Children heard TCDS from a variety of different speakers. Overall, most TCDS came from adults (mean = `r round(mean(propadutcds.rand$avg_prpadutcds), 4)*100`%, median = `r round(median(propadutcds.rand$avg_prpadutcds), 4)*100`%, range = `r round(min(propadutcds.rand$avg_prpadutcds), 4)*100`--`r round(max(propadutcds.rand$avg_prpadutcds), 4)*100`%). On average, `r round(mean(tds.per.seg.rand.age.sx$avg_FA_percent), 4)*100`% of the adult TCDS per clip came from women, and an average of `r round(mean(tds.per.seg.rand.age.sx$tot_percent_FA), 4)*100`% of the total adult TCDS minutes came from women. That said, an increasing quantity of TCDS came from other children (child-TCDS; 'C-TCDS'); a Spearman's correlation showed a significant positive relationship between the average proportion of child TCDS in a clip and target child age (Spearman's _rho_ = `r round(propchitcds.rand.corr_age.test$estimate[[1]],2)`; _p_ = `r round(propchitcds.rand.corr_age.test$p.value[[1]],2)`).
 
 ``` {r fig4, echo=FALSE, fig.cap="Estimates of TCDS min/hr (left panels) and ODS min/hr (right panels) across the recorded day in the random clips (top panels) and turn-taking (bottom panels) clips. Each box plot summarizes the data for children age 1;0 and younger (light) or age 1;0 and older (dark) at the given time of day.", message=FALSE, warning=FALSE, fig.height=4}
 grid.arrange(tod.tcds.rand, tod.ods.rand,
              tod.tcds.tt, tod.ods.tt, nrow=2, ncol=2)
-```
-
-``` {r fig5, echo=FALSE, fig.cap="By-child average proportion of TCDS from other children in a clip; shown for the random (purple) and turn taking (green) samples, and sorted by child age.", message=FALSE, warning=FALSE, fig.height=2.5}
-propchitcds.plot.rand_and_tt
 ```
 
 ```{r ods_models, message=FALSE, warning=FALSE, paged.print=FALSE}
@@ -1726,40 +1732,11 @@ ods.tt.nb.v2 <- glmmTMB(round(ods_mph,0) ~
 ```
 
 
-``` {r descriptive_stats, message=FALSE, warning=FALSE, paged.print=FALSE}
-# #TCDS
-# ## random
-# round(mean(quantity.rand.bychild$tds_mph),2)
-# round(median(quantity.rand.bychild$tds_mph),2)
-# round(min(quantity.rand.bychild$tds_mph),2)
-# round(max(quantity.rand.bychild$tds_mph),2)
-# ## tt
-# round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-# round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-# round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-# round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$tds_mph),2)
-# 
-# # proportion TCDS from adults
-# round(mean(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-# round(median(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-# round(min(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-# round(max(1-propchitcds.rand.corr_age$avg_prpchitcds),4)*100
-# chitcds.age.rho <- round(propchitcds.rand.corr_age.test$estimate[[1]],2)
-# chitcds.age.p <- round(propchitcds.rand.corr_age.test$p.value[[1]],2)
-# 
-# # ODS
-# ## random
-# round(mean(quantity.rand.bychild$ods_mph),2)
-# round(median(quantity.rand.bychild$ods_mph),2)
-# round(min(quantity.rand.bychild$ods_mph),2)
-# round(max(quantity.rand.bychild$ods_mph),2)
-# ## tt
-# round(mean(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
-# round(median(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
-# round(min(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
-# round(max(subset(quantity.nonrand.bychild, sample == "turn-taking")$ods_mph),2)
+## Other-directed speech (ODS)
+In the random sample, these children heard an average of `r round(mean(quantity.rand.bychild$ods_mph),2)` minutes of other-directed speech per hour (median = `r round(median(quantity.rand.bychild$ods_mph),2)`; range = `r round(min(quantity.rand.bychild$ods_mph),2)`--`r round(max(quantity.rand.bychild$ods_mph),2)`): that is more than eleven times the average quantity of speech directed to them, with some children experiencing near-continuous background speech. For comparison, a prior estimate for Tseltal Mayan children using parallel methods to the present study found an average of 21 minutes of overhearable speech per hour (Casillas et al., forthcoming), and a recent study of North American children's daylong recordings found that adult-directed speech occurred at a rate of 7.3 minutes per hour (Bergelson et al., 2019).
 
-```
+The negative binomial regression of other-directed speech rate (N = `r nobs(ods.rand.nb)`, log-likelihood = `r logLik(ods.rand.nb)[1]`, overdispersion estimate = `r ods.rand.nb.disp`) revealed effects of child age, number of speakers present, and time of day on the rate of ODS encountered. The rate of ODS significantly decreased with child age (B = `r round(ods.rand.nb.COEF.age[[1]],2)`, SD = `r round(ods.rand.nb.COEF.age[[2]],2)`, z = `r round(ods.rand.nb.COEF.age[[3]],2)`, p = `r round(ods.rand.nb.COEF.age[[4]],3)`) and significantly increased in the presence of more speakers (B = `r round(ods.rand.nb.COEF.nsk[[1]],2)`, SD = `r round(ods.rand.nb.COEF.nsk[[2]],2)`, z = `r round(ods.rand.nb.COEF.nsk[[3]],2)`, p `r ifelse(round(ods.rand.nb.COEF.nsk[[4]],2) < .001, "< 0.001", paste0("= ", round(ods.rand.nb.COEF.nsk[[4]],2)))`). Across clips, there were an average of `r round(mean(quantity.rand$n_spkrs_clip), 2)` speakers present other than the target child in the randomly selected clips (median = `r round(median(quantity.rand$n_spkrs_clip),2)`; range = `r round(min(quantity.rand$n_spkrs_clip),2)`--`r round(max(quantity.rand$n_spkrs_clip),2)`), an average of `r round(mean(perc_CHI_nspkrs_per_clip$perc_ADU),4)*100`% of whom were adults. Comparing again to Tseltal and North American English, in which the average number of speakers present was 3.44 and XX respectively (REFS)[@bergelson2018day], we can infer that the increased rate of ODS on Rossel Island is due in part to there simply being more speakers present. Time-of-day effects on ODS only came through in an interaction with child age. In particular, older children heard a pattern of ODS mirroring the general pattern of TCDS; significantly more ODS in the mornings compared to midday (midday-vs-morning: B = `r round(ods.rand.nb.COEF.age.midd.morn[[1]],2)`, SD = `r round(ods.rand.nb.COEF.age.midd.morn[[2]],2)`, z = `r round(ods.rand.nb.COEF.age.midd.morn[[3]],2)`, p = `r round(ods.rand.nb.COEF.age.midd.morn[[4]],2)`) and the afternoon (afternoon-vs-morning:  B = `r round(ods.rand.nb.v2.COEF.age.aft.morn[[1]],2)`, SD = `r round(ods.rand.nb.v2.COEF.age.aft.morn[[2]],2)`, z = `r round(ods.rand.nb.v2.COEF.age.aft.morn[[3]],2)`, p = `r round(ods.rand.nb.v2.COEF.age.aft.morn[[4]],2)`). There were no other significant effects on ODS rate, and no significant effects in the zero-inflation models.
+
 
 
 ## Vocal maturity
