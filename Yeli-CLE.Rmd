@@ -535,11 +535,9 @@ perc_CHI_nspkrs_per_clip <- quantity.rand.sa %>%
   group_by(aclew_child_id, segment) %>%
   summarize(
     n_ADU = max(Adult, na.rm = TRUE),
-    n_CHI = max(Child, na.rm = TRUE),
-    ) %>%
+    n_CHI = max(Child, na.rm = TRUE)) %>%
   mutate(
-    perc_ADU = n_ADU / (n_ADU + n_CHI)
-    )
+    perc_ADU = n_ADU / (n_ADU + n_CHI))
 
 # NON-RANDOM
 # Get min/hr speech measures
@@ -2019,7 +2017,32 @@ voc.mat.by.age
 ```
 
 # Discussion {#disc}
+We analyzed the speech environments of 10 Rossel children under age 3;0 to investigate: (a) how often children were spoken to directly, (b) how much other overhearable speech is available to them, (c) how these sources of linguistic input are shaped by child age and interactional context, and (d) whether this (relatively) low rate of directed input appears to impact their early production milestones.
 
+Based on prior ethnographic work, we expected that these children would hear frequent child-directed speech from a wide variety of caregivers (REFS) and frequent speech directed to others (REFS). In fact children were rarely directly addressed. This surprisingly low baseline rate of TCDS is comparable---even slightly less---than that found in a Tseltal Mayan community where minimal TCDS is one means to socializing children into attending to their surroundings (REFS). On the other hand, there was ample overhearable speech directed to others; much more than has been reported for children in other communities at time of writing. We suspect that both the low relative rate of TCDS and the high incidence of ODS are partly attributable to the fact that multiple speakers are typically present in the recordings, as discussed further below.
+
+Prior work using similar methods to those presented here, also led us to expect that the quantity of TCDS would be stable across the age range studied (Scaff, Casillas, Bergelson, REFS), and that an increasing proportion of it would come from other children (Shneidman, Brown, REFS). On the basis of these same studies, we expected the quantity of ODS to decrease across the age range studied (Casillas, Bergelson, REFS). Counter to expectations, we found a small but significant increase in TCDS rate with child age in the random clips and a small but significant decrease in TCDS rate with age in the turn-taking clips. The age-related baseline increase in TCDS may derive from more frequent participation in independent play with other children; in prior work, increased proportional input from other children was also associated with an increase in overall input rate (Shneidman refs). The age-related decrease in TCDS rate during peak interactional moments was not expected, but may be attributable to this change in interactional partners with age; if adults are more likely to be the source of TCDS during interactional peaks for younger children, they may also provide more voluminous speech during those peaks than other children do during interactional peaks later in development. Both of these explanations require follow-up work from a larger sample of children and, ideally, from a larger sample of their interactions throughout the day. As expected, we did see a decrease in ODS with age, consistent with prior work on both Western and non-Western samples (REFS).
+
+Finally, while we anticipated that the children's input would be non-uniformly distributed over the recording day [@blasiIPhuman; @abney2017time; REFS Casillas], we also expected to see a somewhat even distribution of directed speech from morning to evening given that young children have been reported to pass between multiple caregivers during a typical day at home. We expected that this care-sharing practice might weaken the effect of farming activities in the late morning and early afternoon found in previous work with Tseltal Mayan subsistence farmers (Casillas et al. REFS). In fact, we found that children's rate of linguistic input was still significantly impacted by time of day, similar to prior work (Casillas et al. REFS). In paricular, most TCDS and ODS came during the morning, with older children more likely to hear TCDS at midday than younger children, possibly because this is when most adults are likely attending to gardening and domestic duties while children congregate in large play groups (REFS).
+
+<!--Overall, the results suggest that these children typically hear very little directly addressed speech, but that interactional peaks provide opportunities for dense input at multiple points during the day. While the majority of directed speech comes from women, an increasing portion of it comes from other children with age, and directed speech from men is more likely during interactional peaks. Directed and overhearable speech is most likely during the morning, before most of the household has dispersed for their work activities, similar to other work on subsistence farming households (Casillas et al., forthcoming). However, older children are more likely than younger children to show higher input rates at midday, perhaps due to their increased interactions with other children while adults attend to gardening and domestic tasks; we leave investigation of this idea to future work. Possibly because of the large number of speakers typically present, these children also experienced a high rate of overhearable speech, underscoring the availability of other-addressed speech as a resource for linguistic input in this context.
+-->
+
+## Talk to children: ideology vs. rate
+- little speech to infants, possibly because of adult-adult talk w/ so many available speakers
+- impact: daily activities and family members present
+- cover more diverse speaker types during peaks
+- consistency w/ ideology may be seen in the *how* and not in the *how often*
+
+## Independence and child-TCDS
+- increase in CDS from other kids recalls Shneidman work w/ Yukatek kids, suggesting a possible role for speech from other kids in the first few years of life
+- interestingly we didn't find this pattern w/ tseltal kids, possibly because in the Tseltal community extended independent play w/ other kids may start later, after age 3, where our sample ends
+- ethnographic work on Rossel puts a heavy emphaseis on the early independence encouraged among young children, which could help explain why they appear more likely to participate in these child groups already before age 3
+
+## Limitations
+- good for accurate measures of input
+- we don't yet know how ideology impacts the shape of the input; we should look next to features of CDS in these contexts
+- lacking semantically rich interpretations of lg use (needs the close study method)
 
 # Acknowledgements {#acknowledgements}
 This paper was written using the papaja library in RStudio [@R-papaja].
