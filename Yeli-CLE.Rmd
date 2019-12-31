@@ -24,7 +24,7 @@ abstract: |
   Daylong recordings can capture many of the patterns present in children's typical language experience, including how the rate of linguistic input varies depending on child age, time of day, and number of speakers present. We used daylong recordings to investigate how much speech is available to young children (0;0--3;0) on Rossel Island, Papua New Guinea; a community where prior ethnographic study demonstrated face-to-face contingency-seeking interational styles with infants and young children. We find that children's daylong language exposure does not align with the practices that were evident in ethnographic work. Instead, children's linguistic input rates were primarily affected by circumstantial aspects of everyday life (e.g., the presence of other speakers). We discuss the different insights afforded by these approaches in a comparative cross-cultural framework and how these findings relate to the bigger question of how minimal linguistic experience can support first language development.
 
 keywords          : "Child-directed speech, linguistic input, non-WEIRD, vocal maturity, interaction, Papuan"
-wordcount         : "XXXXX (XXXX not including references)"
+wordcount         : "XXXXX (XXXX not including references); currently 10855 and 9636, respectively"
 
 bibliography      : ["Yeli-CLE.bib"]
 
