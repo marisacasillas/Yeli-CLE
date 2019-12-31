@@ -1,0 +1,5 @@
+- short videos w/ individual differences (quick-check Rowe, Hoff, Bornstein/Tamis-LeMonda); _This approach has been fruitful in teasing out individual and group-based differences in interactional behaviors (REFS)._
+- ACLEW CDS quantity info from John
+- Learning from overhearing paper from Laura
+- Check on Penny refs for YD
+- Demographic information to be filled in!
