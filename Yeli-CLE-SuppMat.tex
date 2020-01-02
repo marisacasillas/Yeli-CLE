@@ -126,7 +126,7 @@ measures, a histogram showing how each variable is distributed (i.e.,
 because they are non-normal and/or zero-inflated) and a figure showing
 the distribution of model residuals. For every negative binomial model,
 we also include the full model output table and residual plots for
-matching gaussian mixed-effects regressions which uses a log-transformed
+matching gaussian mixed-effects regressions which use a log-transformed
 dependent measure. Such gaussian models with log-transformed measures
 are an alternative solution to analyzing non-normal distributions
 sometimes used in psycholinguistics, but are not suitable for the
@@ -169,14 +169,14 @@ self-explanatory.
 As more data are added to this corpus, the analyses will also be
 updated, as will this supplementary model information, all of which will
 be available online at:
-\url{https://middycasillas.shinyapps.io/Rossel_Child_Language_Environment/}.
+\url{https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/}.
 
 \subsection{Target-child-directed speech (TCDS)}\label{models-tcds}
 
 \subsubsection{Random clips}\label{models-tcds-random}
 
 TCDS rate in the random clips demonstrated a skewed distribution with
-extra cases of zero \protect\hyperlink{fig1}{Figure 1}. We therefore
+extra cases of zero (\protect\hyperlink{fig1}{Figure 1}). We therefore
 modeled it using a zero-inflated negative binomial mixed-effects
 regression in the main text: results for the two models demonstrating
 all pairwise effects of time of day are shown in
@@ -226,7 +226,7 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab2}Model output of the zero-inflated negative binomial mixed-effects regression of TCDS min/hr for the random sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab2}Full output of the zero-inflated negative binomial mixed-effects regression of TCDS min/hr for the random sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -298,7 +298,7 @@ random\_effect & Residual & 0.79 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab4}Model output of the gaussian mixed-effects regression of TCDS min/hr for the random sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab4}Full output of the gaussian mixed-effects regression of TCDS min/hr for the random sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -352,7 +352,7 @@ are shown in \protect\hyperlink{fig5}{Figure 5}.
 
 }
 
-\caption{The distribution of TCDS rates found across the 59 turn-taking clips.}\label{fig:fig4}
+\caption{The distribution of TCDS rates found across the 55 turn-taking clips.}\label{fig:fig4}
 \end{figure}
 
 \FloatBarrier
@@ -384,7 +384,7 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab6}Model output of the negative binomial mixed-effects regression of TCDS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab6}Full output of the negative binomial mixed-effects regression of TCDS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -455,7 +455,7 @@ random\_effect & Residual & 0.53 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab8}Model output of the gaussian mixed-effects regression of TCDS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab8}Full output of the gaussian mixed-effects regression of TCDS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -543,7 +543,7 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab10}Model output of the negative binomial mixed-effects regression of ODS min/hr for the random sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab10}Full output of the negative binomial mixed-effects regression of ODS min/hr for the random sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -613,7 +613,7 @@ random\_effect & Residual & 0.66 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab12}Model output of the gaussian mixed-effects regression of ODS min/hr for the random sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab12}Full output of the gaussian mixed-effects regression of ODS min/hr for the random sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -667,7 +667,7 @@ of time of day are shown in \protect\hyperlink{tab13}{Table 13} and
 
 }
 
-\caption{The distribution of ODS rates found across the 59 turn-taking clips.}\label{fig:fig10}
+\caption{The distribution of ODS rates found across the 55 turn-taking clips.}\label{fig:fig10}
 \end{figure}
 
 \FloatBarrier
@@ -675,7 +675,7 @@ of time of day are shown in \protect\hyperlink{tab13}{Table 13} and
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab13}Full output of the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample, with morning as the reference level for time of day (note that most default models have midday as the reference level for time of day; the default model is changed here due to convergence issues).}
+\caption{\label{tab:tab13}Full output of the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample, with midday as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -699,7 +699,7 @@ random\_effect & aclew\_child\_id & 0.28 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab14}Model output of the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab14}Full output of the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
@@ -728,7 +728,7 @@ random\_effect & aclew\_child\_id & 0.28 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the zero-inflated negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample.}\label{fig:fig11}
+\caption{The model residuals from the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample.}\label{fig:fig11}
 \end{figure}
 
 As an alternative analysis we generated parallel models of ODS rate in
@@ -770,7 +770,7 @@ random\_effect & Residual & 0.61 & NA & NA & NA\\
 \begin{table}[tbp]
 \begin{center}
 \begin{threeparttable}
-\caption{\label{tab:tab16}Model output of the gaussian mixed-effects regression of ODS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
+\caption{\label{tab:tab16}Full output of the gaussian mixed-effects regression of ODS min/hr for the turn-taking sample, with afternoon as the reference level for time of day.}
 \begin{tabular}{llllll}
 \toprule
 component & \multicolumn{1}{c}{term} & \multicolumn{1}{c}{estimate} & \multicolumn{1}{c}{std.error} & \multicolumn{1}{c}{statistic} & \multicolumn{1}{c}{p.value}\\
