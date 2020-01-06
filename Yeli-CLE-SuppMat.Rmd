@@ -1,6 +1,6 @@
 ---
-title             : "Supplementary Materials: Early language experience in a Papuan village"
-shorttitle        : "Supp. Materials: Early language experience in a Papuan village"
+title             : "Supplementary Materials: Early language experience in a Papuan community"
+shorttitle        : "Supp. Materials: Early language experience in a Papuan community"
 
 author: 
   - name          : "Marisa Casillas"

@@ -1,6 +1,6 @@
 ---
-title             : "Early language experience in a Papuan village"
-shorttitle        : "Early language experience in a Papuan village"
+title             : "Early language experience in a Papuan community"
+shorttitle        : "Early language experience in a Papuan community"
 
 author: 
   - name          : "Marisa Casillas"
