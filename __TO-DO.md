@@ -1,10 +1,8 @@
 # check on refs
-- need bib info: ACLEW CDS from John
-- need bib info: Learning from overhearing paper from Laura
-- Check on Penny refs for YD
 
 # other
+- integrate SCL comments and send back
 - anonymized versions of docs
-- cover letter
-- OSF
-- shiny page
+- create shiny page
+- finalize cover letter
+- upload submission docs to OSF
