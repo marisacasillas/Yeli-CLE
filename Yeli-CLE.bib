@@ -642,6 +642,12 @@ article{tulkin1972mother,
   school={The University of Chicago},
   year={2010}
 }
+@phdthesis{frye2019thesis,
+  title={{Child directed speech in Qaqet}},
+  author={Frye, Henrike},
+  school={University of Cologne},
+  year={2019}
+}
 @article{shneidman2012language,
   title={Language input and acquisition in a {M}ayan village: how important is directed speech?},
   author={Shneidman, Laura A. and Goldin-Meadow, Susan},
@@ -761,7 +767,7 @@ article{tulkin1972mother,
 @article{cychoszURlongform,
   title={Longform recordings of everyday life: Ethics for best practices},
   author={Margaret Cychosz and Rachel Romeo and Melanie Soderstrom and Camila Scaff and Hillary Ganek and Alejandrina Cristia and Marisa Casillas and Kaya de Barbaro and Janet Bang and Adriana Weisleder},
-  year={under review}
+  year={accepted}
 }
 @misc{anderson2019modeling,
   title={Modeling nonuniformities in infants' everyday speech environments. Presented at the Biennial Meeting of the Society for Research on Child Development. Baltimore, MD.},
@@ -947,8 +953,17 @@ article{tulkin1972mother,
   editor={Slobin, Daniel I.},
   booktitle={{The Crosslinguistic Study of Language Acquisition, Volume 3}},
   publisher={Hillsdale, NJ: Lawrence Erlbaum Associates},
-  pages={221-308},
+  pages={221--308},
   year={1992}
+}
+@incollection{rumsey2013ergative,
+  title={The acquisition of ergative marking in {Kaluli, Ku Waru and Duna (Trans New Guinea)}},
+  author={Rumsey, Alan and San Roque, Lila and Schieffelin, Bambi B},
+  editor={Bavin, Edith L and Stoll, Sabine},
+  booktitle={{Sabine}},
+  publisher={Amsterdam; New York: John Benjamins Publishing Company},
+  pages={139--188},
+  year={2013}
 }
 @book{pye2017comparative,
   title={{The Comparative Method of Language Acquisition Research}},
@@ -1179,7 +1194,13 @@ article{tulkin1972mother,
   publisher={Wiley Online Library},
   doi={10.1111/infa.12222}
 }
-
+@book{labov1972sociolinguistic,
+  title={Sociolinguistic Patterns},
+  author={Labov, William},
+  year={1972},
+  location={Philadelphia},
+  publisher={University of Pennsylvania}
+}
 
 
 
@@ -1591,32 +1612,22 @@ article{tulkin1972mother,
   title={Cychosz {HomeBank} Corpus},
   year={2019}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@article{demuth2006word,
+  title={Word-minimality, epenthesis and coda licensing in the early acquisition of English},
+  author={Demuth, Katherine and Culbertson, Jennifer and Alter, Jennifer},
+  journal={Language and Speech},
+  volume={49},
+  number={2},
+  pages={137--173},
+  year={2006},
+  publisher={Sage Publications Sage UK: London, England}
+}
 @Manual{R-base,
   title = {R: A Language and Environment for Statistical Computing},
   author = {{R Core Team}},
   organization = {R Foundation for Statistical Computing},
   address = {Vienna, Austria},
-  year = {2018},
+  year = {2019},
   url = {https://www.R-project.org/},
 }
 @Manual{R-bbmle,
@@ -1625,13 +1636,6 @@ article{tulkin1972mother,
   year = {2017},
   note = {R package version 1.0.20},
   url = {https://CRAN.R-project.org/package=bbmle},
-}
-@Manual{R-bindrcpp,
-  title = {bindrcpp: An 'Rcpp' Interface to Active Bindings},
-  author = {Kirill Müller},
-  year = {2018},
-  note = {R package version 0.2.2},
-  url = {https://CRAN.R-project.org/package=bindrcpp},
 }
 @Manual{R-broom.mixed,
   title = {broom.mixed: Tidying Methods for Mixed Models},
@@ -1644,37 +1648,31 @@ article{tulkin1972mother,
   title = {DHARMa: Residual Diagnostics for Hierarchical (Multi-Level / Mixed)
 Regression Models},
   author = {Florian Hartig},
-  year = {2018},
-  note = {R package version 0.2.0},
+  year = {2019},
+  note = {R package version 0.2.4},
   url = {https://CRAN.R-project.org/package=DHARMa},
 }
 @Manual{R-dplyr,
   title = {dplyr: A Grammar of Data Manipulation},
   author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller},
-  year = {2018},
-  note = {R package version 0.7.5},
+  year = {2019},
+  note = {R package version 0.8.3},
   url = {https://CRAN.R-project.org/package=dplyr},
 }
 @Manual{R-forcats,
   title = {forcats: Tools for Working with Categorical Variables (Factors)},
   author = {Hadley Wickham},
-  year = {2018},
-  note = {R package version 0.3.0},
+  year = {2019},
+  note = {R package version 0.4.0},
   url = {https://CRAN.R-project.org/package=forcats},
-}
-@Manual{R-ggpirate,
-  title = {ggpirate: Pirate plotting for ggplot2},
-  author = {Mika Braginsky},
-  note = {R package version 0.1.1},
-  url = {https://github.com/mikabr/ggpirate},
 }
 @Book{R-ggplot2,
   author = {Hadley Wickham},
   title = {ggplot2: Elegant Graphics for Data Analysis},
   publisher = {Springer-Verlag New York},
-  year = {2009},
-  isbn = {978-0-387-98140-6},
-  url = {http://ggplot2.org},
+  year = {2016},
+  isbn = {978-3-319-24277-4},
+  url = {https://ggplot2.tidyverse.org},
 }
 @Article{R-glmmTMB,
   author = {Mollie E. Brooks and Kasper Kristensen and Koen J. {van Benthem} and Arni Magnusson and Casper W. Berg and Anders Nielsen and Hans J. Skaug and Martin Maechler and Benjamin M. Bolker},
@@ -1703,61 +1701,70 @@ Regression Models},
   pages = {1--48},
   doi = {10.18637/jss.v067.i01},
 }
+@Article{R-lubridate,
+  title = {Dates and Times Made Easy with {lubridate}},
+  author = {Garrett Grolemund and Hadley Wickham},
+  journal = {Journal of Statistical Software},
+  year = {2011},
+  volume = {40},
+  number = {3},
+  pages = {1--25},
+  url = {http://www.jstatsoft.org/v40/i03/},
+}
 @Manual{R-Matrix,
   title = {Matrix: Sparse and Dense Matrix Classes and Methods},
   author = {Douglas Bates and Martin Maechler},
-  year = {2018},
-  note = {R package version 1.2-14},
+  year = {2019},
+  note = {R package version 1.2-17},
   url = {https://CRAN.R-project.org/package=Matrix},
 }
 @Manual{R-papaja,
   author = {Frederik Aust and Marius Barth},
   title = {{papaja}: {Create} {APA} manuscripts with {R Markdown}},
   year = {2018},
-  note = {R package version 0.1.0.9709},
+  note = {R package version 0.1.0.9842},
   url = {https://github.com/crsh/papaja},
 }
 @Manual{R-purrr,
   title = {purrr: Functional Programming Tools},
   author = {Lionel Henry and Hadley Wickham},
   year = {2019},
-  note = {R package version 0.3.0},
+  note = {R package version 0.3.3},
   url = {https://CRAN.R-project.org/package=purrr},
 }
 @Manual{R-readr,
   title = {readr: Read Rectangular Text Data},
   author = {Hadley Wickham and Jim Hester and Romain Francois},
-  year = {2017},
-  note = {R package version 1.1.1},
+  year = {2018},
+  note = {R package version 1.3.1},
   url = {https://CRAN.R-project.org/package=readr},
 }
 @Manual{R-stringr,
   title = {stringr: Simple, Consistent Wrappers for Common String Operations},
   author = {Hadley Wickham},
-  year = {2018},
-  note = {R package version 1.3.1},
+  year = {2019},
+  note = {R package version 1.4.0},
   url = {https://CRAN.R-project.org/package=stringr},
 }
 @Manual{R-tibble,
   title = {tibble: Simple Data Frames},
   author = {Kirill Müller and Hadley Wickham},
-  year = {2018},
-  note = {R package version 1.4.2},
+  year = {2019},
+  note = {R package version 2.1.3},
   url = {https://CRAN.R-project.org/package=tibble},
 }
 @Manual{R-tidyr,
-  title = {tidyr: Easily Tidy Data with 'spread()' and 'gather()' Functions},
+  title = {tidyr: Tidy Messy Data},
   author = {Hadley Wickham and Lionel Henry},
-  year = {2018},
-  note = {R package version 0.8.1},
-  url = {https://CRAN.R-project.org/package=tidyr},
+  year = {2019},
+  note = {https://tidyr.tidyverse.org, https://github.com/tidyverse/tidyr},
 }
 @Manual{R-tidyverse,
   title = {tidyverse: Easily Install and Load the 'Tidyverse'},
   author = {Hadley Wickham},
-  year = {2017},
-  note = {R package version 1.2.1},
-  url = {https://CRAN.R-project.org/package=tidyverse},
+  year = {2019},
+  note = {http://tidyverse.tidyverse.org,
+https://github.com/tidyverse/tidyverse},
 }
 @Manual{R-viridis,
   title = {viridis: Default Color Maps from 'matplotlib'},
@@ -1772,36 +1779,4 @@ Regression Models},
   year = {2018},
   note = {R package version 0.3.0},
   url = {https://CRAN.R-project.org/package=viridisLite},
-}
-@Book{R-knitr,
-  title = {Dynamic Documents with {R} and knitr},
-  author = {Yihui Xie},
-  publisher = {Chapman and Hall/CRC},
-  address = {Boca Raton, Florida},
-  year = {2015},
-  edition = {2nd},
-  note = {ISBN 978-1498716963},
-  url = {https://yihui.name/knitr/},
-}
-@Article{R-lubridate,
-  title = {Dates and Times Made Easy with {lubridate}},
-  author = {Garrett Grolemund and Hadley Wickham},
-  journal = {Journal of Statistical Software},
-  year = {2011},
-  volume = {40},
-  number = {3},
-  pages = {1--25},
-  url = {http://www.jstatsoft.org/v40/i03/},
-}
-
-
-@article{demuth2006word,
-  title={Word-minimality, epenthesis and coda licensing in the early acquisition of English},
-  author={Demuth, Katherine and Culbertson, Jennifer and Alter, Jennifer},
-  journal={Language and Speech},
-  volume={49},
-  number={2},
-  pages={137--173},
-  year={2006},
-  publisher={Sage Publications Sage UK: London, England}
 }
