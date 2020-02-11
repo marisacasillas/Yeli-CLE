@@ -1,4 +1,4 @@
-\documentclass[,man,floatsintext]{apa6}
+\documentclass[,man,mask,floatsintext]{apa6}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -77,7 +77,7 @@ interaction, Papuan},
 \affiliation{
 \vspace{0.5cm}
 \textsuperscript{1} Max Planck Institute for Psycholinguistics}
-\keywords{Child-directed speech, linguistic input, non-WEIRD, vocal maturity, interaction, Papuan\newline\indent Word count: 13001 (10865 not including references)}
+\keywords{Child-directed speech, linguistic input, non-WEIRD, vocal maturity, interaction, Papuan\newline\indent Word count: 12606 (10871 not including references)}
 \usepackage{csquotes}
 \usepackage{upgreek}
 \captionsetup{font=singlespacing,justification=justified}
@@ -639,11 +639,11 @@ software timestamps each image file such that we can calculate the
 number of seconds that have elapsed between photos. These timestamps can
 be used with the cross-device time synchronization cue to create
 photo-linked audio files of each recording, which we then format as
-video files (see \url{https://github.com/marisacasillas/Weave} for
-post-processing scripts and more information). The informed consent
-process used with participants, as well as data collection and storage,
-were conducted in accordance with ethical guidelines approved by the
-Radboud University Social Sciences Ethics Committee.
+video files (see URL\_MASKED\_FOR\_REVIEW for post-processing scripts
+and more information). The informed consent process used with
+participants, as well as data collection and storage, were conducted in
+accordance with ethical guidelines approved by the Radboud University
+Social Sciences Ethics Committee.
 
 \begin{table}[tbp]
 \begin{center}
@@ -754,21 +754,21 @@ We conducted all analyses in R, using the glmmTMB package to run
 generalized linear mixed-effects regressions on our dependent measures
 (M. E. Brooks et al., 2017; R Core Team, 2019). We used ggplot2 to
 generate all plots (Wickham, 2016). The dataset and scripts used in this
-study can be found at \url{https://github.com/marisacasillas/Yeli-CLE}.
-As in previous work on child speech environment measures (Bunce et al.,
-in preparation; Casillas et al., 2019), TCDS and ODS minutes per hour
-are naturally restricted to non-negative (0--infinity) values, causing
-the distributional variance of those measures to become positively
-skewed. To address this issue we use negative binomial regressions,
-which can better fit non-negative, overdispersed data (M. E. Brooks et
-al., 2017; Smithson \& Merkle, 2013). There were also many cases of zero
-minutes of TCDS across the clips---for example, this often occurred in
-the randomly sampled clips when the child was sleeping in a quiet area.
-To handle this additional distributional characteristic of the data, we
-added a zero-inflation model to TCDS analysis which, in addition to the
-count model of TCDS (e.g., testing effects of age on the input rate),
-creates a binary model to evaluate the likelihood of TCDS being used at
-all. More conventional, gaussian linear mixed-effects regressions with
+study can be found at URL\_MASKED\_FOR\_REVIEW. As in previous work on
+child speech environment measures (Bunce et al., in preparation;
+Casillas et al., 2019), TCDS and ODS minutes per hour are naturally
+restricted to non-negative (0--infinity) values, causing the
+distributional variance of those measures to become positively skewed.
+To address this issue we use negative binomial regressions, which can
+better fit non-negative, overdispersed data (M. E. Brooks et al., 2017;
+Smithson \& Merkle, 2013). There were also many cases of zero minutes of
+TCDS across the clips---for example, this often occurred in the randomly
+sampled clips when the child was sleeping in a quiet area. To handle
+this additional distributional characteristic of the data, we added a
+zero-inflation model to TCDS analysis which, in addition to the count
+model of TCDS (e.g., testing effects of age on the input rate), creates
+a binary model to evaluate the likelihood of TCDS being used at all.
+More conventional, gaussian linear mixed-effects regressions with
 log-transformed dependent variables are available in the Supplementary
 Materials. The results of those alternative models are qualitatively
 similar to what we report here.
@@ -1081,7 +1081,7 @@ farming activities on linguistic input rate, found in the late morning
 and early afternoon in previous work with Tseltal Mayan subsistence
 farmers (Casillas et al., 2019). In fact, we found that children's rate
 of linguistic input was still significantly impacted by time of day,
-similar to prior work (Casillas et al., 2019). In particular, most TCDS
+similar to the prior work with Tseltal Mayans. In particular, most TCDS
 and ODS came during the morning, with older children more likely to hear
 TCDS at midday than younger children, possibly because midday is when
 most adults are likely attending to gardening and domestic duties while
@@ -1315,24 +1315,11 @@ Importantly, the data presented here come from an evolving corpus of
 Yélî Dnye developmental data; any reader interested in citing
 descriptive features of the Rossel child language environment is
 strongly encouraged to visit the following address for up-to-date
-estimates:
-\url{https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/}.
-The information on that linked page will include any new data,
-annotations, and analyses added after the publication of this study.
+estimates: URL\_MASKED\_FOR\_REVIEW. The information on that linked page
+will include any new data, annotations, and analyses added after the
+publication of this study.
 
 \section{Acknowledgements}\label{acknowledgements}
-
-The collection and annotation of these recordings was made possible by
-Taakêmê Ńamono, Ndapw:éé Yidika, and Y:aaw:aa Pikuwa; with thanks also
-to the PNG National Research Institute, and the Administration of Milne
-Bay Province. We thank and acknowledge the participating families and
-the Rossel community at large for their continuing support. We also
-acknowledge support from the ACLEW project and thank Maartje Weenink for
-her help with manual clip selection. This work is supported by a NWO
-Veni Innovational Scheme grant (275-89-033) to MC, an ERC Advanced Grant
-(269484 INTERACT) to SCL, and fieldwork funding from the Max Planck
-Institute for Psycholinguistics. This paper was written using the papaja
-library in RStudio (Aust \& Barth, 2018).
 
 \newpage
 
@@ -1356,10 +1343,6 @@ through overhearing. \emph{Child Development}, \emph{72}(2), 416--430.
 Anderson, H., \& Fausey, C. (2019). Modeling nonuniformities in infants'
 everyday speech environments. presented at the biennial meeting of the
 society for research on child development. baltimore, md.
-
-\hypertarget{ref-R-papaja}{}
-Aust, F., \& Barth, M. (2018). \emph{papaja: Create APA manuscripts with
-R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
 
 \hypertarget{ref-bates1997inseparability}{}
 Bates, E., \& Goodman, J. C. (1997). On the inseparability of grammar
