@@ -1,6 +1,6 @@
 ---
 title             : "Supplementary Materials: Early language experience in a Papuan community"
-shorttitle        : "Supp. Materials: Early language experience in a Papuan community"
+shorttitle        : "SM: Language experience on Rossel Island"
 
 author: 
   - name          : "Marisa Casillas"
@@ -56,7 +56,7 @@ model.results <- model.results %>%
 ```
 
 # Full model outputs {#models}
-In these Supplementary Materials we give the full model output tables for each analysis in the main text, including re-leveled versions of each model to show all three of the two-way contrasts between the three-level time-of-day factor (i.e., morning vs. midday, morning vs. afternoon, and midday vs. afternoon) as well as, for each of the measures, a histogram showing how each variable is distributed (i.e., because they are non-normal and/or zero-inflated) and a figure showing the distribution of model residuals. For every negative binomial model, we also include the full model output table and residual plots for matching gaussian mixed-effects regressions which use a log-transformed dependent measure. Such gaussian models with log-transformed measures are an alternative solution to analyzing non-normal distributions sometimes used in psycholinguistics, but are not suitable for the current data given how our speech environment measures are distributed, particularly in the randomly sampled clips (see, e.g., Figures [1](#fig1), [7](#fig7), [10](#fig10), [13](#fig13), [19](#fig19)). Overall, the gaussian models show a qualitatively similar pattern of results. These analyses are structured as identically as possible to those in Casillas and colleagues' [-@casillasFCearly] study on Tseltal Mayan child language environments.
+In these Supplementary Materials we give the full model output tables for each analysis in the main text, including re-leveled versions of each model to show all three of the two-way contrasts between the three-level time-of-day factor (i.e., morning vs. midday, morning vs. afternoon, and midday vs. afternoon) as well as, for each of the measures, a histogram showing how each variable is distributed (i.e., because they are non-normal and/or zero-inflated) and a figure showing the distribution of model residuals. For every negative binomial model, we also include the full model output table and residual plots for matching gaussian mixed-effects regressions which use a log-transformed dependent measure. Such gaussian models with log-transformed measures are an alternative solution to analyzing non-normal distributions sometimes used in psycholinguistics, but are not suitable for the current data given how our speech environment measures are distributed, particularly in the randomly sampled clips (see, e.g., Figures [1](#fig1), [7](#fig7), [10](#fig10), [13](#fig13), [19](#fig19)). Overall, the gaussian models show a qualitatively similar pattern of results. These analyses are structured as identically as possible to those in Casillas and colleagues' [-@casillas2019early] study on Tseltal Mayan child language environments.
 
 ## How to interpret the model output
 All models were run with the glmm-TMB library in R [@R-glmmTMB; @brooks2017modeling]. Note that, in the negative binomial regressions, the dependent variables have been rounded to the nearest integer (e.g., 3.2 minutes of TCDS per hour becomes 3 minutes per hour in the model).
@@ -65,7 +65,7 @@ The predictors in the models are abbreviated as follows: tchiyr.std = centered, 
 
 In each model output table, the "component" shows what kind of model the estimate derives from (e.g., the zero-inflated models include both a conditional "cond" set of predictors, random effects, and zero-inflation "zi" predictors). The "term" is the estimated predictor. The "statistic" is the estimated _z_-statistic for each predictor's effect. The other labels are self-explanatory.
 
-As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at: https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/.
+As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at <OMITTED FOR REVIEW><!--: https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/-->.
 
 ## Target-child-directed speech (TCDS) {#models-tcds}
 ### Random clips {#models-tcds-random}
@@ -95,7 +95,7 @@ apa_table(filter(model.results, model == "TCDS_random_z-inb.v2") %>% select(-mod
 knitr::include_graphics("www/TCDS_random_z-inb_res_plot.png")
 ```
 
-As an alternative analysis we generated parallel models of TCDS rate in the random clips using gaussian mixed-effects regression with logged values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 3](#tab3) and [Table 4](#tab4). The residuals for the default gaussian model ([Table 3](#tab3)) are shown in [Figure 3](#fig3).
+As an alternative analysis we generated parallel models of TCDS rate in the random clips using gaussian mixed-effects regression with log-transformed values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 3](#tab3) and [Table 4](#tab4). The residuals for the default gaussian model ([Table 3](#tab3)) are shown in [Figure 3](#fig3).
 
 \FloatBarrier
 
@@ -145,7 +145,7 @@ apa_table(filter(model.results, model == "TCDS_turntaking_nb.v2") %>% select(-mo
 knitr::include_graphics("www/TCDS_turntaking_nb_res_plot.png")
 ```
 
-As an alternative analysis we generated parallel models of TCDS rate in the turn-taking clips using gaussian mixed-effects regression with logged values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 7](#tab7) and [Table 8](#tab8). The residuals for the default gaussian model ([Table 7](#tab7)) are shown in [Figure 6](#fig6).
+As an alternative analysis we generated parallel models of TCDS rate in the turn-taking clips using gaussian mixed-effects regression with log-transformed values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 7](#tab7) and [Table 8](#tab8). The residuals for the default gaussian model ([Table 7](#tab7)) are shown in [Figure 6](#fig6).
 
 \FloatBarrier
 
@@ -196,7 +196,7 @@ apa_table(filter(model.results, model == "ODS_random_nb.v2") %>% select(-model),
 knitr::include_graphics("www/ODS_random_nb_res_plot.png")
 ```
 
-As an alternative analysis we generated parallel models of ODS rate in the random clips using gaussian mixed-effects regression with logged values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 11](#tab11) and [Table 12](#tab12). The residuals for the default gaussian model ([Table 11](#tab11)) are shown in [Figure 9](#fig9).
+As an alternative analysis we generated parallel models of ODS rate in the random clips using gaussian mixed-effects regression with log-transformed values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 11](#tab11) and [Table 12](#tab12). The residuals for the default gaussian model ([Table 11](#tab11)) are shown in [Figure 9](#fig9).
 
 \FloatBarrier
 
@@ -246,7 +246,7 @@ apa_table(filter(model.results, model == "ODS_turntaking_nb.v2") %>% select(-mod
 knitr::include_graphics("www/ODS_turntaking_nb_res_plot.png")
 ```
 
-As an alternative analysis we generated parallel models of ODS rate in the turn-taking clips using gaussian mixed-effects regression with logged values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 15](#tab15) and [Table 16](#tab16). The residuals for the default gaussian model ([Table 15](#tab15)) are shown in [Figure 12](#fig12).
+As an alternative analysis we generated parallel models of ODS rate in the turn-taking clips using gaussian mixed-effects regression with log-transformed values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 15](#tab15) and [Table 16](#tab16). The residuals for the default gaussian model ([Table 15](#tab15)) are shown in [Figure 12](#fig12).
 
 \FloatBarrier
 
