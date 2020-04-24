@@ -4,7 +4,7 @@
         - look at input in child-centric subsistence-farming society to determine factors affecting input quantity
         - look at peaks to investigate whether this reflects child-centricity
         - check milestones to see whether they are effected by the above
-- Compress close vs. panoramic discussion
+x Compress close vs. panoramic discussion
 - Add methods details asked for by Rev2
 - Consider strength of hypothetical learning mechanisms
 - Add weaknesses wrt quality and vocab measures (though note CDS is a 'quality' measure already)
