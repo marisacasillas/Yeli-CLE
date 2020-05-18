@@ -1,28 +1,32 @@
 # To do (next)
-- Make a new outline for the intro and discussion
+
+- _Make a new outline for the intro and discussion_
     - Rev1's suggested outline of aims:
         - look at input in child-centric subsistence-farming society to determine factors affecting input quantity
         - look at peaks to investigate whether this reflects child-centricity
         - check milestones to see whether they are effected by the above
-x Compress close vs. panoramic discussion
-x Add methods details asked for by Rev2
+- ~Compress close vs. panoramic discussion~
+- ~Add methods details asked for by Rev2~
 - Consider strength of hypothetical learning mechanisms
 - Add weaknesses wrt quality and vocab measures (though note CDS is a 'quality' measure already)
     - Rev1 thinks the findings are unsurprising; maybe add more material on indiv. variation used also in TS paper
 - Strengthen introduction of value of peak measures
 
 ### Editor
+
 - organization and writing
 - add some (?) supplemental materials to the main text
 - shorten supplemental materials; posting on open access website (?)
 
 ### AE
+
 - lacks focus
 - most important result is lost
 - PNG childrearing needs to be presented earlier
 - Make sure linkage between key questions and results are clearer
 
 ### Reviewer 1
+
 - overlong and lacking in focus
 - more on methods, which are currently undersold, despite still having significant flaws for investigating ideological differences
 - more on implications for language learning
@@ -36,6 +40,7 @@ x Add methods details asked for by Rev2
 - too much focus on close vs. panoramic in the discussion and not enough on the results
 
 ### Reviewer 2
+
 - wants more information about clip selection (also I should clarify that HV was assessed wrt CHI vocal activity)
 - wants to know number of utterances coded and interrater reliability (nothing to offer on the latter part directly; Cychosz et al.)
 - finds the discussion of close vs. panoramic interesting but maybe not quite situated well
