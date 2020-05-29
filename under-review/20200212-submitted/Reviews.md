@@ -1,6 +1,6 @@
 # To do (next)
 
-- _Make a new outline for the intro and discussion_
+- ~Make a new outline for the intro and discussion~
     - Rev1's suggested outline of aims:
         - look at input in child-centric subsistence-farming society to determine factors affecting input quantity
         - look at peaks to investigate whether this reflects child-centricity
@@ -10,7 +10,7 @@
 - Consider strength of hypothetical learning mechanisms
 - Add weaknesses wrt quality and vocab measures (though note CDS is a 'quality' measure already)
     - Rev1 thinks the findings are unsurprising; maybe add more material on indiv. variation used also in TS paper
-- Strengthen introduction of value of peak measures
+- ~Strengthen introduction of value of peak measures~
 
 ### Editor
 
