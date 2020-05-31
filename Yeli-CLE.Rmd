@@ -2319,6 +2319,13 @@ Based on prior ethnographic work, we **hypothesized** that **Rossel** children w
 ## **Implications for language learning models**
 <!--to do
 R2 wants the hypothesis about how learning could take place in these circumstances stated more clearly and described wrt other proposed models of language acquisition (mention N. Chater and C. Mortensen)
+
+consider how language acquisition occurs, given such circumstances ... the paper offers the argument that the bursts of high-density input provide the data for learning and the quiet periods offer the opportunity for consolidation (learning and memory sense or also off-line processing of stored, unanalyzed input?)... a serious treatment of this hypothesis needs to make this clear and then also tackle how such a proposal fits with other proposed models of language acquisition. Hypothesis testing v. building networks approaches, and the now-or-never bottleneck argument (multiple papers and a book by N. Chater and C. Mortensen).
+
+these data take most seriously models that account for
+- learning from overhearing
+- mass learning
+
 -->
 
 <!--other to do
