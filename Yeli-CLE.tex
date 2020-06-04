@@ -18,11 +18,12 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
             pdftitle={Early language experience in a Papuan community},
             pdfauthor={Marisa Casillas, Penelope Brown, \& Stephen C. Levinson},
             pdfkeywords={Child-directed speech, linguistic input, non-WEIRD, vocal maturity,
@@ -30,11 +31,7 @@ interaction, Papuan},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{graphicx}
-% grffile has become a legacy package: https://ctan.org/pkg/grffile
-\IfFileExists{grffile.sty}{%
-\usepackage{grffile}
-}{}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -63,16 +60,11 @@ interaction, Papuan},
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
-
-  \title{Early language experience in a Papuan community}
-    \author{Marisa Casillas\textsuperscript{1}, Penelope Brown\textsuperscript{1},
-\& Stephen C. Levinson\textsuperscript{1}}
-    \date{}
-  
 \shorttitle{Language experience on Rossel Island}
 \affiliation{
 \vspace{0.5cm}
@@ -102,6 +94,11 @@ interaction, Papuan},
 
 \linenumbers
 
+\title{Early language experience in a Papuan community}
+\author{Marisa Casillas\textsuperscript{1}, Penelope Brown\textsuperscript{1},
+\& Stephen C. Levinson\textsuperscript{1}}
+\date{}
+
 \authornote{
 
 Correspondence concerning this article should be addressed to Marisa
@@ -109,22 +106,29 @@ Casillas, P.O. Box 310, 6500 AH Nijmegen, The Netherlands. E-mail:
 \href{mailto:Marisa.Casillas@mpi.nl}{\nolinkurl{Marisa.Casillas@mpi.nl}}}
 
 \abstract{
-Daylong recordings capture many patterns within children's typical
-language experience, including how linguistic input rate varies
-depending on child age, time of day, and number of speakers present. We
-used daylong recordings to investigate how much speech is available to
-young children (0;0--3;0) on Rossel Island, Papua New Guinea; a
-community where prior ethnographic study demonstrated face-to-face
-contingency-seeking interactional styles with infants and young
-children. We found that the patterns of children's daylong language
-experience were somewhat different from that seen in prior ethnographic
-work. Children were infrequently directly addressed and their linguistic
-input rates were primarily affected by circumstantial aspects of
-everyday life (e.g., the presence of other speakers). We discuss the
-different insights afforded by these approaches in a comparative
-cross-cultural framework and how the daylong and ethnographic findings
-together shed light on the question of how little direct linguistic
-input can support first language development.
+\textbf{The rate at which children are directly addressed varies due to
+many factors, including both (a) caregiver attitudes about children as
+conversational partners and (b) the organization of everyday life. Prior
+work suggests that cross-cultural differences in the former relates to
+substantial differences in the rate of child-directed speech (Casillas,
+Brown, \& Levinson, 2019; Shneidman \& Goldin-Meadow, 2012). However,
+these comparisons are fraught with confounds, including differences in
+the organization of everyday life between (sub)urban postindustrial and
+subsistence farming communities. We use} daylong recordings to
+investigate how much speech is available to young children (0;0--3;0) on
+Rossel Island, Papua New Guinea; a subsistence farming community where
+prior ethnographic study demonstrated face-to-face contingency-seeking
+interactional styles with infants\textbf{, delivering a crucial
+comparative datapoint in understanding precisely how caregiver language
+ideologies influence child language development.} We found that children
+were infrequently directly addressed, that their linguistic input rates
+were primarily affected by circumstantial aspects of everyday life, and
+that, despite this, their vocalization maturity showed no delay in
+development. \textbf{We evaluate the similarities and differences in
+input characteristics between this community and a Tseltal Mayan one in
+which near-parallel methods have produced comparable results. We then
+briefly discuss the models and mechanisms for language learning that are
+best supported by our findings.}
 
 
 }
@@ -151,87 +155,89 @@ talking about what to whom---vary dramatically within and across
 families, \textbf{and} that children in some communities \textbf{hear}
 very little directed talk \textbf{without any} apparent delays in their
 linguistic development (Brown, 2011, 2014; Brown \& Gaskins, 2014;
-Casillas, Brown, \& Levinson, 2019; Gaskins, 2006; Ochs \& Schieffelin,
-1984).
+Casillas et al., 2019; Gaskins, 2006; Ochs \& Schieffelin, 1984).
 
 \textbf{A key puzzle for developmental language science} is then
 \textbf{uncovering} how the human cognitive toolkit for language
 learning can flexibly adapt to the variable circumstances under which it
 successfully occurs\textbf{, including circumstances in which CDS is
 infrequent, produced in large part by other children, or is primarily
-restricted to a small number of activities (REFS; Shneidman, Ochs,
-Brown, TseltalCasillas, Wittebolle). Resolving this puzzle requires
-researchers to find ways to track the distribution and characteristics
-of linguistic input over multiple interactional contexts, across
-developmental time, between families, and across different cultural
-groups. In what follows we explore two major factors that may impact
-children's linguistic environments: ideological stance toward
-child-directed speech and situational features of everyday life. We
-build a case for testing both sources of variation using clips sampled
-from recordings of whole waking days at home. We then use this approach
-to report on the language environments of children under 3;0 in one
-child-centric subsistence farming society (Yélî, Rossel Island, Papua
-New Guinea), and compare the findings to a parallel set of results from
-another subsistence farming society that is, by contrast, \emph{not}
-child-centric (Tseltal, Tenejapa, Mexico).}
+restricted to a small number of activities (Brown, 2014; Casillas et
+al., 2019; Gaskins, 2006; Ochs \& Schieffelin, 1984; Soderstrom \&
+Wittebolle, 2013). Resolving this puzzle requires researchers to find
+ways to track the distribution and characteristics of linguistic input
+over multiple interactional contexts, across developmental time, between
+families, and across different cultural groups. In what follows we
+explore two major factors that may impact children's linguistic
+environments: ideological stance toward child-directed speech and
+situational features of everyday life. We build a case for testing both
+sources of variation using clips sampled from recordings of whole waking
+days at home. We then use this approach to report on the language
+environments of children under 3;0 in one child-centric subsistence
+farming society (Yélî, Rossel Island, Papua New Guinea), and compare the
+findings to a parallel set of results from another subsistence farming
+society that is, by contrast, \emph{not} child-centric (Tseltal,
+Tenejapa, Mexico).}
 
 \subsection{Ideological and situational variation in
 CDS}\label{ideological-and-situational-variation-in-cds}
 
 \textbf{Caregivers' personal and cultural notions about how children
 should develop as members of the broader language community influence
-the prevalence and style of their child-directed talk (REFS; Rowe,
-2008). For example, extensive ethnographic research among multiple,
-distinct Mayan communities of Southern Mexico and Guatemala has forged a
-consistent view of childrearing and child-directed speech: adult
-caregivers shape infants' and young children's worlds such that children
-learn to attend to what is going on around them rather than expecting to
-be the center of attention (e.g., Brown, 2011, 2014; de León, 2011;
-Gaskins, 2000; Pye, 1986; Rogoff, Paradise, Arauz, Correa-Chávez, \&
-Angelillo, 2003). These ethnographic findings lay out a broader ideology
-of caregiving, including a number of component attitudes (e.g., infants
-as inadequate conversational partners), that lead to the prediction
-that, on average, typically developing Mayan children are only
-infrequently directly addressed during their days at home. Indeed, using
-data from daylong recordings of children under age 3;0, Casillas and
-colleagues (2019) found that the Tseltal Mayan children in their sample
-heard an average of 3.6 minutes per hour of speech directed to
-them---around one third of the current estimate for North American
-English {[}REFS{]}---yet hit established benchmarks for the onset of
-single- and multi-word utterances {[}see also REFS-cychosz{]}. This
+the prevalence and style of their child-directed talk (Gaskins, 2006;
+Ochs \& Schieffelin, 1984; Rowe, 2008). For example, extensive
+ethnographic research among multiple, distinct Mayan communities of
+Southern Mexico and Guatemala has forged a consistent view of
+childrearing and child-directed speech: adult caregivers shape infants'
+and young children's worlds such that children learn to attend to what
+is going on around them rather than expecting to be the center of
+attention (e.g., Brown, 2011, 2014; de León, 2011; Gaskins, 2000; Pye,
+1986; Rogoff, Paradise, Arauz, Correa-Chávez, \& Angelillo, 2003). These
+ethnographic findings lay out a broader ideology of caregiving,
+including a number of component attitudes (e.g., infants as inadequate
+conversational partners), that lead to the prediction that, on average,
+typically developing Mayan children are only infrequently directly
+addressed during their days at home. Indeed, using data from daylong
+recordings of children under age 3;0, Casillas and colleagues (2019)
+found that the Tseltal Mayan children in their sample heard an average
+of 3.6 minutes per hour of speech directed to them---around one third of
+the current estimate for North American English (Bergelson et al.,
+2019b)---yet hit established benchmarks for the onset of single- and
+multi-word utterances (see also Cychosz et al., under review). This
 finding appears to support the idea that attitudes about child-directed
-talk mediate how frequently children are addressed (see also REFS
-Shneidman). However, any direct comparison between these two
-childrearing contexts is critically confounded: the arrangement of
-everyday life is highly different between the subsistence farming, rural
-Tseltal Mayan community and the (sub)urban, middle-class North American
-populations samples to which they are being compared.}
+talk mediate how frequently children are addressed. However, any direct
+comparison between these two childrearing contexts is critically
+confounded: the arrangement of everyday life is highly different between
+the subsistence farming, rural Tseltal Mayan community and the
+(sub)urban, middle-class North American populations samples to which
+they are being compared.}
 
 \textbf{Children's pattern of linguistic input also varies depending on
 the social organization of everyday life, which shapes the circumstances
 for their interactions with others over the course of the day. Prior
-analyses of daylong recordings in both North American {[}REFS Wittebolle
-Greenwood{]} and Tseltal Mayan {[}REFS{]} contexts suggests that
-different activities impact the rate at which children hear
-child-directed speech from hour to hour {[}REFS; see also Bergelson,
-Tamis-LeMonda{]}. The limited evidence to date shows approximately
-similar patterns in input rate fluctuation across the waking day:
-children in both contexts hear their highest rates of linguistic input
-in the morning and afternoon, with a dip around midday {[}REFS
-Wittebolle Greenwood{]}. Intruigingly, the activities associated with
-dense adult talk in the North American context are highly rare in the
-Tseltal sample (e.g., sing-alongs) and the activities associated with
-the least dense periods in the North American data as associated with
-\emph{peak} input periods in the Tseltal sample (e.g., mealtimes;
-Casillas et al. (2019)). In the Tseltal context specifically, the
-afternoon-dip pattern likely arises as a consequence of communal eating
-events with multiple adult and child speakers, separated by a longer,
-relatively quiet midday period of work and/or rest. The fluctuations in
-linguistic input Tseltal children hear over the day thus appear to be
-driven by the presence of multiple adult and child speakers whose home
-presence is regulated by the schedule and workload of farming, food
-preparation, and other domestic activities (e.g., with respect to sun
-position, season, and domestic role; see also REFS).}
+analyses of daylong recordings in both North American (Greenwood,
+Thiemann-Bourque, Walker, Buzhardt, \& Gilkerson, 2011; Soderstrom \&
+Wittebolle, 2013) and Tseltal Mayan (Casillas et al., 2019) contexts
+suggests that different activities impact the rate at which children
+hear child-directed speech from hour to hour ({\textbf{???}};
+Tamis-LeMonda, Custode, Kuchirko, Escobar, \& Lo, 2018). The limited
+evidence to date shows approximately similar patterns in input rate
+fluctuation across the waking day: children in both contexts hear their
+highest rates of linguistic input in the morning and afternoon, with a
+dip around midday (Greenwood et al., 2011; Soderstrom \& Wittebolle,
+2013). Intruigingly, the activities associated with dense adult talk in
+the North American context are highly rare in the Tseltal sample (e.g.,
+sing-alongs) and the activities associated with the least dense periods
+in the North American data as associated with \emph{peak} input periods
+in the Tseltal sample (e.g., mealtimes; Casillas et al. (2019)). In the
+Tseltal context specifically, the afternoon-dip pattern likely arises as
+a consequence of communal eating events with multiple adult and child
+speakers, separated by a longer, relatively quiet midday period of work
+and/or rest. The fluctuations in linguistic input Tseltal children hear
+over the day thus appear to be driven by the presence of multiple adult
+and child speakers whose home presence is regulated by the schedule and
+workload of farming, food preparation, and other domestic activities
+(e.g., with respect to sun position, season, and domestic role).}
 
 \subsection{The current study}\label{the-current-study}
 
@@ -241,22 +247,21 @@ lifestyle is broadly similar to that of the Tseltal Mayans, their
 orientation to verbal interaction with infants is more similar to that
 of middle-class North Americans: Rossel caregivers engage in intensive
 face-to-face verbal interactions with prelinguistic children, as
-described in more detail below {[}REFS Brown 2011;
-brownIPchildrearing{]}. Rossel Island therefore offers a critical new
-datapoint in our understanding of cross-cultural variation in linguistic
-input\footnote{While a comparison between Rossel Island and the Tseltal
-  Mayan community is still confounded by numerous other cultural and
-  linguistic differences, their similarity in economic lifestyle makes
-  for a more valid comparison than either community compared to a
-  post-industrial one.}:} If patterns of \textbf{CDS on Rossel Island}
-are similar to those reported for North American English, \textbf{it
-would support that idea that caregiver ideology drives substantial
-differences in language input across variable contexts}. If, instead,
-\textbf{CDS} patterns are more similar to that of the Tseltal
-\textbf{Mayan} community, \textbf{it would support the idea that
-\emph{lifestyle} drives substantial differences in language input across
-variable contexts}; specifically, subsistence farming
-vs.~post-industrial \textbf{lifestyles}.
+described in more detail below (Brown, 2011; Brown \& Casillas, in
+press). Rossel Island therefore offers a critical new datapoint in our
+understanding of cross-cultural variation in linguistic input\footnote{While
+  a comparison between Rossel Island and the Tseltal Mayan community is
+  still confounded by numerous other cultural and linguistic
+  differences, their similarity in economic lifestyle makes for a more
+  valid comparison than either community compared to a post-industrial
+  one.}:} If patterns of \textbf{CDS on Rossel Island} are similar to
+those reported for North American English, \textbf{it would support that
+idea that caregiver ideology drives substantial differences in language
+input across variable contexts}. If, instead, \textbf{CDS} patterns are
+more similar to that of the Tseltal \textbf{Mayan} community, \textbf{it
+would support the idea that \emph{lifestyle} drives substantial
+differences in language input across variable contexts}; specifically,
+subsistence farming vs.~post-industrial \textbf{lifestyles}.
 
 \textbf{We use manually annotated daylong recordings of Rossel
 children's language environments to track how much speech they hear from
@@ -281,8 +286,8 @@ clips in which children are hearably interacting with others, we aim to
 partly---albeit imperfectly---sample from home interactional contexts in
 which we know the target child is alert and socially engaged, similar to
 contexts in which cross-cultural differences in CDS have been shown in
-the past with these same communities {[}e.g., REFS Brown 2011;
-brownIPchildrearing{]}.}
+the past with these same communities (e.g., Brown, 2011; Brown \&
+Casillas, in press).}
 
 \textbf{On the basis of past comparative work, we predicted that
 children on Rossel Island would} hear frequent CDS from a wide variety
@@ -298,13 +303,13 @@ be abundant. We also predicted that any ideologically-based differences
 between the Tseltal and Rossel Island data would be most apparent during
 the clips targeting interactant responsiveness, which better approximate
 the interactional contexts in which past differences between these
-communities have been found {[}e.g., REFS Brown 2011;
-brownIPchildrearing{]}. Consonant with prior daylong child language data
-across multiple cultural contexts, we also expected little-to-no
-increase in CDS rate with age, a decrease in ODS rate with age, and that
-CDS occurs in non-uniform bursts throughout the day (Abney, Smith, \&
-Yu, 2017; Bergelson et al., 2019b; Casillas et al., 2019; Scaff,
-Stieglitz, Casillas, \& Cristia, in preparation).}
+communities have been found (e.g., Brown, 2011, 2014; Brown \& Casillas,
+in press). Consonant with prior daylong child language data across
+multiple cultural contexts, we also expected little-to-no increase in
+CDS rate with age, a decrease in ODS rate with age, and that CDS occurs
+in non-uniform bursts throughout the day (Abney, Smith, \& Yu, 2017;
+Bergelson et al., 2019b; Casillas et al., 2019; Scaff, Stieglitz,
+Casillas, \& Cristia, in preparation).}
 
 In what follows we review the ethnographic work done in this community
 previously, describe our methods for following up on that work with
@@ -850,14 +855,14 @@ expectations based on populations of children who hear more CDS
 (\protect\hyperlink{fig4}{Figure 4}). Canonical babble appears in the
 second half of the first year, first words appear around the first
 birthday, and multi-word utterances appear a few months after that
-(Frank et al., in preparation; Kuhl, 2004; Pine \& Lieven, 1993; Slobin,
-1970; Tomasello \& Brooks, 1999; Warlaumont, Richards, Gilkerson, \&
-Oller, 2014). Rossel children also far exceeded the canonical babbling
-ratio (CBR) associated with major developmental delay (proportional use
-of speech-like vocalizations \textgreater{} 0.15 by 0;10; Cychosz et
-al., under review; Oller, Eilers, Basinger, Steffens, \& Urbano, 1995);
-the minimum CBR among Rossel children 0;9 and older was 0.22 (mean =
-0.63; median = 0.68; range = 0.22--0.86).
+(Frank et al., in preparation; P. K. Kuhl, 2004; Pine \& Lieven, 1993;
+Slobin, 1970; Tomasello \& Brooks, 1999; Warlaumont, Richards,
+Gilkerson, \& Oller, 2014). Rossel children also far exceeded the
+canonical babbling ratio (CBR) associated with major developmental delay
+(proportional use of speech-like vocalizations \textgreater{} 0.15 by
+0;10; Cychosz et al., under review; Oller, Eilers, Basinger, Steffens,
+\& Urbano, 1995); the minimum CBR among Rossel children 0;9 and older
+was 0.22 (mean = 0.63; median = 0.68; range = 0.22--0.86).
 
 Over all annotated clips, children produced an average of 7.18
 linguistic vocalizations per minute (median = 7.79; range = 4.57--8.95),
@@ -888,17 +893,17 @@ child-centric subsistence farming context, we aimed to provide a new and
 critical comparative datapoint to a research area that has previously
 confounded differences in child-directed speech ideology with
 differences in broad lifestyle features (post-industrial/nuclear
-vs.~subsistence-farming/multi-generational; REFS casillas2019,
-shneidman). Our idea was that, if Rossel children's language
-environments pattern like North American ones, it would support that
-idea that caregiver ideology drives substantial differences in language
-input, whereas if they patterned like Tseltal environments, it would
-instead support the idea that lifestyle drives substantial differences.
-Overall, our findings point toward broad effects of lifestyle on the
-quantity of directed and overheard speech children hear. Evidence for
-the influence of CDS ideologies only begins to emerge when we look at
-patterns in \emph{who} speaks to the target child, not at overall rates
-of linguistic input.}
+vs.~subsistence-farming/multi-generational; Casillas et al. (2019),
+Shneidman \& Goldin-Meadow (2012)). Our idea was that, if Rossel
+children's language environments pattern like North American ones, it
+would support that idea that caregiver ideology drives substantial
+differences in language input, whereas if they patterned like Tseltal
+environments, it would instead support the idea that lifestyle drives
+substantial differences. Overall, our findings point toward broad
+effects of lifestyle on the quantity of directed and overheard speech
+children hear. Evidence for the influence of CDS ideologies only begins
+to emerge when we look at patterns in \emph{who} speaks to the target
+child, not at overall rates of linguistic input.}
 
 \subsection{\texorpdfstring{\textbf{Input rate similarities across
 subsistence farming
@@ -916,25 +921,26 @@ relatively low rate of TCDS was not associated with any delay in the
 appearance of vocal maturity milestones, including the use of single and
 multi-word utterances. Since we know from prior, in-depth ethnographic
 work that caregivers' ideas about talking to young children do, in fact,
-differ enormously in these two communities (REFS Brown \& Casillas, in
-press, p. 2011), we attribute the similarity in baseline rates of TCDS
-to the fact that all these children are growing up in
+differ enormously in these two communities (Brown, 2011, 2014; Brown \&
+Casillas, in press), we attribute the similarity in baseline rates of
+TCDS to the fact that all these children are growing up in
 multi-generational, subsistence farming households. This inference is
 bolstered by the fact that fluctuations in TCDS rate over the day in the
 Rossel Island data are highly similar to those reported for
 Tseltal---peak rates in the morning, with older children eliciting more
-TCDS during midday hours than younger children {[}REFS casillas2019{]},
+TCDS during midday hours than younger children (Casillas et al., 2019),
 and with ODS rate following a similar contour. While a basic
 afternoon-dip pattern has been shown in at least one set of North
-American home recordings {[}Wittebolle Greenwood REFS{]}, the activities
-and total number of speakers present during periods of peak linguistic
-input periods are likely to be different across these economic contexts;
-an important avenue for future research. In line with prior work linking
-high caregiver workload to less CDS, our prediction is that the Tseltal
-and Rossel Island fluctuations derive from (broadly) similar tasks
-associated with their subsistence farming lifesyles (see also REFS
-Kaluli, Samoan, Gusii, and Yucatec; Schieffelin 1990, Ochs 1988, Le Vine
-et al., 1994; see Gaskins REFS for a review).}
+American home recordings (Greenwood et al., 2011; Soderstrom \&
+Wittebolle, 2013), the activities and total number of speakers present
+during periods of peak linguistic input periods are likely to be
+different across these economic contexts; an important avenue for future
+research. In line with prior work linking high caregiver workload to
+less CDS, our prediction is that the Tseltal and Rossel Island
+fluctuations derive from (broadly) similar tasks associated with their
+subsistence farming lifesyles (see also Kaluli, Samoan, Gusii, and
+Yucatec; R. A. LeVine et al. (1996); Ochs (1988); Schieffelin (1990);
+see Gaskins (2006) for a review).}
 
 \textbf{We had hypothesized that cultural differences in quantity of
 caregiver talk to children would be most visible in the turn-taking
@@ -959,7 +965,7 @@ Casillas, in press). In line with these observations, we find that
 Rossel children hear more CDS from other children than Tseltal children
 do (Rossel: 27\% of TCDS vs.~Tseltal 20\%), and that the proportion of
 TCDS from other children increases with age, a pattern not found for
-Tseltal children in this age range {[}REFS casillas2019{]}.
+Tseltal children in this age range (Casillas et al., 2019).
 Additionally, TCDS from men was far more frequent in the Rossel Island
 data, making up nearly 20\% of adult TCDS in the random baseline and
 nearly 40\% of adult TCDS in the turn-taking clips.\footnote{For
@@ -976,8 +982,8 @@ the target child, and not with respec to how often the child is being
 talked to.}
 
 \textbf{The} increase in TCDS from other children recalls findings from
-Shneidman and Goldin-Meadow (Shneidman and Goldin-Meadow (2012); see
-also (Brown, 2011; Brown \& Casillas, in press)) in which Yucatec Mayan
+Shneidman and Goldin-Meadow (Shneidman \& Goldin-Meadow (2012); see also
+(Brown, 2011; Brown \& Casillas, in press)) in which Yucatec Mayan
 children's directed speech rate increased enormously between ages one
 and three\textbf{---much more than the increase observed in these Rossel
 children's recordings---}primarily due to increased input from other
@@ -1036,9 +1042,6 @@ turn-taking clips across the day revealed substantial fluctuations in
 TCDS rate (Abney et al., 2017; Bergelson et al., 2019b; Casillas et al.,
 2019; Scaff et al., in preparation).}
 
-\subsection{\texorpdfstring{\textbf{Daylong data and depth of
-analysis}}{Daylong data and depth of analysis}}\label{daylong-data-and-depth-of-analysis}
-
 \textbf{One implication of our findings is that TCDS rate estimates from
 daylong data do not appear to be} effective at distinguishing distinct
 caregiver attitudes toward talking to young children. While Rossel
@@ -1067,6 +1070,97 @@ also the sources and content, of the speech children are exposed to,
 perhaps using strategic subsampling similar to what was implemented in
 the present study.}
 
+\subsection{\texorpdfstring{\textbf{Implications for theories of
+language
+learning}}{Implications for theories of language learning}}\label{implications-for-theories-of-language-learning}
+
+\textbf{Despite hearing relatively little directed linguistic input,
+these 10 Rossel children show no sign of delay in their achievement of
+early linguistic milestones, including the use of single and multi-word
+utterances. This finding is hard to explain under any theory of language
+learning that requires substantial linguistic input (see also Casillas
+et al., 2019). While prior evidence predicts a highly robust onset of
+canonical babble ({\textbf{???}}; but see also Lee, Jhang, Relyea, Chen,
+\& Oller, 2018; Oller et al., 1995; e.g., Oller, Eilers, Neal, \&
+Cobo-Lewis, 1998), the stable use of individual phonological segments in
+speech-like babble and the subsequent appearance of recognizable words
+is indeed variable between children (see also McCune \& Vihman, 2001;
+McGillion et al., 2017) and, further on, children's early productive
+vocabulary size predicts their later syntactic development, including
+early word combinations (Frank et al., in preparation; Marchman et al.,
+2004). In sum, while a stable onset for canonical babble is expected
+cross-linguistically, there is no such expectation for the onset of
+lexical and multi-word utterances.}
+
+\textbf{Following a similar set of findings regarding both the language
+environment and vocal maturity of Tseltal-learning children, Casillas
+and colleagues (2019) suggested three ways in which children might
+proceed in language learning without delay despite hearing relatively
+little directed speech: (a) an ability to learn from observing others'
+language use (see also de León, 2011; Rogoff et al., 2003; Shneidman,
+2010; Shneidman \& Goldin-Meadow, 2012), (b) capitalizing on
+regularities in language used during day-to-day routines, and (c)
+benefiting from a natural cycle in which children frequently sleep
+following short bursts of interactional linguistic input. In this third
+case, the idea is that short-term memories of directed input are
+consolidated before significant interference takes place (Gómez,
+Bootzin, \& Nadel, 2006; Horváth, Liu, \& Plunkett, 2016; Kurdziel,
+Duclos, \& Spencer, 2013; Mullally \& Maguire, 2014). These three
+proposals, which are not mutually exclusive, may also apply in the case
+of Rossel children, considering that the overall characteristics of the
+environment are quite similar.}
+
+\textbf{Mechanisms for language learning that efficiently capitalize on
+sparse bursts of CDS and/or overhearable speech (e.g., massed learning,
+as in Schwab \& Lew-Williams (2016); or attention to others' talk, as in
+Akhtar (2005); Shneidman, Arroyo, Levine, \& Goldin-Meadow (2012)) are
+supported by the current findings. Further, theoretical models of
+language learning that: (a) make the most of each linguistic
+\enquote{datapoint} in the input and (b) enable rapid uptake of streams
+of talk (e.g., when observing speech between others) may be key to
+explaining language development in this context. For example,
+prediction-based models allow the learner to compare the predicted
+vs.~observed properties of each utterance as it unfolds, with
+recalibration when errors are detected (Chang, Dell, \& Bock, 2006;
+Christiansen \& Chater, 2016; Elman, 1990, 1993; McCauley \&
+Christiansen, 2017). Such models hypothetically make the most of each
+utterance by rapidly updating knowledge on the basis of both the
+occurrence and non-occurrence of expected events {[}see Rabagliati et
+al. for a balanced overview{]}. In contrast, models of learning that
+rely on pedagogical cueing or frequent and fitted responses to infant
+vocalizations by an adult caregiver are not easily reconciled with the
+results presented here, nor indeed those reported for several other
+rural, traditional communities (Brown, 2014; Cristia, Dupoux, Gurven, \&
+Stieglitz, 2017; Gaskins, 2006; Ochs \& Schieffelin, 1984; Scaff et al.,
+in preparation; Shneidman \& Goldin-Meadow, 2012; Vogt, Mastin, \&
+Schots, 2015).}
+
+\subsection{\texorpdfstring{\textbf{Limitations}}{Limitations}}\label{limitations}
+
+\textbf{Prior work establishing input-related variation in language
+development has often focused on the relationship between child
+vocabulary and input \enquote{quality} (e.g., Cartmill et al., 2013;
+Hirsh-Pasek et al., 2015; Ramírez, Lytle, \& Kuhl, 2020;
+Ramírez-Esparza, García-Sierra, \& Kuhl, 2014; Rowe, 2012), neither of
+which we measure here. Vocabulary development on Rossel Island may
+indeed be responsive to the type and quantity of CDS children
+encounter---for example, referentially transparent utterances would
+theoretically still facilitate the acquisition of word meanings. That
+said, our impression is that such variation does not play a meaningful
+role in Rossel children's development as a full-fledged members of the
+language community. So, future work along those lines would likely be
+limited to interpreting such effects with respect to the mechanisms
+underlying lexical category formation, and not as prerequisites for
+normative language development. With respect to input \enquote{quality}
+we are similarly unable to assume that the features of language
+experience considered to be \enquote{quality} in a US middle-class
+context also happen to promote the suite of language behaviors
+particular to Yélî Dnye speakers. Instead, we here use
+target-child-directed speech as a proxy for the quantity of
+\enquote{tailored} input children hear; that is, the quantity of input
+known to be tailored for the child's attention and ability at the moment
+the speech was uttered.}
+
 \subsection{Conclusion}\label{disc-conclusion}
 
 We estimate that, on average, children on Rossel Island under age 3;0
@@ -1079,8 +1173,8 @@ speech and less overhearable speech than younger children. Bursts of
 speech featuring mostly TCDS appear to be present from infancy onward.
 Despite this relatively low rate of directed speech, these children's
 vocal maturity appears on-track with norms for typically developing
-children in many other populations (Cychosz et al., under review; Lee,
-Jhang, Relyea, Chen, \& Oller, 2018; Warlaumont et al., 2014).
+children in many other populations (Cychosz et al., under review; Lee et
+al., 2018; Warlaumont et al., 2014).
 
 Our findings diverged in several ways from expectations developed on the
 basis of prior ethnographic work in this community, including the
@@ -1124,6 +1218,10 @@ relevant time scales for joint attention. In G. Gunzelmann, A. Howes, T.
 Tenbrink, \& E. Davelaar (Eds.), \emph{Proceedings of the 39th Annual
 Meeting of the Cognitive Science Society} (pp. 1489--1494). London, UK.
 
+\hypertarget{ref-akhtar2005robustness}{}
+Akhtar, N. (2005). The robustness of learning through overhearing.
+\emph{Developmental Science}, \emph{8}(2), 199--209.
+
 \hypertarget{ref-bates1997inseparability}{}
 Bates, E., \& Goodman, J. C. (1997). On the inseparability of grammar
 and the lexicon: Evidence from acquisition, aphasia, and real-time
@@ -1164,7 +1262,7 @@ doi:\href{https://doi.org/10.1101/132753}{10.1101/132753}
 
 \hypertarget{ref-brown2011cultural}{}
 Brown, P. (2011). The cultural organization of attention. In A. Duranti,
-E. Ochs, \& and B. B. Schieffelin (Eds.), \emph{Handbook of Language
+E. Ochs, \& and Bambi B Schieffelin (Eds.), \emph{Handbook of Language
 Socialization} (pp. 29--55). Malden, MA: Wiley-Blackwell.
 
 \hypertarget{ref-brown2014interactional}{}
@@ -1186,6 +1284,13 @@ socialization. In N. J. Enfield, P. Kockelman, \& J. Sidnell (Eds.),
 UK: Cambridge University Press.
 doi:\href{https://doi.org/10.1017/CBO9781139342872.010}{10.1017/CBO9781139342872.010}
 
+\hypertarget{ref-cartmill2013quality}{}
+Cartmill, E. A., Armstrong, B. F., Gleitman, L. R., Goldin-Meadow, S.,
+Medina, T. N., \& Trueswell, J. C. (2013). Quality of early parent input
+predicts child vocabulary 3 years later. \emph{Proceedings of the
+National Academy of Sciences}, \emph{110}(28), 11278--11283.
+doi:\href{https://doi.org/10.1073/pnas.1309518110}{10.1073/pnas.1309518110}
+
 \hypertarget{ref-casillas2019stepbystep}{}
 Casillas, M., \& Cristia, A. (2019). A step-by-step guide to collecting
 and analyzing long-format speech environment (lfse) recordings.
@@ -1203,6 +1308,21 @@ Alam, F., \ldots{} Garrison, H. (2017). Introduction: The ACLEW DAS
 template {[}training materials{]}. Retrieved from
 \url{https://osf.io/aknjv/}
 
+\hypertarget{ref-chang2006becoming}{}
+Chang, F., Dell, G. S., \& Bock, K. (2006). Becoming syntactic.
+\emph{Psychological Review}, \emph{113}(2), 234.
+
+\hypertarget{ref-christiansen2016now}{}
+Christiansen, M. H., \& Chater, N. (2016). The now-or-never bottleneck:
+A fundamental constraint on language. \emph{Behavioral and Brain
+Sciences}, \emph{39}.
+
+\hypertarget{ref-cristia2017child}{}
+Cristia, A., Dupoux, E., Gurven, M., \& Stieglitz, J. (2017).
+Child-directed speech is infrequent in a forager-farmer population: A
+time allocation study. \emph{Child Development}, \emph{Early View},
+1--15. doi:\href{https://doi.org/10.1111/cdev.12974}{10.1111/cdev.12974}
+
 \hypertarget{ref-cychoszURcanonical}{}
 Cychosz, M., Cristia, A., Bergelson, E., Casillas, M., Baudet, G.,
 Warlaumont, A. S., \ldots{} Seidl, A. (under review). Canonical babble
@@ -1211,10 +1331,18 @@ development in a large-scale crosslinguistic corpus. Retrieved from
 
 \hypertarget{ref-deleon2011language}{}
 de León, L. (2011). Language socialization and multiparty participation
-frameworks. In A. Duranti, E. Ochs, \& and B. B. Schieffelin (Eds.),
+frameworks. In A. Duranti, E. Ochs, \& and Bambi B Schieffelin (Eds.),
 \emph{Handbook of Language Socialization} (pp. 81--111). Malden, MA:
 Wiley-Blackwell.
 doi:\href{https://doi.org/10.1002/9781444342901.ch4}{10.1002/9781444342901.ch4}
+
+\hypertarget{ref-elman1990finding}{}
+Elman, J. L. (1990). Finding structure in time. \emph{Cognitive
+Science}, \emph{14}(2), 179--211.
+
+\hypertarget{ref-elman1993learning}{}
+Elman, J. L. (1993). Learning and development in neural networks: The
+importance of starting small. \emph{Cognition}, \emph{48}(1), 71--99.
 
 \hypertarget{ref-frankIPvariability}{}
 Frank, M. C., Braginsky, M., Marchman, V. A., \& Yurovsky, D. (in
@@ -1234,16 +1362,42 @@ interaction. In N. J. Enfield \& S. Levinson (Eds.), \emph{Roots of
 Human Sociality: Culture, Cognition and Interaction} (pp. 279--298).
 Oxford: Berg.
 
+\hypertarget{ref-gomez2006naps}{}
+Gómez, R. L., Bootzin, R. R., \& Nadel, L. (2006). Naps promote
+abstraction in language-learning infants. \emph{Psychological Science},
+\emph{17}(8), 670--674.
+doi:\href{https://doi.org/10.1111/j.1467-9280.2006.01764.x}{10.1111/j.1467-9280.2006.01764.x}
+
+\hypertarget{ref-greenwood2011assessing}{}
+Greenwood, C. R., Thiemann-Bourque, K., Walker, D., Buzhardt, J., \&
+Gilkerson, J. (2011). Assessing children's home language environments
+using automatic speech recognition technology. \emph{Communication
+Disorders Quarterly}, \emph{32}(2), 83--92.
+doi:\href{https://doi.org/10.1177/1525740110367826}{10.1177/1525740110367826}
+
 \hypertarget{ref-hart1995meaningful}{}
 Hart, B., \& Risley, T. R. (1995). \emph{Meaningful Differences in the
 Everyday Experience of Young American Children}. Paul H. Brookes
 Publishing.
+
+\hypertarget{ref-hirshpasek2015contribution}{}
+Hirsh-Pasek, K., Adamson, L. B., Bakeman, R., Owen, M. T., Golinkoff, R.
+M., Pace, A., \ldots{} Suma, K. (2015). The contribution of early
+communication quality to low-income children's language success.
+\emph{Psychological Science}, \emph{26}(7), 1071--1083.
+doi:\href{https://doi.org/10.1177/0956797615581493}{10.1177/0956797615581493}
 
 \hypertarget{ref-hoff2003specificity}{}
 Hoff, E. (2003). The specificity of environmental influence:
 Socioeconomic status affects early vocabulary development via maternal
 speech. \emph{Child Development}, \emph{74}(5), 1368--1378.
 doi:\href{https://doi.org/10.3389/fpsyg.2015.01492}{10.3389/fpsyg.2015.01492}
+
+\hypertarget{ref-horvath2016daytime}{}
+Horváth, K., Liu, S., \& Plunkett, K. (2016). A daytime nap facilitates
+generalization of word meanings in young toddlers. \emph{Sleep},
+\emph{39}(1), 203--207.
+doi:\href{https://doi.org/10.5665/sleep.5348}{10.5665/sleep.5348}
 
 \hypertarget{ref-huttenlocher2010sources}{}
 Huttenlocher, J., Waterfall, H., Vasilyeva, M., Vevea, J., \& Hedges, L.
@@ -1256,11 +1410,21 @@ Kuhl, P. K. (2004). Early language acquisition: Cracking the speech
 code. \emph{Nature Reviews Neuroscience}, \emph{5}(11), 831.
 doi:\href{https://doi.org/10.1038/nrn1533}{10.1038/nrn1533}
 
+\hypertarget{ref-kurdziel2013sleep}{}
+Kurdziel, L., Duclos, K., \& Spencer, R. M. (2013). Sleep spindles in
+midday naps enhance learning in preschool children. \emph{Proceedings of
+the National Academy of Sciences}, \emph{110}(43), 17267--17272.
+
 \hypertarget{ref-lee2018babbling}{}
 Lee, C.-C., Jhang, Y., Relyea, G., Chen, L.-m., \& Oller, D. K. (2018).
 Babbling development as seen in canonical babbling ratios: A
 naturalistic evaluation of all-day recordings. \emph{Infant Behavior and
 Development}, \emph{50}, 140--153.
+
+\hypertarget{ref-levine1996child}{}
+LeVine, R. A., Dixon, S., LeVine, S., Richman, A., Leiderman, P. H.,
+Keefer, C. H., \& Brazelton, T. B. (1996). \emph{Child care and culture:
+Lessons from Africa}. Cambridge University Press.
 
 \hypertarget{ref-lieven1997lexically}{}
 Lieven, E. V. M., Pine, J. M., \& Baldwin, G. (1997). Lexically-based
@@ -1275,8 +1439,33 @@ bilingual language learners. \emph{Developmental Science}, \emph{7}(2),
 212--224.
 doi:\href{https://doi.org/10.1111/j.1467-7687.2004.00340.x}{10.1111/j.1467-7687.2004.00340.x}
 
+\hypertarget{ref-mccauley2017computational}{}
+McCauley, S. M., \& Christiansen, M. H. (2017). Computational
+investigations of multiword chunks in language learning. \emph{Topics in
+Cognitive Science}, \emph{9}(3), 637--652.
+
+\hypertarget{ref-mccune2001early}{}
+McCune, L., \& Vihman, M. M. (2001). Early phonetic and lexical
+development. \emph{Journal of Speech, Language, and Hearing Research}.
+
+\hypertarget{ref-mcgillion2017paves}{}
+McGillion, M., Herbert, J. S., Pine, J., Vihman, M., DePaolis, R.,
+Keren-Portnoy, T., \& Matthews, D. (2017). What paves the way to
+conventional language? The predictive value of babble, pointing, and
+socioeconomic status. \emph{Child Development}, \emph{88}(1), 156--166.
+
+\hypertarget{ref-mullally2014learning}{}
+Mullally, S. L., \& Maguire, E. A. (2014). Learning to remember: The
+early ontogeny of episodic memory. \emph{Developmental Cognitive
+Neuroscience}, \emph{9}, 12--29.
+
+\hypertarget{ref-ochs1988culture}{}
+Ochs, E. (1988). \emph{Culture and language development: Language
+acquisition and language socialization in a Samoan village}. Cambridge
+University Press.
+
 \hypertarget{ref-ochs1984language}{}
-Ochs, E., \& Schieffelin, B. (1984). Language acquisition and
+Ochs, E., \& Schieffelin, B. B. (1984). Language acquisition and
 socialization: Three developmental stories and their implications. In R.
 A. Schweder \& R. A. LeVine (Eds.), \emph{Culture theory: Essays on
 mind, self, and emotion} (pp. 276--322). Cambridge University Press.
@@ -1285,6 +1474,12 @@ mind, self, and emotion} (pp. 276--322). Cambridge University Press.
 Oller, D. K., Eilers, R. E., Basinger, D., Steffens, M. L., \& Urbano,
 R. (1995). Extreme poverty and the development of precursors to the
 speech capacity. \emph{First Language}, \emph{15}(44), 167--187.
+
+\hypertarget{ref-oller1998late}{}
+Oller, D. K., Eilers, R. E., Neal, A. R., \& Cobo-Lewis, A. B. (1998).
+Late onset canonical babbling: A possible early marker of abnormal
+development. \emph{American Journal on Mental Retardation},
+\emph{103}(3), 249--263.
 
 \hypertarget{ref-pine1993reanalysing}{}
 Pine, J. M., \& Lieven, E. V. M. (1993). Reanalysing rote-learned
@@ -1302,6 +1497,19 @@ R Core Team. (2019). \emph{R: A language and environment for statistical
 computing}. Vienna, Austria: R Foundation for Statistical Computing.
 Retrieved from \url{https://www.R-project.org/}
 
+\hypertarget{ref-ramirez2020parent}{}
+Ramírez, N. F., Lytle, S. R., \& Kuhl, P. K. (2020). Parent coaching
+increases conversational turns and advances infant language development.
+\emph{Proceedings of the National Academy of Sciences}, \emph{117}(7),
+3484--3491.
+
+\hypertarget{ref-ramirezesparza2014look}{}
+Ramírez-Esparza, N., García-Sierra, A., \& Kuhl, P. K. (2014). Look
+who's talking: Speech style and social context in language input to
+infants are linked to concurrent and future speech development.
+\emph{Developmental Science}, \emph{17}, 880--891.
+doi:\href{https://doi.org/10.1111/desc.12172}{10.1111/desc.12172}
+
 \hypertarget{ref-rogoff2003firsthand}{}
 Rogoff, B., Paradise, R., Arauz, R. M., Correa-Chávez, M., \& Angelillo,
 C. (2003). Firsthand learning through intent participation. \emph{Annual
@@ -1314,16 +1522,40 @@ status, knowledge of child development and child vocabulary skill.
 \emph{Journal of Child Language}, \emph{35}(1), 185--205.
 doi:\href{https://doi.org/10.1017/S0305000907008343}{10.1017/S0305000907008343}
 
+\hypertarget{ref-rowe2012longitudinal}{}
+Rowe, M. L. (2012). A longitudinal investigation of the role of quantity
+and quality of child-directed speech in vocabulary development.
+\emph{Child Development}, \emph{83}(5), 1762--1774.
+
 \hypertarget{ref-scaffIPlanguage}{}
 Scaff, C., Stieglitz, J., Casillas, M., \& Cristia, A. (in preparation).
 Language input in a hunter-forager population: Estimations from daylong
 recordings.
+
+\hypertarget{ref-schieffelin1990give}{}
+Schieffelin, B. B. (1990). \emph{The give and take of everyday life:
+Language, socialization of Kaluli children}. Cambridge University Press.
+
+\hypertarget{ref-schwab2016repetition}{}
+Schwab, J. F., \& Lew-Williams, C. (2016). Repetition across successive
+sentences facilitates young children's word learning.
+\emph{Developmental Psychology}, \emph{52}(6), 879--886.
+doi:\href{https://doi.org/10.1037/dev0000125}{10.1037/dev0000125}
+
+\hypertarget{ref-shneidman2010language}{}
+Shneidman, L. A. (2010). \emph{Language Input and Acquisition in a Mayan
+Village} (PhD thesis). The University of Chicago.
 
 \hypertarget{ref-shneidman2012language}{}
 Shneidman, L. A., \& Goldin-Meadow, S. (2012). Language input and
 acquisition in a Mayan village: How important is directed speech?
 \emph{Developmental Science}, \emph{15}(5), 659--673.
 doi:\href{https://doi.org/10.1111/j.1467-7687.2012.01168.x}{10.1111/j.1467-7687.2012.01168.x}
+
+\hypertarget{ref-shneidman2012counts}{}
+Shneidman, L. A., Arroyo, M. E., Levine, S. C., \& Goldin-Meadow, S.
+(2012). What counts as effective input for word learning? \emph{Journal
+of Child Language}, \emph{40}(3), 672--686.
 
 \hypertarget{ref-slobin1970universals}{}
 Slobin, D. I. (1970). Universals of grammatical development in children.
@@ -1337,10 +1569,433 @@ categorical and continuous limited dependent variables}. New York:
 Chapman; Hall/CRC.
 doi:\href{https://doi.org/10.1201/b15694}{10.1201/b15694}
 
+\hypertarget{ref-soderstrom2013when}{}
+Soderstrom, M., \& Wittebolle, K. (2013). When do caregivers talk? The
+influences of activity and time of day on caregiver speech and child
+vocalizations in two childcare environments. \emph{PloS One}, \emph{8},
+e80646.
+doi:\href{https://doi.org/10.1371/journal.pone.0080646}{10.1371/journal.pone.0080646}
+
+\hypertarget{ref-tamislemonda2018routine}{}
+Tamis-LeMonda, C. S., Custode, S., Kuchirko, Y., Escobar, K., \& Lo, T.
+(2018). Routine language: Speech directed to infants during home
+activities. \emph{Child Development}, \emph{Early View}, 1--18.
+
 \hypertarget{ref-tomasello1999early}{}
 Tomasello, M., \& Brooks, P. J. (1999). Early syntactic development: A
 Construction Grammar approach. In M. Barrett (Ed.), \emph{The
 Development of Language} (pp. 161--190). New York: Psychology Press.
+
+\hypertarget{ref-vogt2015communicative}{}
+Vogt, P., Mastin, J. D., \& Schots, D. M. A. (2015). Communicative
+intentions of child-directed speech in three different learning
+environments: Observations from the Netherlands, and rural and urban
+Mozambique. \emph{First Language}, \emph{35}(4--5), 341--358.
+doi:\href{https://doi.org/10.1177/0142723715596647}{10.1177/0142723715596647}
+
+\hypertarget{ref-warlaumont2014social}{}
+Warlaumont, A. S., Richards, J. A., Gilkerson, J., \& Oller, D. K.
+(2014). A social feedback loop for speech development and its reduction
+in Autism. \emph{Psychological Science}, \emph{25}(7), 1314--1324.
+doi:\href{https://doi.org/10.1177/0956797614531023}{10.1177/0956797614531023}
+
+\hypertarget{ref-weisleder2013talking}{}
+Weisleder, A., \& Fernald, A. (2013). Talking to children matters: Early
+language experience strengthens processing and builds vocabulary.
+\emph{Psychological Science}, \emph{24}(11), 2143--2152.
+doi:\href{https://doi.org/10.1177/0956797613488145}{10.1177/0956797613488145}
+
+\hypertarget{ref-R-ggplot2}{}
+Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}.
+Springer-Verlag New York. Retrieved from
+\url{https://ggplot2.tidyverse.org}
+
+\hypertarget{ref-ELAN}{}
+Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., \& Sloetjes, H.
+(2006). ELAN: A professional framework for multimodality research. In
+\emph{Proceedings of the Fifth International Conference on Language
+Resources and Evaluation} (pp. 1556--1559).
+
+\hypertarget{ref-abney2017time}{}
+Abney, D. H., Smith, L. B., \& Yu, C. (2017). It's time: Quantifying the
+relevant time scales for joint attention. In G. Gunzelmann, A. Howes, T.
+Tenbrink, \& E. Davelaar (Eds.), \emph{Proceedings of the 39th Annual
+Meeting of the Cognitive Science Society} (pp. 1489--1494). London, UK.
+
+\hypertarget{ref-akhtar2005robustness}{}
+Akhtar, N. (2005). The robustness of learning through overhearing.
+\emph{Developmental Science}, \emph{8}(2), 199--209.
+
+\hypertarget{ref-bates1997inseparability}{}
+Bates, E., \& Goodman, J. C. (1997). On the inseparability of grammar
+and the lexicon: Evidence from acquisition, aphasia, and real-time
+processing. \emph{Language and Cognitive Processes}, \emph{12}(5--6),
+507--584.
+doi:\href{https://doi.org/10.1080/016909697386628}{10.1080/016909697386628}
+
+\hypertarget{ref-bergelsonIPbsl}{}
+Bergelson, E., Alphen, P. van, Benneti, L., Bunce, J., Casillas, M.,
+Guez, A., \ldots{} Cristia, A. (in preparation). Child language
+environments in \textgreater{}2500 daylong recordings across 5
+continents.
+
+\hypertarget{ref-bergelson2019day}{}
+Bergelson, E., Amatuni, A., Dailey, S., Koorathota, S., \& Tor, S.
+(2019a). Day by day, hour by hour: Naturalistic language input to
+infants. \emph{Developmental Science}, \emph{22}(1), e12715.
+doi:\href{https://doi.org/10.1111/desc.12715}{10.1111/desc.12715}
+
+\hypertarget{ref-bergelsoncasillas2019what}{}
+Bergelson, E., Casillas, M., Soderstrom, M., Seidl, A., Warlaumont, A.
+S., \& Amatuni, A. (2019b). What do North American babies hear? A
+large-scale cross-corpus analysis. \emph{Developmental Science},
+\emph{22}(1), e12724.
+doi:\href{https://doi.org/10.1111/desc.12724}{10.1111/desc.12724}
+
+\hypertarget{ref-brinchmann2019direct}{}
+Brinchmann, E. I., Braeken, J., \& Lyster, S.-A. H. (2019). Is there a
+direct relation between the development of vocabulary and grammar?
+\emph{Developmental Science}, \emph{22}(1), e12709.
+doi:\href{https://doi.org/10.1111/desc.12709}{10.1111/desc.12709}
+
+\hypertarget{ref-brooks2017modeling}{}
+Brooks, M. E., Kristensen, K., van Benthem, K. J., Magnusson, A., Berg,
+C. W., Nielsen, A., \ldots{} Bolker, B. M. (2017). Modeling
+zero-inflated count data with glmmTMB. \emph{bioRxiv}.
+doi:\href{https://doi.org/10.1101/132753}{10.1101/132753}
+
+\hypertarget{ref-brown2011cultural}{}
+Brown, P. (2011). The cultural organization of attention. In A. Duranti,
+E. Ochs, \& and Bambi B Schieffelin (Eds.), \emph{Handbook of Language
+Socialization} (pp. 29--55). Malden, MA: Wiley-Blackwell.
+
+\hypertarget{ref-brown2014interactional}{}
+Brown, P. (2014). The interactional context of language learning in
+Tzeltal. In I. Arnon, M. Casillas, C. Kurumada, \& B. Estigarribia
+(Eds.), \emph{Language in interaction: Studies in honor of Eve V. Clark}
+(pp. 51--82). Amsterdam, NL: John Benjamins.
+
+\hypertarget{ref-brownIPchildrearing}{}
+Brown, P., \& Casillas, M. (in press). Childrearing through social
+interaction on Rossel Island, PNG. In A. J. Fentiman \& M. Goody (Eds.),
+\emph{Esther Goody revisited: Exploring the legacy of an original
+inter-disciplinarian} (pp. XX--XX). New York, NY: Berghahn.
+
+\hypertarget{ref-brown2014language}{}
+Brown, P., \& Gaskins, S. (2014). Language acquisition and language
+socialization. In N. J. Enfield, P. Kockelman, \& J. Sidnell (Eds.),
+\emph{Handbook of Linguistic Anthropology} (pp. 187--226). Cambridge,
+UK: Cambridge University Press.
+doi:\href{https://doi.org/10.1017/CBO9781139342872.010}{10.1017/CBO9781139342872.010}
+
+\hypertarget{ref-cartmill2013quality}{}
+Cartmill, E. A., Armstrong, B. F., Gleitman, L. R., Goldin-Meadow, S.,
+Medina, T. N., \& Trueswell, J. C. (2013). Quality of early parent input
+predicts child vocabulary 3 years later. \emph{Proceedings of the
+National Academy of Sciences}, \emph{110}(28), 11278--11283.
+doi:\href{https://doi.org/10.1073/pnas.1309518110}{10.1073/pnas.1309518110}
+
+\hypertarget{ref-casillas2019stepbystep}{}
+Casillas, M., \& Cristia, A. (2019). A step-by-step guide to collecting
+and analyzing long-format speech environment (lfse) recordings.
+\emph{Collabra: Psychology}, \emph{5}(1), 24.
+doi:\href{https://doi.org/10.1525/collabra.209}{10.1525/collabra.209}
+
+\hypertarget{ref-casillas2019early}{}
+Casillas, M., Brown, P., \& Levinson, S. C. (2019). Early language
+experience in a {[}tseltal mayan{]} village. \emph{Child Development},
+\emph{OnlineOpen}(X), XX--XX.
+
+\hypertarget{ref-casillas2017ACLEWDAS}{}
+Casillas, M., Bunce, J., Soderstrom, M., Rosemberg, C., Migdalek, M.,
+Alam, F., \ldots{} Garrison, H. (2017). Introduction: The ACLEW DAS
+template {[}training materials{]}. Retrieved from
+\url{https://osf.io/aknjv/}
+
+\hypertarget{ref-chang2006becoming}{}
+Chang, F., Dell, G. S., \& Bock, K. (2006). Becoming syntactic.
+\emph{Psychological Review}, \emph{113}(2), 234.
+
+\hypertarget{ref-christiansen2016now}{}
+Christiansen, M. H., \& Chater, N. (2016). The now-or-never bottleneck:
+A fundamental constraint on language. \emph{Behavioral and Brain
+Sciences}, \emph{39}.
+
+\hypertarget{ref-cristia2017child}{}
+Cristia, A., Dupoux, E., Gurven, M., \& Stieglitz, J. (2017).
+Child-directed speech is infrequent in a forager-farmer population: A
+time allocation study. \emph{Child Development}, \emph{Early View},
+1--15. doi:\href{https://doi.org/10.1111/cdev.12974}{10.1111/cdev.12974}
+
+\hypertarget{ref-cychoszURcanonical}{}
+Cychosz, M., Cristia, A., Bergelson, E., Casillas, M., Baudet, G.,
+Warlaumont, A. S., \ldots{} Seidl, A. (under review). Canonical babble
+development in a large-scale crosslinguistic corpus. Retrieved from
+\url{https://osf.io/ca6qu/}
+
+\hypertarget{ref-deleon2011language}{}
+de León, L. (2011). Language socialization and multiparty participation
+frameworks. In A. Duranti, E. Ochs, \& and Bambi B Schieffelin (Eds.),
+\emph{Handbook of Language Socialization} (pp. 81--111). Malden, MA:
+Wiley-Blackwell.
+doi:\href{https://doi.org/10.1002/9781444342901.ch4}{10.1002/9781444342901.ch4}
+
+\hypertarget{ref-elman1990finding}{}
+Elman, J. L. (1990). Finding structure in time. \emph{Cognitive
+Science}, \emph{14}(2), 179--211.
+
+\hypertarget{ref-elman1993learning}{}
+Elman, J. L. (1993). Learning and development in neural networks: The
+importance of starting small. \emph{Cognition}, \emph{48}(1), 71--99.
+
+\hypertarget{ref-frankIPvariability}{}
+Frank, M. C., Braginsky, M., Marchman, V. A., \& Yurovsky, D. (in
+preparation). \emph{Variability and consistency in early language
+learning: The Wordbank project}. Retrieved from
+\url{https://langcog.github.io/wordbank-book/}
+
+\hypertarget{ref-gaskins2000childrens}{}
+Gaskins, S. (2000). Children's daily activities in a Mayan village: A
+culturally grounded description. \emph{Cross-Cultural Research},
+\emph{34}(4), 375--389.
+doi:\href{https://doi.org/10.1177/106939710003400405}{10.1177/106939710003400405}
+
+\hypertarget{ref-gaskins2006cultural}{}
+Gaskins, S. (2006). Cultural perspectives on infant--caregiver
+interaction. In N. J. Enfield \& S. Levinson (Eds.), \emph{Roots of
+Human Sociality: Culture, Cognition and Interaction} (pp. 279--298).
+Oxford: Berg.
+
+\hypertarget{ref-gomez2006naps}{}
+Gómez, R. L., Bootzin, R. R., \& Nadel, L. (2006). Naps promote
+abstraction in language-learning infants. \emph{Psychological Science},
+\emph{17}(8), 670--674.
+doi:\href{https://doi.org/10.1111/j.1467-9280.2006.01764.x}{10.1111/j.1467-9280.2006.01764.x}
+
+\hypertarget{ref-greenwood2011assessing}{}
+Greenwood, C. R., Thiemann-Bourque, K., Walker, D., Buzhardt, J., \&
+Gilkerson, J. (2011). Assessing children's home language environments
+using automatic speech recognition technology. \emph{Communication
+Disorders Quarterly}, \emph{32}(2), 83--92.
+doi:\href{https://doi.org/10.1177/1525740110367826}{10.1177/1525740110367826}
+
+\hypertarget{ref-hart1995meaningful}{}
+Hart, B., \& Risley, T. R. (1995). \emph{Meaningful Differences in the
+Everyday Experience of Young American Children}. Paul H. Brookes
+Publishing.
+
+\hypertarget{ref-hirshpasek2015contribution}{}
+Hirsh-Pasek, K., Adamson, L. B., Bakeman, R., Owen, M. T., Golinkoff, R.
+M., Pace, A., \ldots{} Suma, K. (2015). The contribution of early
+communication quality to low-income children's language success.
+\emph{Psychological Science}, \emph{26}(7), 1071--1083.
+doi:\href{https://doi.org/10.1177/0956797615581493}{10.1177/0956797615581493}
+
+\hypertarget{ref-hoff2003specificity}{}
+Hoff, E. (2003). The specificity of environmental influence:
+Socioeconomic status affects early vocabulary development via maternal
+speech. \emph{Child Development}, \emph{74}(5), 1368--1378.
+doi:\href{https://doi.org/10.3389/fpsyg.2015.01492}{10.3389/fpsyg.2015.01492}
+
+\hypertarget{ref-horvath2016daytime}{}
+Horváth, K., Liu, S., \& Plunkett, K. (2016). A daytime nap facilitates
+generalization of word meanings in young toddlers. \emph{Sleep},
+\emph{39}(1), 203--207.
+doi:\href{https://doi.org/10.5665/sleep.5348}{10.5665/sleep.5348}
+
+\hypertarget{ref-huttenlocher2010sources}{}
+Huttenlocher, J., Waterfall, H., Vasilyeva, M., Vevea, J., \& Hedges, L.
+V. (2010). Sources of variability in children's language growth.
+\emph{Cognitive Psychology}, \emph{61}(4), 343--365.
+doi:\href{https://doi.org/10.1016/j.cogpsych.2010.08.002}{10.1016/j.cogpsych.2010.08.002}
+
+\hypertarget{ref-kuhl2004early}{}
+Kuhl, P. K. (2004). Early language acquisition: Cracking the speech
+code. \emph{Nature Reviews Neuroscience}, \emph{5}(11), 831.
+doi:\href{https://doi.org/10.1038/nrn1533}{10.1038/nrn1533}
+
+\hypertarget{ref-kurdziel2013sleep}{}
+Kurdziel, L., Duclos, K., \& Spencer, R. M. (2013). Sleep spindles in
+midday naps enhance learning in preschool children. \emph{Proceedings of
+the National Academy of Sciences}, \emph{110}(43), 17267--17272.
+
+\hypertarget{ref-lee2018babbling}{}
+Lee, C.-C., Jhang, Y., Relyea, G., Chen, L.-m., \& Oller, D. K. (2018).
+Babbling development as seen in canonical babbling ratios: A
+naturalistic evaluation of all-day recordings. \emph{Infant Behavior and
+Development}, \emph{50}, 140--153.
+
+\hypertarget{ref-levine1996child}{}
+LeVine, R. A., Dixon, S., LeVine, S., Richman, A., Leiderman, P. H.,
+Keefer, C. H., \& Brazelton, T. B. (1996). \emph{Child care and culture:
+Lessons from Africa}. Cambridge University Press.
+
+\hypertarget{ref-lieven1997lexically}{}
+Lieven, E. V. M., Pine, J. M., \& Baldwin, G. (1997). Lexically-based
+learning and early grammatical development. \emph{Journal of Child
+Language}, \emph{24}(1), 187--219.
+doi:\href{https://doi.org/10.1017/S0305000996002930}{10.1017/S0305000996002930}
+
+\hypertarget{ref-marchman2004language}{}
+Marchman, V. A., Martínez-Sussmann, C., \& Dale, P. S. (2004). The
+language-specific nature of grammatical development: Evidence from
+bilingual language learners. \emph{Developmental Science}, \emph{7}(2),
+212--224.
+doi:\href{https://doi.org/10.1111/j.1467-7687.2004.00340.x}{10.1111/j.1467-7687.2004.00340.x}
+
+\hypertarget{ref-mccauley2017computational}{}
+McCauley, S. M., \& Christiansen, M. H. (2017). Computational
+investigations of multiword chunks in language learning. \emph{Topics in
+Cognitive Science}, \emph{9}(3), 637--652.
+
+\hypertarget{ref-mccune2001early}{}
+McCune, L., \& Vihman, M. M. (2001). Early phonetic and lexical
+development. \emph{Journal of Speech, Language, and Hearing Research}.
+
+\hypertarget{ref-mcgillion2017paves}{}
+McGillion, M., Herbert, J. S., Pine, J., Vihman, M., DePaolis, R.,
+Keren-Portnoy, T., \& Matthews, D. (2017). What paves the way to
+conventional language? The predictive value of babble, pointing, and
+socioeconomic status. \emph{Child Development}, \emph{88}(1), 156--166.
+
+\hypertarget{ref-mullally2014learning}{}
+Mullally, S. L., \& Maguire, E. A. (2014). Learning to remember: The
+early ontogeny of episodic memory. \emph{Developmental Cognitive
+Neuroscience}, \emph{9}, 12--29.
+
+\hypertarget{ref-ochs1988culture}{}
+Ochs, E. (1988). \emph{Culture and language development: Language
+acquisition and language socialization in a Samoan village}. Cambridge
+University Press.
+
+\hypertarget{ref-ochs1984language}{}
+Ochs, E., \& Schieffelin, B. B. (1984). Language acquisition and
+socialization: Three developmental stories and their implications. In R.
+A. Schweder \& R. A. LeVine (Eds.), \emph{Culture theory: Essays on
+mind, self, and emotion} (pp. 276--322). Cambridge University Press.
+
+\hypertarget{ref-oller1995extreme}{}
+Oller, D. K., Eilers, R. E., Basinger, D., Steffens, M. L., \& Urbano,
+R. (1995). Extreme poverty and the development of precursors to the
+speech capacity. \emph{First Language}, \emph{15}(44), 167--187.
+
+\hypertarget{ref-oller1998late}{}
+Oller, D. K., Eilers, R. E., Neal, A. R., \& Cobo-Lewis, A. B. (1998).
+Late onset canonical babbling: A possible early marker of abnormal
+development. \emph{American Journal on Mental Retardation},
+\emph{103}(3), 249--263.
+
+\hypertarget{ref-pine1993reanalysing}{}
+Pine, J. M., \& Lieven, E. V. M. (1993). Reanalysing rote-learned
+phrases: Individual differences in the transition to multi-word speech.
+\emph{Journal of Child Language}, \emph{20}(3), 551--571.
+doi:\href{https://doi.org/10.1017/S0305000900008473}{10.1017/S0305000900008473}
+
+\hypertarget{ref-pye1986quiche}{}
+Pye, C. (1986). Quiché Mayan speech to children. \emph{Journal of Child
+Language}, \emph{13}(1), 85--100.
+doi:\href{https://doi.org/10.1017/S0305000900000313}{10.1017/S0305000900000313}
+
+\hypertarget{ref-R-base}{}
+R Core Team. (2019). \emph{R: A language and environment for statistical
+computing}. Vienna, Austria: R Foundation for Statistical Computing.
+Retrieved from \url{https://www.R-project.org/}
+
+\hypertarget{ref-ramirez2020parent}{}
+Ramírez, N. F., Lytle, S. R., \& Kuhl, P. K. (2020). Parent coaching
+increases conversational turns and advances infant language development.
+\emph{Proceedings of the National Academy of Sciences}, \emph{117}(7),
+3484--3491.
+
+\hypertarget{ref-ramirezesparza2014look}{}
+Ramírez-Esparza, N., García-Sierra, A., \& Kuhl, P. K. (2014). Look
+who's talking: Speech style and social context in language input to
+infants are linked to concurrent and future speech development.
+\emph{Developmental Science}, \emph{17}, 880--891.
+doi:\href{https://doi.org/10.1111/desc.12172}{10.1111/desc.12172}
+
+\hypertarget{ref-rogoff2003firsthand}{}
+Rogoff, B., Paradise, R., Arauz, R. M., Correa-Chávez, M., \& Angelillo,
+C. (2003). Firsthand learning through intent participation. \emph{Annual
+Review of Psychology}, \emph{54}(1), 175--203.
+doi:\href{https://doi.org/10.1146/annurev.psych.54.101601.145118}{10.1146/annurev.psych.54.101601.145118}
+
+\hypertarget{ref-rowe2008child}{}
+Rowe, M. L. (2008). Child-directed speech: Relation to socioeconomic
+status, knowledge of child development and child vocabulary skill.
+\emph{Journal of Child Language}, \emph{35}(1), 185--205.
+doi:\href{https://doi.org/10.1017/S0305000907008343}{10.1017/S0305000907008343}
+
+\hypertarget{ref-rowe2012longitudinal}{}
+Rowe, M. L. (2012). A longitudinal investigation of the role of quantity
+and quality of child-directed speech in vocabulary development.
+\emph{Child Development}, \emph{83}(5), 1762--1774.
+
+\hypertarget{ref-scaffIPlanguage}{}
+Scaff, C., Stieglitz, J., Casillas, M., \& Cristia, A. (in preparation).
+Language input in a hunter-forager population: Estimations from daylong
+recordings.
+
+\hypertarget{ref-schieffelin1990give}{}
+Schieffelin, B. B. (1990). \emph{The give and take of everyday life:
+Language, socialization of Kaluli children}. Cambridge University Press.
+
+\hypertarget{ref-schwab2016repetition}{}
+Schwab, J. F., \& Lew-Williams, C. (2016). Repetition across successive
+sentences facilitates young children's word learning.
+\emph{Developmental Psychology}, \emph{52}(6), 879--886.
+doi:\href{https://doi.org/10.1037/dev0000125}{10.1037/dev0000125}
+
+\hypertarget{ref-shneidman2010language}{}
+Shneidman, L. A. (2010). \emph{Language Input and Acquisition in a Mayan
+Village} (PhD thesis). The University of Chicago.
+
+\hypertarget{ref-shneidman2012language}{}
+Shneidman, L. A., \& Goldin-Meadow, S. (2012). Language input and
+acquisition in a Mayan village: How important is directed speech?
+\emph{Developmental Science}, \emph{15}(5), 659--673.
+doi:\href{https://doi.org/10.1111/j.1467-7687.2012.01168.x}{10.1111/j.1467-7687.2012.01168.x}
+
+\hypertarget{ref-shneidman2012counts}{}
+Shneidman, L. A., Arroyo, M. E., Levine, S. C., \& Goldin-Meadow, S.
+(2012). What counts as effective input for word learning? \emph{Journal
+of Child Language}, \emph{40}(3), 672--686.
+
+\hypertarget{ref-slobin1970universals}{}
+Slobin, D. I. (1970). Universals of grammatical development in children.
+In G. B. Flores d'Arcais \& W. J. M. Levelt (Eds.), \emph{Advances in
+Psycholinguistics} (pp. 174--186). Amsterdam, NL: North Holland
+Publishing.
+
+\hypertarget{ref-smithson2013generalized}{}
+Smithson, M., \& Merkle, E. (2013). \emph{Generalized linear models for
+categorical and continuous limited dependent variables}. New York:
+Chapman; Hall/CRC.
+doi:\href{https://doi.org/10.1201/b15694}{10.1201/b15694}
+
+\hypertarget{ref-soderstrom2013when}{}
+Soderstrom, M., \& Wittebolle, K. (2013). When do caregivers talk? The
+influences of activity and time of day on caregiver speech and child
+vocalizations in two childcare environments. \emph{PloS One}, \emph{8},
+e80646.
+doi:\href{https://doi.org/10.1371/journal.pone.0080646}{10.1371/journal.pone.0080646}
+
+\hypertarget{ref-tamislemonda2018routine}{}
+Tamis-LeMonda, C. S., Custode, S., Kuchirko, Y., Escobar, K., \& Lo, T.
+(2018). Routine language: Speech directed to infants during home
+activities. \emph{Child Development}, \emph{Early View}, 1--18.
+
+\hypertarget{ref-tomasello1999early}{}
+Tomasello, M., \& Brooks, P. J. (1999). Early syntactic development: A
+Construction Grammar approach. In M. Barrett (Ed.), \emph{The
+Development of Language} (pp. 161--190). New York: Psychology Press.
+
+\hypertarget{ref-vogt2015communicative}{}
+Vogt, P., Mastin, J. D., \& Schots, D. M. A. (2015). Communicative
+intentions of child-directed speech in three different learning
+environments: Observations from the Netherlands, and rural and urban
+Mozambique. \emph{First Language}, \emph{35}(4--5), 341--358.
+doi:\href{https://doi.org/10.1177/0142723715596647}{10.1177/0142723715596647}
 
 \hypertarget{ref-warlaumont2014social}{}
 Warlaumont, A. S., Richards, J. A., Gilkerson, J., \& Oller, D. K.
@@ -1366,6 +2021,5 @@ Wittenburg, P., Brugman, H., Russel, A., Klassmann, A., \& Sloetjes, H.
 Resources and Evaluation} (pp. 1556--1559).
 
 \endgroup
-
 
 \end{document}

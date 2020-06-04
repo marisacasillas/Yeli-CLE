@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  29 MAY 2020 14:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2020.5.31)  4 JUN 2020 13:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -728,6 +728,12 @@ Now handling font encoding PD1 ...
 (/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
+Package hyperref Info: Option `unicode' set `true' on input line 4319.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
 Package hyperref Info: Hyper figures OFF on input line 4443.
 Package hyperref Info: Link nesting OFF on input line 4448.
 Package hyperref Info: Hyper index ON on input line 4451.
@@ -772,13 +778,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip69
 )
-Package hyperref Info: Option `unicode' set `true' on input line 31.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
-Now handling font encoding PU ...
-... no UTF-8 mapping file for font encoding PU
-)
-Package hyperref Info: Option `breaklinks' set `true' on input line 31.
+Package hyperref Info: Option `breaklinks' set `true' on input line 32.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/grffile.sty
 Package: grffile 2012/04/05 v1.16 Extended file name support for graphics (HO)
 Package grffile Info: Option `multidot' is set to `true'.
@@ -886,30 +886,30 @@ Package csquotes Info: ... none found.
 (./Yeli-CLE.aux)
 \openout1 = `Yeli-CLE.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 132.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 132.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 136.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 136.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 132.
-LaTeX Font Info:    ... okay on input line 132.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 132.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 136.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -983,7 +983,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2013/02/03 v1.3-62 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 132.
+LaTeX Info: Redefining \microtypecontext on input line 136.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -998,7 +998,7 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 \AtBeginShipoutBox=\box38
-Package hyperref Info: Link coloring OFF on input line 132.
+Package hyperref Info: Link coloring OFF on input line 136.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1006,51 +1006,51 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count153
 )
-LaTeX Info: Redefining \ref on input line 132.
-LaTeX Info: Redefining \pageref on input line 132.
-LaTeX Info: Redefining \nameref on input line 132.
+LaTeX Info: Redefining \ref on input line 136.
+LaTeX Info: Redefining \pageref on input line 136.
+LaTeX Info: Redefining \nameref on input line 136.
 (./Yeli-CLE.out) (./Yeli-CLE.out)
 \@outlinefile=\write5
 \openout5 = `Yeli-CLE.out'.
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 134.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 138.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 134.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 138.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 134.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 138.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 134
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 138
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 134
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 138
 .
 (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 134.
+(Font)              <12> on input line 138.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 134.
+(Font)              <8> on input line 138.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 134.
-LaTeX Font Info:    Try loading font information for U+msa on input line 134.
+(Font)              <6> on input line 138.
+LaTeX Font Info:    Try loading font information for U+msa on input line 138.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 134.
+LaTeX Font Info:    Try loading font information for U+msb on input line 138.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1061,79 +1061,523 @@ File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
 
 ] [2] [3] [4] [5]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 251.
+(Font)              <10> on input line 257.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 251.
+(Font)              <7> on input line 257.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 251.
+(Font)              <5> on input line 257.
 [6] [7] [8]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
 [9]
-Underfull \vbox (badness 4752) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[10]
-Underfull \vbox (badness 1838) has occurred while \output is active []
-
-[11] <Yeli-CLE_files/figure-latex/fig1-1.pdf, id=153, 442.65375pt x 256.96pt>
+[10] [11] <Yeli-CLE_files/figure-latex/fig1-1.pdf, id=157, 461.725pt x 260.975p
+t>
 File: Yeli-CLE_files/figure-latex/fig1-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig1-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig1-1.pdf used on input l
-ine 491.
-(pdftex.def)             Requested size: 442.67966pt x 256.97504pt.
+ine 496.
+(pdftex.def)             Requested size: 461.72388pt x 260.97437pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[12] [13] [14 <./Yeli-CLE_files/figure-latex/fig1-1.pdf>]
+[12] [13]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[14 <./Yeli-CLE_files/figure-latex/fig1-1.pdf>]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[15] [16] [17] <Yeli-CLE_files/figure-latex/fig2-1.pdf, id=193, 461.725pt x 170
+[15] [16] [17] <Yeli-CLE_files/figure-latex/fig2-1.pdf, id=197, 461.725pt x 170
 .6375pt>
 File: Yeli-CLE_files/figure-latex/fig2-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig2-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig2-1.pdf used on input l
-ine 656.
+ine 661.
 (pdftex.def)             Requested size: 461.72388pt x 170.63707pt.
 [18]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [19 <./Yeli-CLE_files/figure-latex/fig2-1.pdf>] <Yeli-CLE_files/figure-latex/fi
-g3-1.pdf, id=219, 461.725pt x 279.0425pt>
+g3-1.pdf, id=223, 461.725pt x 279.0425pt>
 File: Yeli-CLE_files/figure-latex/fig3-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig3-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig3-1.pdf used on input l
-ine 711.
+ine 716.
 (pdftex.def)             Requested size: 461.72388pt x 279.04181pt.
 [20]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [21 <./Yeli-CLE_files/figure-latex/fig3-1.pdf>] [22] [23] [24] <Yeli-CLE_files/
-figure-latex/fig4-1.pdf, id=265, 461.725pt x 244.915pt>
+figure-latex/fig4-1.pdf, id=269, 461.725pt x 244.915pt>
 File: Yeli-CLE_files/figure-latex/fig4-1.pdf Graphic file (type pdf)
 <use Yeli-CLE_files/figure-latex/fig4-1.pdf>
 Package pdftex.def Info: Yeli-CLE_files/figure-latex/fig4-1.pdf used on input l
-ine 870.
+ine 875.
 (pdftex.def)             Requested size: 461.72388pt x 244.91438pt.
-[25 <./Yeli-CLE_files/figure-latex/fig4-1.pdf>] [26] [27] [28] [29] [30] [31] [
-32]
-Underfull \vbox (badness 1558) has occurred while \output is active []
+[25 <./Yeli-CLE_files/figure-latex/fig4-1.pdf>] [26] [27] [28] [29] [30] [31]
+Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[33] [34] [35] [36] [37] AED endfloat: Processing end Figures and Tables [38]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1371.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1371.
+[32] [33] [34] [35] [36] [37] [38]
+Underfull \vbox (badness 4686) has occurred while \output is active []
+
+[39]
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
+[40]
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
+[41] [42] [43]pdfTeX warning (ext4): destination with the same identifier (name
+{ref-abney2017time}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1619 \hypertarget{ref-abney2017time}{}
+                                         [44]pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-akhtar2005robustness}) has been already use
+d, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1625 \hypertarget{ref-akhtar2005robustness}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-bates1997inseparability}) has been alread
+y used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1629 \hypertarget{ref-bates1997inseparability}{}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-bergelsonIPbsl}) has been already used
+, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1636 \hypertarget{ref-bergelsonIPbsl}{}
+                                         pdfTeX warning (ext4): destination wit
+h the same identifier (name{ref-bergelson2019day}) has been already used, dupli
+cate ignored
+<to be read again> 
+                   \relax 
+l.1642 \hypertarget{ref-bergelson2019day}{}
+                                           pdfTeX warning (ext4): destination w
+ith the same identifier (name{ref-bergelsoncasillas2019what}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1648 ...rtarget{ref-bergelsoncasillas2019what}{}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-brinchmann2019direct}) has been alread
+y used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1655 \hypertarget{ref-brinchmann2019direct}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-brooks2017modeling}) has been already use
+d, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1661 \hypertarget{ref-brooks2017modeling}{}
+                                             pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-brown2011cultural}) has been already used, 
+duplicate ignored
+<to be read again> 
+                   \relax 
+l.1667 \hypertarget{ref-brown2011cultural}{}
+                                            
+Underfull \vbox (badness 4686) has occurred while \output is active []
+
+[45]pdfTeX warning (ext4): destination with the same identifier (name{ref-brown
+2014interactional}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1672 \hypertarget{ref-brown2014interactional}{}
+                                                 pdfTeX warning (ext4): destina
+tion with the same identifier (name{ref-brownIPchildrearing}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1678 \hypertarget{ref-brownIPchildrearing}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-brown2014language}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.1684 \hypertarget{ref-brown2014language}{}
+                                            pdfTeX warning (ext4): destination 
+with the same identifier (name{ref-cartmill2013quality}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.1691 \hypertarget{ref-cartmill2013quality}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-casillas2019stepbystep}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1698 \hypertarget{ref-casillas2019stepbystep}{}
+                                                 pdfTeX warning (ext4): destina
+tion with the same identifier (name{ref-casillas2019early}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1704 \hypertarget{ref-casillas2019early}{}
+                                            pdfTeX warning (ext4): destination 
+with the same identifier (name{ref-casillas2017ACLEWDAS}) has been already used
+, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1709 \hypertarget{ref-casillas2017ACLEWDAS}{}
+                                               
+Underfull \vbox (badness 4686) has occurred while \output is active []
+
+[46]pdfTeX warning (ext4): destination with the same identifier (name{ref-chang
+2006becoming}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1715 \hypertarget{ref-chang2006becoming}{}
+                                            pdfTeX warning (ext4): destination 
+with the same identifier (name{ref-christiansen2016now}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.1719 \hypertarget{ref-christiansen2016now}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-cristia2017child}) has been already used, 
+duplicate ignored
+<to be read again> 
+                   \relax 
+l.1724 \hypertarget{ref-cristia2017child}{}
+                                           pdfTeX warning (ext4): destination w
+ith the same identifier (name{ref-cychoszURcanonical}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.1730 \hypertarget{ref-cychoszURcanonical}{}
+                                             pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-deleon2011language}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.1736 \hypertarget{ref-deleon2011language}{}
+                                             pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-elman1990finding}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.1743 \hypertarget{ref-elman1990finding}{}
+                                           pdfTeX warning (ext4): destination w
+ith the same identifier (name{ref-elman1993learning}) has been already used, du
+plicate ignored
+<to be read again> 
+                   \relax 
+l.1747 \hypertarget{ref-elman1993learning}{}
+                                            pdfTeX warning (ext4): destination 
+with the same identifier (name{ref-frankIPvariability}) has been already used, 
+duplicate ignored
+<to be read again> 
+                   \relax 
+l.1751 \hypertarget{ref-frankIPvariability}{}
+                                              [47]pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-gaskins2000childrens}) has been alread
+y used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1757 \hypertarget{ref-gaskins2000childrens}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-gaskins2006cultural}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1763 \hypertarget{ref-gaskins2006cultural}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-gomez2006naps}) has been already used, dup
+licate ignored
+<to be read again> 
+                   \relax 
+l.1769 \hypertarget{ref-gomez2006naps}{}
+                                        pdfTeX warning (ext4): destination with
+ the same identifier (name{ref-greenwood2011assessing}) has been already used, 
+duplicate ignored
+<to be read again> 
+                   \relax 
+l.1775 \hypertarget{ref-greenwood2011assessing}{}
+                                                 pdfTeX warning (ext4): destina
+tion with the same identifier (name{ref-hart1995meaningful}) has been already u
+sed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1782 \hypertarget{ref-hart1995meaningful}{}
+                                             pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-hirshpasek2015contribution}) has been alrea
+dy used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1787 ...target{ref-hirshpasek2015contribution}{}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-hoff2003specificity}) has been already
+ used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1794 \hypertarget{ref-hoff2003specificity}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-horvath2016daytime}) has been already used
+, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1800 \hypertarget{ref-horvath2016daytime}{}
+                                             
+Underfull \vbox (badness 4686) has occurred while \output is active []
+
+[48]pdfTeX warning (ext4): destination with the same identifier (name{ref-hutte
+nlocher2010sources}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1806 \hypertarget{ref-huttenlocher2010sources}{}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-kuhl2004early}) has been already used,
+ duplicate ignored
+<to be read again> 
+                   \relax 
+l.1812 \hypertarget{ref-kuhl2004early}{}
+                                        pdfTeX warning (ext4): destination with
+ the same identifier (name{ref-kurdziel2013sleep}) has been already used, dupli
+cate ignored
+<to be read again> 
+                   \relax 
+l.1817 \hypertarget{ref-kurdziel2013sleep}{}
+                                            pdfTeX warning (ext4): destination 
+with the same identifier (name{ref-lee2018babbling}) has been already used, dup
+licate ignored
+<to be read again> 
+                   \relax 
+l.1822 \hypertarget{ref-lee2018babbling}{}
+                                          pdfTeX warning (ext4): destination wi
+th the same identifier (name{ref-levine1996child}) has been already used, dupli
+cate ignored
+<to be read again> 
+                   \relax 
+l.1828 \hypertarget{ref-levine1996child}{}
+                                          pdfTeX warning (ext4): destination wi
+th the same identifier (name{ref-lieven1997lexically}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.1833 \hypertarget{ref-lieven1997lexically}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-marchman2004language}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1839 \hypertarget{ref-marchman2004language}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-mccauley2017computational}) has been alre
+ady used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1846 ...rtarget{ref-mccauley2017computational}{}
+                                                  
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
+[49]pdfTeX warning (ext4): destination with the same identifier (name{ref-mccun
+e2001early}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1851 \hypertarget{ref-mccune2001early}{}
+                                          pdfTeX warning (ext4): destination wi
+th the same identifier (name{ref-mcgillion2017paves}) has been already used, du
+plicate ignored
+<to be read again> 
+                   \relax 
+l.1855 \hypertarget{ref-mcgillion2017paves}{}
+                                             pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-mullally2014learning}) has been already use
+d, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1861 \hypertarget{ref-mullally2014learning}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-ochs1988culture}) has been already used, 
+duplicate ignored
+<to be read again> 
+                   \relax 
+l.1866 \hypertarget{ref-ochs1988culture}{}
+                                          pdfTeX warning (ext4): destination wi
+th the same identifier (name{ref-ochs1984language}) has been already used, dupl
+icate ignored
+<to be read again> 
+                   \relax 
+l.1871 \hypertarget{ref-ochs1984language}{}
+                                           pdfTeX warning (ext4): destination w
+ith the same identifier (name{ref-oller1995extreme}) has been already used, dup
+licate ignored
+<to be read again> 
+                   \relax 
+l.1877 \hypertarget{ref-oller1995extreme}{}
+                                           pdfTeX warning (ext4): destination w
+ith the same identifier (name{ref-oller1998late}) has been already used, duplic
+ate ignored
+<to be read again> 
+                   \relax 
+l.1882 \hypertarget{ref-oller1998late}{}
+                                        pdfTeX warning (ext4): destination with
+ the same identifier (name{ref-pine1993reanalysing}) has been already used, dup
+licate ignored
+<to be read again> 
+                   \relax 
+l.1888 \hypertarget{ref-pine1993reanalysing}{}
+                                              
+Underfull \vbox (badness 1389) has occurred while \output is active []
+
+[50]pdfTeX warning (ext4): destination with the same identifier (name{ref-pye19
+86quiche}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1894 \hypertarget{ref-pye1986quiche}{}
+                                        pdfTeX warning (ext4): destination with
+ the same identifier (name{ref-R-base}) has been already used, duplicate ignore
+d
+<to be read again> 
+                   \relax 
+l.1899 \hypertarget{ref-R-base}{}
+                                 pdfTeX warning (ext4): destination with the sa
+me identifier (name{ref-ramirez2020parent}) has been already used, duplicate ig
+nored
+<to be read again> 
+                   \relax 
+l.1904 \hypertarget{ref-ramirez2020parent}{}
+                                            pdfTeX warning (ext4): destination 
+with the same identifier (name{ref-ramirezesparza2014look}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1910 \hypertarget{ref-ramirezesparza2014look}{}
+                                                 pdfTeX warning (ext4): destina
+tion with the same identifier (name{ref-rogoff2003firsthand}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1917 \hypertarget{ref-rogoff2003firsthand}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-rowe2008child}) has been already used, dup
+licate ignored
+<to be read again> 
+                   \relax 
+l.1923 \hypertarget{ref-rowe2008child}{}
+                                        pdfTeX warning (ext4): destination with
+ the same identifier (name{ref-rowe2012longitudinal}) has been already used, du
+plicate ignored
+<to be read again> 
+                   \relax 
+l.1929 \hypertarget{ref-rowe2012longitudinal}{}
+                                                [51]pdfTeX warning (ext4): dest
+ination with the same identifier (name{ref-scaffIPlanguage}) has been already u
+sed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1934 \hypertarget{ref-scaffIPlanguage}{}
+                                          pdfTeX warning (ext4): destination wi
+th the same identifier (name{ref-schieffelin1990give}) has been already used, d
+uplicate ignored
+<to be read again> 
+                   \relax 
+l.1939 \hypertarget{ref-schieffelin1990give}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-schwab2016repetition}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1943 \hypertarget{ref-schwab2016repetition}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-shneidman2010language}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1949 \hypertarget{ref-shneidman2010language}{}
+                                                pdfTeX warning (ext4): destinat
+ion with the same identifier (name{ref-shneidman2012language}) has been already
+ used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1953 \hypertarget{ref-shneidman2012language}{}
+                                                pdfTeX warning (ext4): destinat
+ion with the same identifier (name{ref-shneidman2012counts}) has been already u
+sed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1959 \hypertarget{ref-shneidman2012counts}{}
+                                              pdfTeX warning (ext4): destinatio
+n with the same identifier (name{ref-slobin1970universals}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1964 \hypertarget{ref-slobin1970universals}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-smithson2013generalized}) has been alread
+y used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1970 \hypertarget{ref-smithson2013generalized}{}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-soderstrom2013when}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1976 \hypertarget{ref-soderstrom2013when}{}
+                                              [52]pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-tamislemonda2018routine}) has been alr
+eady used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1983 \hypertarget{ref-tamislemonda2018routine}{}
+                                                  pdfTeX warning (ext4): destin
+ation with the same identifier (name{ref-tomasello1999early}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1988 \hypertarget{ref-tomasello1999early}{}
+                                             pdfTeX warning (ext4): destination
+ with the same identifier (name{ref-vogt2015communicative}) has been already us
+ed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1993 \hypertarget{ref-vogt2015communicative}{}
+                                                pdfTeX warning (ext4): destinat
+ion with the same identifier (name{ref-warlaumont2014social}) has been already 
+used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2000 \hypertarget{ref-warlaumont2014social}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-weisleder2013talking}) has been already u
+sed, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2006 \hypertarget{ref-weisleder2013talking}{}
+                                               pdfTeX warning (ext4): destinati
+on with the same identifier (name{ref-R-ggplot2}) has been already used, duplic
+ate ignored
+<to be read again> 
+                   \relax 
+l.2012 \hypertarget{ref-R-ggplot2}{}
+                                    pdfTeX warning (ext4): destination with the
+ same identifier (name{ref-ELAN}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2017 \hypertarget{ref-ELAN}{}
+                                AED endfloat: Processing end Figures and Tables
+[53]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2025.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2025.
 (./Yeli-CLE.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1371.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1371.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2025.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2025.
 
 Package rerunfilecheck Info: File `Yeli-CLE.out' has not changed.
-(rerunfilecheck)             Checksum: 858EFA417268CB0BEDDAB517B06A3BEE;4116.
+(rerunfilecheck)             Checksum: 081B5AC1CF42378B6906BD7B0108C343;4288.
  ) 
 Here is how much of TeX's memory you used:
- 15644 strings out of 493089
- 230992 string characters out of 6134842
- 346202 words of memory out of 5000000
- 18644 multiletter control sequences out of 15000+600000
- 85729 words of font info for 122 fonts, out of 8000000 for 9000
+ 15696 strings out of 493089
+ 231854 string characters out of 6134842
+ 344801 words of memory out of 5000000
+ 18645 multiletter control sequences out of 15000+600000
+ 86116 words of font info for 125 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  43i,10n,47p,795b,489s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{fig4} has been referenced but does not exist, rep
@@ -1159,10 +1603,10 @@ pe1/public/lm/lmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
 lm/lmr7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmr8.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/loca
 l/texlive/2015/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
-Output written on Yeli-CLE.pdf (38 pages, 331038 bytes).
+Output written on Yeli-CLE.pdf (53 pages, 365865 bytes).
 PDF statistics:
- 468 PDF objects out of 1000 (max. 8388607)
- 403 compressed objects within 5 object streams
- 118 named destinations out of 1000 (max. 500000)
- 10437 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 620 PDF objects out of 1000 (max. 8388607)
+ 539 compressed objects within 6 object streams
+ 163 named destinations out of 1000 (max. 500000)
+ 10445 words of extra memory for PDF output out of 12000 (max. 10000000)
 
