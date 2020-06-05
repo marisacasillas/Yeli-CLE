@@ -7,9 +7,9 @@
         - check milestones to see whether they are effected by the above
 - ~Compress close vs. panoramic discussion~
 - ~Add methods details asked for by Rev2~
-- Consider strength of hypothetical learning mechanisms
-- Add weaknesses wrt quality and vocab measures (though note CDS is a 'quality' measure already)
-    - Rev1 thinks the findings are unsurprising; maybe add more material on indiv. variation used also in TS paper
+- ~Consider strength of hypothetical learning mechanisms~
+- ~Add weaknesses wrt quality and vocab measures (though note CDS is a 'quality' measure already)~
+    - ~Rev1 thinks the findings are unsurprising; maybe add more material on indiv. variation used also in TS paper~
 - ~Strengthen introduction of value of peak measures~
 
 ### Editor
