@@ -24,7 +24,7 @@ abstract: |
   **The rate at which young children are directly spoken to varies due to many factors, including (a) caregiver ideas about children as conversational partners and (b) the organization of everyday life. Prior work suggests that cross-cultural differences in the former predict wide variation in rates of child-directed speech [@shneidman2012language; @casillas2019early]. However, these comparisons are fraught with confounds, including differences in the organization of everyday life between (sub)urban postindustrial and subsistence farming communities. We use** daylong recordings to investigate how much speech is available to young children (0;0--3;0) on Rossel Island, Papua New Guinea; an isolated small-scale traditional community where prior ethnographic study demonstrated face-to-face contingency-seeking interactional styles with infants**.** We found that children were infrequently directly addressed, that their linguistic input rates were primarily affected by situational aspects of everyday life, and that, despite this, their vocalization maturity showed no delay in development. **We evaluate the similarities and differences in input characteristics between this community and a Tseltal Mayan one in which near-parallel methods have produced comparable results. We then briefly discuss the models and mechanisms for language learning that are best supported by our findings.**
   
 keywords          : "Child-directed speech, linguistic input, non-WEIRD, vocal maturity, interaction, Papuan"
-wordcount         : "9663 (14017 including references)"
+wordcount         : "9724 (11658 including references)"
 
 bibliography      : ["Yeli-CLE.bib"]
 

@@ -34,7 +34,7 @@ lineno            : yes
 mask              : no
 
 class             : "man"
-output            : papaja::apa6_pdf #apa6_pdf or apa6_word
+output            : papaja::apa6_word #apa6_pdf or apa6_word
 ---
 
 ```{r load_packages, include=FALSE, echo=FALSE, warning=FALSE}
@@ -56,7 +56,7 @@ model.results <- model.results %>%
 ```
 
 # Full model outputs {#models}
-In these Supplementary Materials we give the full model output tables for each analysis in the main text, including re-leveled versions of each model to show all three of the two-way contrasts between the three-level time-of-day factor (i.e., morning vs. midday, morning vs. afternoon, and midday vs. afternoon) as well as, for each of the measures, a histogram showing how each variable is distributed (i.e., because they are non-normal and/or zero-inflated) and a figure showing the distribution of model residuals. For every negative binomial model, we also include the full model output table and residual plots for matching gaussian mixed-effects regressions which use a log-transformed dependent measure. Such gaussian models with log-transformed measures are an alternative solution to analyzing non-normal distributions sometimes used in psycholinguistics, but are not suitable for the current data given how our speech environment measures are distributed, particularly in the randomly sampled clips (see, e.g., Figures [1](#fig1), [7](#fig7), [10](#fig10), [13](#fig13), [19](#fig19)). Overall, the gaussian models show a qualitatively similar pattern of results. These analyses are structured as identically as possible to those in Casillas and colleagues' [-@casillas2019early] study on Tseltal Mayan child language environments.
+In these Supplementary Materials we give the full model output tables for each analysis in the main text, including re-leveled versions of each model to show all three of the two-way contrasts between the three-level time-of-day factor (i.e., morning vs. midday, morning vs. afternoon, and midday vs. afternoon) as well as, for each of the measures, a histogram showing how each variable is distributed (i.e., because they are non-normal and/or zero-inflated) and a figure showing the distribution of model residuals. For every negative binomial model, we also include the full model output table and residual plots for matching gaussian mixed-effects regressions which use a log-transformed dependent measure. Such gaussian models with log-transformed measures are an alternative solution to analyzing non-normal distributions sometimes used in psycholinguistics, but are not suitable for the current data given how our speech environment measures are distributed, particularly in the randomly sampled clips (see, e.g., Figures [1](#fig1), [7](#fig7), and [10](#fig10)). Overall, the gaussian models show a qualitatively similar pattern of results. These analyses are structured as identically as possible to those in Casillas and colleagues' [-@casillas2019early] study on Tseltal Mayan child language environments.
 
 ## How to interpret the model output
 All models were run with the glmm-TMB library in R [@R-glmmTMB; @brooks2017modeling]. Note that, in the negative binomial regressions, the dependent variables have been rounded to the nearest integer (e.g., 3.2 minutes of TCDS per hour becomes 3 minutes per hour in the model).
@@ -65,7 +65,7 @@ The predictors in the models are abbreviated as follows: tchiyr.std = centered, 
 
 In each model output table, the "component" shows what kind of model the estimate derives from (e.g., the zero-inflated models include both a conditional "cond" set of predictors, random effects, and zero-inflation "zi" predictors). The "term" is the estimated predictor. The "statistic" is the estimated _z_-statistic for each predictor's effect. The other labels are self-explanatory.
 
-As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at <OMITTED FOR REVIEW><!--: https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/-->.
+As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at URL-OMITTED-FOR-REVIEW<!--: https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/-->.
 
 ## Target-child-directed speech (TCDS) {#models-tcds}
 ### Random clips {#models-tcds-random}
