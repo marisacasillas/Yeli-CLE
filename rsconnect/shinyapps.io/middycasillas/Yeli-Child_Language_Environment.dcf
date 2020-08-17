@@ -1,0 +1,13 @@
+name: Yeli-Child_Language_Environment
+title: Yeli-Child_Language_Environment
+username:
+account: middycasillas
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2677654
+bundleId: 3525828
+url: https://middycasillas.shinyapps.io/Yeli-Child_Language_Environment/
+when: 1597678627.4909
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|0-Anonymize_Transcripts.R|0-Helper.R|apa-noissue.csl|clip-codes.csv|Segment-order-inventory.csv|Tseltal-CLE.bib|YD-baseline.test.csv|Yeli-CLE-SuppMat.docx|Yeli-CLE-SuppMat.knit.md|Yeli-CLE-SuppMat.log|Yeli-CLE-SuppMat.pdf|Yeli-CLE-SuppMat.Rmd|Yeli-CLE-SuppMat.tex|Yeli-CLE-SuppMat.utf8.md|Yeli-CLE.bib|Yeli-CLE.docx|Yeli-CLE.pdf|Yeli-CLE.Rmd|Yeli-CLE.tex|metadata/recording-info.csv|diff_figs|transcripts|under-review|Yeli-CLE_files

@@ -1,161 +1,61 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-%
-\documentclass[
-  english,
-  ,man,floatsintext]{apa6}
-\usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-% Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Supplementary Materials: Early language experience in a Papuan community},
-  pdfauthor={Marisa Casillas1, Penelope Brown1, \& Stephen C. Levinson1},
-  pdflang={en-EN},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
-\makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
-\makeatletter
-\def\fps@figure{htbp}
-\makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-% Make \paragraph and \subparagraph free-standing
-\ifx\paragraph\undefined\else
-  \let\oldparagraph\paragraph
-  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-  \let\oldsubparagraph\subparagraph
-  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-% Manuscript styling
-\usepackage{upgreek}
-\captionsetup{font=singlespacing,justification=justified}
+---
+title             : "Supplementary Materials: Early language experience in a Papuan community"
+shorttitle        : "SM: Language experience on Rossel Island"
 
-% Table formatting
-\usepackage{longtable}
-\usepackage{lscape}
-% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
-\usepackage{multirow}		% Table styling
-\usepackage{tabularx}		% Control Column width
-\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
-\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+author: 
+  - name          : "Marisa Casillas"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "P.O. Box 310, 6500 AH Nijmegen, The Netherlands"
+    email         : "Marisa.Casillas@mpi.nl"
+  - name          : "Penelope Brown"
+    affiliation   : "1"
+  - name          : "Stephen C. Levinson"
+    affiliation   : "1"
 
-% Create new environments so endfloat can handle them
-% \newenvironment{ltable}
-%   {\begin{landscape}\begin{center}\begin{threeparttable}}
-%   {\end{threeparttable}\end{center}\end{landscape}}
-\newenvironment{lltable}{\begin{landscape}\begin{center}\begin{ThreePartTable}}{\end{ThreePartTable}\end{center}\end{landscape}}
+affiliation:
+  - id            : "1"
+    institution   : "Max Planck Institute for Psycholinguistics"
 
-% Enables adjusting longtable caption width to table width
-% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
-\makeatletter
-\newcommand\LastLTentrywidth{1em}
-\newlength\longtablewidth
-\setlength{\longtablewidth}{1in}
-\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+header-includes: #allows you to add in your own Latex packages
+- \usepackage{float} #use the 'float' package
+- \floatplacement{figure}{H} #make every figure with caption = h
+- \usepackage{placeins}
 
-% \setlength{\parindent}{0.5in}
-% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+csl: apa-noissue.csl
 
-% \usepackage{etoolbox}
-\makeatletter
-\patchcmd{\HyOrg@maketitle}
-  {\section{\normalfont\normalsize\abstractname}}
-  {\section*{\normalfont\normalsize\abstractname}}
-  {}{\typeout{Failed to patch abstract.}}
-\patchcmd{\HyOrg@maketitle}
-  {\section{\protect\normalfont{\@title}}}
-  {\section*{\protect\normalfont{\@title}}}
-  {}{\typeout{Failed to patch title.}}
-\makeatother
-\shorttitle{SM: Language experience on Rossel Island}
-\usepackage{lineno}
+bibliography      : ["Yeli-CLE.bib"]
 
-\linenumbers
-\usepackage{csquotes}
-\usepackage{float}
-\floatplacement{figure}{H}
-\usepackage{placeins}
-\ifxetex
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[]{english}
-\else
-  \usepackage[shorthands=off,main=english]{babel}
-\fi
+figsintext        : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+lineno            : yes
+mask              : no
 
-\title{Supplementary Materials: Early language experience in a Papuan community}
-\author{Marisa Casillas\textsuperscript{1}, Penelope Brown\textsuperscript{1}, \& Stephen C. Levinson\textsuperscript{1}}
-\date{}
+class             : "man"
+output            : papaja::apa6_pdf #apa6_pdf or apa6_word
+---
 
-\begin{document}
-\maketitle
 
-\hypertarget{models}{%
-\section{Full model outputs}\label{models}}
 
-In these Supplementary Materials we give the full model output tables for each analysis in the main text, including re-leveled versions of each model to show all three of the two-way contrasts between the three-level time-of-day factor (i.e., morning vs.~midday, morning vs.~afternoon, and midday vs.~afternoon) as well as, for each of the measures, a histogram showing how each variable is distributed (i.e., because they are non-normal and/or zero-inflated) and a figure showing the distribution of model residuals. For every negative binomial model, we also include the full model output table and residual plots for matching gaussian mixed-effects regressions which use a log-transformed dependent measure. Such gaussian models with log-transformed measures are an alternative solution to analyzing non-normal distributions sometimes used in psycholinguistics, but are not suitable for the current data given how our speech environment measures are distributed, particularly in the randomly sampled clips (see, e.g., Figures \protect\hyperlink{fig1}{1}, \protect\hyperlink{fig7}{7}, and \protect\hyperlink{fig10}{10}). Overall, the gaussian models show a qualitatively similar pattern of results. These analyses are structured as identically as possible to those in Casillas and colleagues' (2019) study on Tseltal Mayan child language environments.
 
-\hypertarget{how-to-interpret-the-model-output}{%
-\subsection{How to interpret the model output}\label{how-to-interpret-the-model-output}}
 
-All models were run with the glmm-TMB library in R (Brooks, Kristensen, van Benthem, Magnusson, Berg, Nielsen, Skaug, Maechler, et al., 2017; Brooks, Kristensen, van Benthem, Magnusson, Berg, Nielsen, Skaug, Mächler, et al., 2017). Note that, in the negative binomial regressions, the dependent variables have been rounded to the nearest integer (e.g., 3.2 minutes of TCDS per hour becomes 3 minutes per hour in the model).
+# Full model outputs {#models}
+In these Supplementary Materials we give the full model output tables for each analysis in the main text, including re-leveled versions of each model to show all three of the two-way contrasts between the three-level time-of-day factor (i.e., morning vs. midday, morning vs. afternoon, and midday vs. afternoon) as well as, for each of the measures, a histogram showing how each variable is distributed (i.e., because they are non-normal and/or zero-inflated) and a figure showing the distribution of model residuals. For every negative binomial model, we also include the full model output table and residual plots for matching gaussian mixed-effects regressions which use a log-transformed dependent measure. Such gaussian models with log-transformed measures are an alternative solution to analyzing non-normal distributions sometimes used in psycholinguistics, but are not suitable for the current data given how our speech environment measures are distributed, particularly in the randomly sampled clips (see, e.g., Figures [1](#fig1), [7](#fig7), and [10](#fig10)). Overall, the gaussian models show a qualitatively similar pattern of results. These analyses are structured as identically as possible to those in Casillas and colleagues' [-@casillas2019early] study on Tseltal Mayan child language environments.
 
-The predictors in the models are abbreviated as follows: tchiyr.std = centered, standardized target child age in months; stthr.tri = the start time of the clip as either morning, midday, or afternoon; hsz.std = centered, standardized household size of the target child; nsk.std = centered, standardized number of speakers present in the clip, aclew\_child\_id = the unique identifier for each child. The predictors are sometimes combined in two-way interactions, as shown below with a \enquote{:} separator between predictor names (e.g., tchiyr.std:nsk.std = a two-way interaction of target child age and number of speakers present).
+## How to interpret the model output
+All models were run with the glmm-TMB library in R [@R-glmmTMB; @brooks2017modeling]. Note that, in the negative binomial regressions, the dependent variables have been rounded to the nearest integer (e.g., 3.2 minutes of TCDS per hour becomes 3 minutes per hour in the model).
 
-In each model output table, the \enquote{component} shows what kind of model the estimate derives from (e.g., the zero-inflated models include both a conditional \enquote{cond} set of predictors, random effects, and zero-inflation \enquote{zi} predictors). The \enquote{term} is the estimated predictor. The \enquote{statistic} is the estimated \emph{z}-statistic for each predictor's effect. The other labels are self-explanatory.
+The predictors in the models are abbreviated as follows: tchiyr.std = centered, standardized target child age in months; stthr.tri = the start time of the clip as either morning, midday, or afternoon; hsz.std = centered, standardized household size of the target child; nsk.std = centered, standardized number of speakers present in the clip, aclew_child_id = the unique identifier for each child. The predictors are sometimes combined in two-way interactions, as shown below with a ':' separator between predictor names (e.g., tchiyr.std:nsk.std = a two-way interaction of target child age and number of speakers present).
 
-As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at \url{https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/}.
+In each model output table, the "component" shows what kind of model the estimate derives from (e.g., the zero-inflated models include both a conditional "cond" set of predictors, random effects, and zero-inflation "zi" predictors). The "term" is the estimated predictor. The "statistic" is the estimated _z_-statistic for each predictor's effect. The other labels are self-explanatory.
 
-\hypertarget{models-tcds}{%
-\subsection{Target-child-directed speech (TCDS)}\label{models-tcds}}
+As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/.
 
-\hypertarget{models-tcds-random}{%
-\subsubsection{Random clips}\label{models-tcds-random}}
-
-TCDS rate in the random clips demonstrated a skewed distribution with extra cases of zero (\protect\hyperlink{fig1}{Figure 1}). We therefore modeled it using a zero-inflated negative binomial mixed-effects regression in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab1}{Table 1} and \protect\hyperlink{tab2}{Table 2}. The residuals for the default model (\protect\hyperlink{tab1}{Table 1}) are shown in \protect\hyperlink{fig2}{Figure 2}.
+## Target-child-directed speech (TCDS) {#models-tcds}
+### Random clips {#models-tcds-random}
+TCDS rate in the random clips demonstrated a skewed distribution with extra cases of zero ([Figure 1](#fig1)). We therefore modeled it using a zero-inflated negative binomial mixed-effects regression in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 1](#tab1) and [Table 2](#tab2). The residuals for the default model ([Table 1](#tab1)) are shown in [Figure 2](#fig2).
 
 \FloatBarrier
 
@@ -165,10 +65,11 @@ TCDS rate in the random clips demonstrated a skewed distribution with extra case
 
 }
 
-\caption{The distribution of TCDS rates found across the 90 random clips.}\label{fig:fig1}
+\caption{The distribution of TCDS rates found across the 90 random clips.}(\#fig:fig1)
 \end{figure}
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -200,6 +101,7 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -240,12 +142,13 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the zero-inflated negative binomial mixed-effects regression of TCDS min/hr for the random sample.}\label{fig:fig2}
+\caption{The model residuals from the zero-inflated negative binomial mixed-effects regression of TCDS min/hr for the random sample.}(\#fig:fig2)
 \end{figure}
 
-As an alternative analysis we generated parallel models of TCDS rate in the random clips using gaussian mixed-effects regression with log-transformed values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab3}{Table 3} and \protect\hyperlink{tab4}{Table 4}. The residuals for the default gaussian model (\protect\hyperlink{tab3}{Table 3}) are shown in \protect\hyperlink{fig3}{Figure 3}.
+As an alternative analysis we generated parallel models of TCDS rate in the random clips using gaussian mixed-effects regression with log-transformed values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 3](#tab3) and [Table 4](#tab4). The residuals for the default gaussian model ([Table 3](#tab3)) are shown in [Figure 3](#fig3).
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -276,6 +179,7 @@ random\_effect & Residual & 0.79 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -315,15 +219,14 @@ random\_effect & Residual & 0.79 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the gaussian mixed-effects regression of TCDS min/hr for the random sample.}\label{fig:fig3}
+\caption{The model residuals from the gaussian mixed-effects regression of TCDS min/hr for the random sample.}(\#fig:fig3)
 \end{figure}
 
 \FloatBarrier
 
-\hypertarget{models-tcds-turntaking}{%
-\subsubsection{Turn-taking clips}\label{models-tcds-turntaking}}
+### Turn-taking clips {#models-tcds-turntaking}
+TCDS rate in the turn-taking clips demonstrated a slightly skewed, but unimodal distribution [Figure 4](#fig4). We therefore modeled it using a plain (i.e., non-zero-inflated) negative binomial mixed-effects regression in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 5](#tab5) and [Table 6](#tab6). The residuals for the default model ([Table 5](#tab5)) are shown in [Figure 5](#fig5).
 
-TCDS rate in the turn-taking clips demonstrated a slightly skewed, but unimodal distribution \protect\hyperlink{fig4}{Figure 4}. We therefore modeled it using a plain (i.e., non-zero-inflated) negative binomial mixed-effects regression in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab5}{Table 5} and \protect\hyperlink{tab6}{Table 6}. The residuals for the default model (\protect\hyperlink{tab5}{Table 5}) are shown in \protect\hyperlink{fig5}{Figure 5}.
 
 \FloatBarrier
 
@@ -333,10 +236,11 @@ TCDS rate in the turn-taking clips demonstrated a slightly skewed, but unimodal 
 
 }
 
-\caption{The distribution of TCDS rates found across the 55 turn-taking clips.}\label{fig:fig4}
+\caption{The distribution of TCDS rates found across the 55 turn-taking clips.}(\#fig:fig4)
 \end{figure}
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -366,6 +270,7 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -404,12 +309,13 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the negative binomial mixed-effects regression of TCDS min/hr for the turn-taking sample.}\label{fig:fig5}
+\caption{The model residuals from the negative binomial mixed-effects regression of TCDS min/hr for the turn-taking sample.}(\#fig:fig5)
 \end{figure}
 
-As an alternative analysis we generated parallel models of TCDS rate in the turn-taking clips using gaussian mixed-effects regression with log-transformed values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab7}{Table 7} and \protect\hyperlink{tab8}{Table 8}. The residuals for the default gaussian model (\protect\hyperlink{tab7}{Table 7}) are shown in \protect\hyperlink{fig6}{Figure 6}.
+As an alternative analysis we generated parallel models of TCDS rate in the turn-taking clips using gaussian mixed-effects regression with log-transformed values of TCDS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 7](#tab7) and [Table 8](#tab8). The residuals for the default gaussian model ([Table 7](#tab7)) are shown in [Figure 6](#fig6).
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -440,6 +346,7 @@ random\_effect & Residual & 0.53 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -479,18 +386,15 @@ random\_effect & Residual & 0.53 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the gaussian mixed-effects regression of TCDS min/hr for the turn-taking sample.}\label{fig:fig6}
+\caption{The model residuals from the gaussian mixed-effects regression of TCDS min/hr for the turn-taking sample.}(\#fig:fig6)
 \end{figure}
 
 \FloatBarrier
 
-\hypertarget{models-ods}{%
-\subsection{Other-directed speech (ODS)}\label{models-ods}}
+## Other-directed speech (ODS) {#models-ods}
+### Random clips {#models-ods-random}
+ODS rate in the random clips demonstrated a skewed distribution, but without extra cases of zero [Figure 7](#fig7). We therefore modeled it using a negative binomial mixed-effects regression without zero inflation in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 9](#tab9) and [Table 10](#tab10). The residuals for the default model ([Table 9](#tab9)) are shown in [Figure 8](#fig8).
 
-\hypertarget{models-ods-random}{%
-\subsubsection{Random clips}\label{models-ods-random}}
-
-ODS rate in the random clips demonstrated a skewed distribution, but without extra cases of zero \protect\hyperlink{fig7}{Figure 7}. We therefore modeled it using a negative binomial mixed-effects regression without zero inflation in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab9}{Table 9} and \protect\hyperlink{tab10}{Table 10}. The residuals for the default model (\protect\hyperlink{tab9}{Table 9}) are shown in \protect\hyperlink{fig8}{Figure 8}.
 
 \FloatBarrier
 
@@ -500,10 +404,11 @@ ODS rate in the random clips demonstrated a skewed distribution, but without ext
 
 }
 
-\caption{The distribution of ODS rates found across the 90 random clips.}\label{fig:fig7}
+\caption{The distribution of ODS rates found across the 90 random clips.}(\#fig:fig7)
 \end{figure}
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -533,6 +438,7 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -571,12 +477,13 @@ random\_effect & aclew\_child\_id & 0.00 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the zero-inflated negative binomial mixed-effects regression of ODS min/hr for the random sample.}\label{fig:fig8}
+\caption{The model residuals from the zero-inflated negative binomial mixed-effects regression of ODS min/hr for the random sample.}(\#fig:fig8)
 \end{figure}
 
-As an alternative analysis we generated parallel models of ODS rate in the random clips using gaussian mixed-effects regression with log-transformed values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab11}{Table 11} and \protect\hyperlink{tab12}{Table 12}. The residuals for the default gaussian model (\protect\hyperlink{tab11}{Table 11}) are shown in \protect\hyperlink{fig9}{Figure 9}.
+As an alternative analysis we generated parallel models of ODS rate in the random clips using gaussian mixed-effects regression with log-transformed values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 11](#tab11) and [Table 12](#tab12). The residuals for the default gaussian model ([Table 11](#tab11)) are shown in [Figure 9](#fig9).
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -607,6 +514,7 @@ random\_effect & Residual & 0.66 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -646,15 +554,14 @@ random\_effect & Residual & 0.66 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the gaussian mixed-effects regression of ODS min/hr for the random sample.}\label{fig:fig9}
+\caption{The model residuals from the gaussian mixed-effects regression of ODS min/hr for the random sample.}(\#fig:fig9)
 \end{figure}
 
 \FloatBarrier
 
-\hypertarget{models-ods-turntaking}{%
-\subsubsection{Turn-taking clips}\label{models-ods-turntaking}}
+### Turn-taking clips {#models-ods-turntaking}
+ODS rate in the turn-taking clips demonstrated a skewed distribution [Figure 10](#fig10). We therefore modeled it using a negative binomial mixed-effects regression without zero inflation in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 13](#tab13) and [Table 14](#tab14). The residuals for the default model ([Table 13](#tab13)) are shown in [Figure 11](#fig11).
 
-ODS rate in the turn-taking clips demonstrated a skewed distribution \protect\hyperlink{fig10}{Figure 10}. We therefore modeled it using a negative binomial mixed-effects regression without zero inflation in the main text: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab13}{Table 13} and \protect\hyperlink{tab14}{Table 14}. The residuals for the default model (\protect\hyperlink{tab13}{Table 13}) are shown in \protect\hyperlink{fig11}{Figure 11}.
 
 \FloatBarrier
 
@@ -664,10 +571,11 @@ ODS rate in the turn-taking clips demonstrated a skewed distribution \protect\hy
 
 }
 
-\caption{The distribution of ODS rates found across the 55 turn-taking clips.}\label{fig:fig10}
+\caption{The distribution of ODS rates found across the 55 turn-taking clips.}(\#fig:fig10)
 \end{figure}
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -697,6 +605,7 @@ random\_effect & aclew\_child\_id & 0.28 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -735,12 +644,13 @@ random\_effect & aclew\_child\_id & 0.28 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample.}\label{fig:fig11}
+\caption{The model residuals from the negative binomial mixed-effects regression of ODS min/hr for the turn-taking sample.}(\#fig:fig11)
 \end{figure}
 
-As an alternative analysis we generated parallel models of ODS rate in the turn-taking clips using gaussian mixed-effects regression with log-transformed values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in \protect\hyperlink{tab15}{Table 15} and \protect\hyperlink{tab16}{Table 16}. The residuals for the default gaussian model (\protect\hyperlink{tab15}{Table 15}) are shown in \protect\hyperlink{fig12}{Figure 12}.
+As an alternative analysis we generated parallel models of ODS rate in the turn-taking clips using gaussian mixed-effects regression with log-transformed values of ODS: results for the two models demonstrating all pairwise effects of time of day are shown in [Table 15](#tab15) and [Table 16](#tab16). The residuals for the default gaussian model ([Table 15](#tab15)) are shown in [Figure 12](#fig12).
 
 \FloatBarrier
+
 
 \begin{table}[tbp]
 
@@ -771,6 +681,7 @@ random\_effect & Residual & 0.61 & NA & NA & NA\\
 \end{center}
 
 \end{table}
+
 
 \begin{table}[tbp]
 
@@ -810,32 +721,18 @@ random\_effect & Residual & 0.61 & NA & NA & NA\\
 
 }
 
-\caption{The model residuals from the gaussian mixed-effects regression of ODS min/hr for the turn-taking sample.}\label{fig:fig12}
+\caption{The model residuals from the gaussian mixed-effects regression of ODS min/hr for the turn-taking sample.}(\#fig:fig12)
 \end{figure}
 
 \FloatBarrier
 
-\hypertarget{refs}{%
-\section{References}\label{refs}}
+# References {#refs}
+
+
 
 \begingroup
 \setlength{\parindent}{-0.5in}
 \setlength{\leftskip}{0.5in}
 
-\hypertarget{refs}{}
-\leavevmode\hypertarget{ref-R-glmmTMB}{}%
-Brooks, M. E., Kristensen, K., van Benthem, K. J., Magnusson, A., Berg, C. W., Nielsen, A., \ldots{} Bolker, B. M. (2017). glmmTMB balances speed and flexibility among packages for zero-inflated generalized linear mixed modeling. \emph{The R Journal}, \emph{9}, 378--400.
-
-\leavevmode\hypertarget{ref-brooks2017modeling}{}%
-Brooks, M. E., Kristensen, K., van Benthem, K. J., Magnusson, A., Berg, C. W., Nielsen, A., \ldots{} Bolker, B. M. (2017). Modeling zero-inflated count data with glmmTMB. \emph{bioRxiv}. \url{https://doi.org/10.1101/132753}
-
-\leavevmode\hypertarget{ref-casillas2019early}{}%
-Casillas, M., Brown, P., \& Levinson, S. C. (2019). Early language experience in a Tseltal Mayan village. \emph{Child Development}, \emph{OnlineOpen}, XX--XX.
-
+<div id = "refs"></div>
 \endgroup
-
-\affiliation{\vspace{0.5cm}\textsuperscript{1} Max Planck Institute for Psycholinguistics}
-
-% End of papaja Lua-filter additions
-
-\end{document}

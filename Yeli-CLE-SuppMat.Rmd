@@ -34,7 +34,7 @@ lineno            : yes
 mask              : no
 
 class             : "man"
-output            : papaja::apa6_word #apa6_pdf or apa6_word
+output            : papaja::apa6_pdf #apa6_pdf or apa6_word
 ---
 
 ```{r load_packages, include=FALSE, echo=FALSE, warning=FALSE}
@@ -65,7 +65,7 @@ The predictors in the models are abbreviated as follows: tchiyr.std = centered, 
 
 In each model output table, the "component" shows what kind of model the estimate derives from (e.g., the zero-inflated models include both a conditional "cond" set of predictors, random effects, and zero-inflation "zi" predictors). The "term" is the estimated predictor. The "statistic" is the estimated _z_-statistic for each predictor's effect. The other labels are self-explanatory.
 
-As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at URL-OMITTED-FOR-REVIEW<!--: https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/-->.
+As more data are added to this corpus, the analyses will also be updated, as will this supplementary model information, all of which will be available online at https://middycasillas.shinyapps.io/Yeli_Child_Language_Environment/.
 
 ## Target-child-directed speech (TCDS) {#models-tcds}
 ### Random clips {#models-tcds-random}
